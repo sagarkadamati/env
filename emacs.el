@@ -11,7 +11,6 @@
 (load "vlf.el")
 
 (load "cscope-config.el")
-;; (load "chaf-config.el")
 
 (load "elscreen-config.el")
 (load "custom.el")

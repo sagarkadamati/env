@@ -1,0 +1,55 @@
+#!/bin/sh
+
+HOFFSET=0
+VOFFSET=0
+HPULSE=0
+VPULSE=0
+HBACK=0
+VBACK=0
+
+# Display resolution in pixels
+RESOLUTION=1920x1080
+
+# Horizontal and Vertical Resoulution in pixels
+HACTIVE=`echo ${RESOLUTION} | cut -d'x' -f1`
+VACTIVE=`echo ${RESOLUTION} | cut -d'x' -f2`
+
+# Pixel clock in 10khz
+PCLK=3326
+
+# Horizontal and Vertical front porch in pixels
+HOFFSET=64
+VOFFSET=4
+
+# Horizontal and Vertical sync pulse width in pixels
+HPULSE=64
+VPULSE=3
+
+# Horizontal and Vertical back porch in pixels
+HBACK=0
+VBACK=0
+
+# Horizontal and Vertical blanking in pixels (back porch + sync width + front porch)
+# HBLANK=$(( ${HPULSE} + ${HOFFSET} + ${HBACK} ))
+# VBLANK=$(( ${VPULSE} + ${VOFFSET} + ${VBACK} ))
+HBLANK=256
+VBLANK=45
+
+
+# Pixel Clock: 148.5MHz 
+
+# Horizontal Active: 1920 
+# Vertical Active: 1080 
+
+# Horizontal Blanking: 280 
+# Vertical Blanking: 45 
+
+# Horizontal Sync Offset: 88 
+# Horizontal Sync Pulse: 44 
+
+# Vertical Sync Offset: 4 
+# Vertical Sync Pulse: 5 
+
+# ./nv_edidgenerate 14850,1920,280,1080,45,88,44,4,5
+
+./nv_edidgenerate "${PCLK},${HACTIVE},${HBLANK},${VACTIVE},${VBLANK},${HOFFSET},${HPULSE},${VOFFSET},${VPULSE}" | grep '|' | cut -d'|' -f2

@@ -1,0 +1,43 @@
+#!/bin/sh
+set -e
+
+IFILE="$1"
+
+# Remove the tmp files if present
+rm -rf "/tmp/xls2org.txt*"
+
+# Convert to text file with delimiter |
+ssconvert -S -O 'separator=|' /tmp/"${IFILE}" /tmp/xls2org.txt
+
+# Remove any double quotes
+sed -i 's/"/ /g' /tmp/xls2org.txt.0
+
+# Insert '|' at ending of line
+sed -i 's/$/|/g' /tmp/xls2org.txt.0
+
+# Insert '|' at starting of line
+sed -i 's/^/|#/g' /tmp/xls2org.txt.0
+
+# Remove # before BugID field header
+sed -i 's/^|#B/|B/g' /tmp/xls2org.txt.0
+sed -i 's/^|# B/|B/g' /tmp/xls2org.txt.0
+
+# Remove unwanted generations
+sed -i '/^|#|/d' /tmp/xls2org.txt.0
+sed -i 's/||||||||||||||//g' /tmp/xls2org.txt.0
+
+# Generate if any headers present
+sed -i 's/^|# /\* /g' /tmp/xls2org.txt.0
+
+# Generate Table block
+sed -i '/^\*/i |-' /tmp/xls2org.txt.0
+sed -i '/^\*/i -' /tmp/xls2org.txt.0
+sed -i 's/^-//g' /tmp/xls2org.txt.0
+echo '|-' >> /tmp/xls2org.txt.0
+
+# Generating BugID table block
+sed -i '/^|BugID/i |-' /tmp/xls2org.txt.0
+sed -i '/^|BugID/a |-' /tmp/xls2org.txt.0
+sed -i '/^|Bug ID/i |-' /tmp/xls2org.txt.0
+sed -i '/^|Bug ID/a |-' /tmp/xls2org.txt.0
+

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+new=`echo "$1" | awk -F'.' '{print $1}'`
+
+cflow2dot.pl "$1"
+mv /tmp/cflow.svg "/home/sagar/graphs/${new}.svg"
