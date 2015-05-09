@@ -1,0 +1,50 @@
+#!/bin/sh
+
+# Flush file system buffers by executing
+echo -n Flushing file system...
+sudo sync;
+echo done
+
+# free page cache
+echo -n Freeing page cache...
+sudo sh -c "echo 1 > /proc/sys/vm/drop_caches"
+echo done
+
+# # free dentries and inodes
+# echo -n Freeing dentries and inodes...
+# sudo sh -c "echo 2 > /proc/sys/vm/drop_caches"
+# echo done
+
+# # free page cache, dentries and inodes
+# echo -n Freeing page cache, dentries and inodes...
+# sudo sh -c "echo 3 > /proc/sys/vm/drop_caches"
+# echo done
+
+# Clean swap memory
+SWAPTOTAL=`grep SwapTotal /proc/meminfo | awk -F' ' '{print $2}'`;
+SWAPFREE=`grep SwapFree /proc/meminfo | awk -F' ' '{print $2}'`;
+if [ $SWAPTOTAL -ne $SWAPFREE ] ;then
+    echo -n Cleaning swap space...
+    sudo swapoff -a
+    sudo swapon -a
+    echo done
+
+# Flush file system buffers by executing
+sudo sync;
+
+# free page cache
+echo -n Freeing page cache...
+sudo sh -c "echo 1 > /proc/sys/vm/drop_caches"
+echo done
+
+# # free dentries and inodes
+# echo -n Freeing dentries and inodes...
+# sudo sh -c "echo 2 > /proc/sys/vm/drop_caches"
+# echo done
+
+# # free page cache, dentries and inodes
+# echo -n Freeing page cache, dentries and inodes...
+# sudo sh -c "echo 3 > /proc/sys/vm/drop_caches"
+# echo done
+
+fi
