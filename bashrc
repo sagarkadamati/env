@@ -106,24 +106,15 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-export NV_BUILD_CONFIGURATION_IS_VERBOSE=1
-export P4CONFIG=~/.p4config
-export P4ROOT=~/p4
-
-alias es='emacs23 --daemon'
-alias ec='emacsclient.emacs23 -n'
+alias es='emacs --daemon'
+alias ec='emacsclient.emacs -n'
 
 PS1='\@ \u@\h (\W)\$ '
 printf "\033];%s\07" "Terminal"
 
-mkrfs()
-{
-    link=`pwd`
-    cd /
-    sudo unlink nfs
-    sudo ln -s "$link" nfs
-    sudo chown sagar:sagar nfs
-    cd -
-}
-
 PATH=$PATH:~/env/scripts
+
+set_title() { printf "\e]2;$*\a"; }
+
+set_title "Terminal"
+

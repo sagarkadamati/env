@@ -42,7 +42,7 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-(elscreen-toggle-display-tab)
+;; (elscreen-toggle-display-tab)
 (display-time)
 
 ;; (setq default-frame-alist
@@ -80,7 +80,7 @@
 (setq term-default-fg-color "Black")
 
 ;; frame transparent mode
-(set-frame-parameter (selected-frame) 'alpha '(85 90))
+(set-frame-parameter (selected-frame) 'alpha '(100 95))
 (add-to-list 'default-frame-alist '(alpha 100 95))
 
 ;; open file at the location

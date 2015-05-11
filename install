@@ -1,1 +1,21 @@
-sudo apt-get install pdftk sox 
+#!/bin/sh
+
+PKGS=""
+
+# sudo apt-get install linux-headers-generic build-essential git vim pdftk sox terminator minicom
+
+# sudo apt-get install dconf-tools
+
+#sudo apt-get install emacs
+
+# touch ~/.emacs
+# echo ';; -*- mode: emacs-lisp; -*-' >> ~/.emacs
+
+# echo "(load \"~/env/elisp/core-utils.el]\")" >> ~/.emacs
+
+# sudo apt-get install devilspie wmctrl
+# sudo apt-get install texlive-extra-utils
+sudo apt-get install cscope mplayer
+
+# dpkg -S /bin/ls
+sudo apt-get install openjdk-6-jre-headless
