@@ -15,7 +15,18 @@ PKGS=""
 
 # sudo apt-get install devilspie wmctrl
 # sudo apt-get install texlive-extra-utils
-sudo apt-get install cscope mplayer
+#sudo apt-get install cscope mplayer
 
 # dpkg -S /bin/ls
-sudo apt-get install openjdk-6-jre-headless
+#sudo apt-get install openjdk-6-jre-headless
+
+git config credential.helper store
+#!/bin/sh
+
+
+# mkdir -p ~/.config/terminator
+# mkdir -p ~/.config/terminator/plugins
+# cp config ~/.config/terminator/config
+
+# gsettings set org.gnome.desktop.default-applications.terminal exec x-terminal-emulator
+# gsettings set org.gnome.desktop.default-applications.terminal exec-arg ""
