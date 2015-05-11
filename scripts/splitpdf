@@ -1,0 +1,10 @@
+#!/bin/bash
+
+src_files=`ls original/*.pdf`
+
+for src in $src_files
+do
+    dest=`echo "$src" | cut -d '/' -f 2`
+
+    pdftk "$src" output "uncompress/$dest" uncompress
+done
