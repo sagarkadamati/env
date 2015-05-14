@@ -1,0 +1,3 @@
+#!/bin/bash                                                           
+
+wmctrl -a "Custom 3"

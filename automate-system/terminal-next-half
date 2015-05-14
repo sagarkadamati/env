@@ -1,0 +1,1 @@
+wmctrl -r Terminal -e 0,800,600,800,450

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+wmctrl -r :ACTIVE: -b remove,maximized_vert,maximized_horz
+wmctrl -r :ACTIVE: -e 0,10,54,808,850
+wmctrl -r :ACTIVE: -b add,maximized_vert

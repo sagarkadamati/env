@@ -1,0 +1,4 @@
+#!/bin/sh
+
+#wmctrl -a Terminal
+wmctrl -r Terminal -e 0,800,0,800,850

@@ -1,0 +1,9 @@
+#!/bin/sh
+
+opened=`wmctrl -l | grep 'Firefox'`
+
+if [ "X$opened" == "X" ]; then
+    firefox
+else 
+    wmctrl -a '- Mozilla Firefox'
+fi

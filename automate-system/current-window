@@ -1,0 +1,12 @@
+#!/bin/sh
+
+get_window_id() {
+    window_id=$(wmctrl -l | grep "$1" | tail -1 | cut -f1 -d" ")
+}
+
+get_window_id "Terminal"
+wmctrl -r "$window_id"
+
+#wmctrl -i -r "$window_id" -e 0,1025,0,953,100
+
+#wmctrl -r :ACTIVE: -e 0,800,0,800,850
