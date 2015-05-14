@@ -114,7 +114,7 @@ printf "\033];%s\07" "Terminal"
 
 PATH=$PATH:~/env/scripts
 
-set_title() { printf "\e]2;$*\a"; }
+set_title() { printf "\e]2;Terminal: $*\a"; }
 
 set_title "Terminal"
 

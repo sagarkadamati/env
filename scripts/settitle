@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# myval=`pwd`
+# BASEDIR=`echo ${myval#*/workspace/}`
+# PROJDIR=`echo ${myval%/workspace/*}`
+
+PROJPATH=`pwd | awk '{split($0,a,"/workspace/");$1=a[1] "/"; $2=a[2]; print $1,$2}' | cut -d ' ' -f2`
+
+WORKSPACE=Workspace
+PROJECT=""
+BRANCH=""
+MANIFEST=""
+if [ "X$PROJPATH" != "X" ]; then
+    PROJECT=`basename $PROJPATH`
+    TEMP=`dirname $PROJPATH`
+    if [ "X$TEMP" != "X" ]; then
+	BRANCH=`dirname ${TEMP}`
+	MANIFEST=`basename ${TEMP}`
+    fi
+fi
+
+set_title() {
+    printf "\e]0;Terminal :: $*\a";
+}
+
+if [ "X${PROJECT}" != "X" ] && [ "X${BRANCH}" != "X" ] && [ "X${MANIFEST}" != "X" ] && [ "X${PROJECT}" != "X." ] && [ "X${BRANCH}" != "X." ] && [ "X${MANIFEST}" != "X." ]; then
+    set_title ${WORKSPACE}  \( ${PROJECT} :: ${BRANCH} :: ${MANIFEST} \)
+else
+    pwd | grep ${WORKSPACE} -q
+    if [ $? -ne 0 ];then
+	set_title ${WORKSPACE}
+    else
+	printf "\e]0;Terminal\a";
+    fi
+fi
+
+# if [ "${BASEDIR}" == "/home/sagar/workspace" ]; then
+#     printf "\e]0;Terminal: Workspace\a";
+# else
+#     printf "\e]0;Terminal\a";
+# fi
+
+

@@ -20,7 +20,7 @@ PKGS=""
 # dpkg -S /bin/ls
 #sudo apt-get install openjdk-6-jre-headless
 
-git config credential.helper store
+# git config credential.helper store
 #!/bin/sh
 
 
@@ -30,3 +30,22 @@ git config credential.helper store
 
 # gsettings set org.gnome.desktop.default-applications.terminal exec x-terminal-emulator
 # gsettings set org.gnome.desktop.default-applications.terminal exec-arg ""
+
+# sudo apt-get install dconf-tools
+# dconf dump /org/gnome/desktop/wm/keybindings/ > keybindings-backup.dconf
+# dconf load /org/gnome/desktop/wm/keybindings/ < keybindings-backup.dconf
+
+
+
+# gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']"
+# You then set the name, command and binding values
+
+# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "shutter"
+# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "shutter -s"
+# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "Print"
+
+# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ name "shutter"
+# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ command "shutter -f"
+# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gn
+
+sudo apt-get install memlockd
