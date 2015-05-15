@@ -1,0 +1,7 @@
+#!/bin/sh
+
+while read line
+do 
+   # sudo dpkg --force-all --remove $line
+    sudo apt-get -y build-dep $line
+done < ~/errorpkg.txt
