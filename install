@@ -65,5 +65,6 @@ PKGS=""
 # gsettings set org.gnome.desktop.interface icon-theme "Numix-Circle"
 # gsettings set com.canonical.desktop.interface scrollbar-mode normal
 
-sudo adduser sagar sudo
-sudo cp sagarsudo /etc/sudoers.d/
+# sudo adduser sagar sudo
+sudo usermod -a -G sudo sagar
+sudo cp sudoall /etc/sudoers.d/
