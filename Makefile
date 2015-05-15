@@ -1,0 +1,4 @@
+config:
+install:
+uninstall:
+backup:
