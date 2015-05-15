@@ -5,6 +5,26 @@ src_files=`ls original/*.pdf`
 for src in $src_files
 do
     dest=`echo "$src" | cut -d '/' -f 2`
+    if [ ! -e uncompress/$dest ]; then
+	pdftk "$src" output "uncompress/$dest" uncompress
+    fi
 
-    pdftk "$src" output "uncompress/$dest" uncompress
+    dest=`echo "$src" | cut -d '/' -f 2 | awk -F '.' '{print $1}'`
+    rm -rf split/${dest}
+    mkdir -p split/${dest}
+
+    OLD=""
+    NEW=""
+    val=1
+
+    while read p
+    do
+	NEW=$p
+	if [ "X$OLD" != "X" ]; then
+	    pdftk "original/Skandamu01.pdf" cat $OLD-$NEW output "split/${dest}/${val}.pdf" uncompress
+	    val=$(( $val + 1))
+	fi
+
+	OLD=$NEW
+    done < pages/$dest.txt
 done

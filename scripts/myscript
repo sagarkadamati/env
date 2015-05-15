@@ -1,7 +1,27 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-ENVPATH="/home/sagar/workspace/env"
+ENVPATH="/home/sagar/env"
 
-emacsclient -n ${ENVPATH}/scripts/$1
-chmod +x ${ENVPATH}/scripts/$1
+FILE="${ENVPATH}/scripts/$1"
+
+# function emacs_server_is_running()
+# {
+#     ps ux | grep "\bemacs\b" | grep -v grep >/dev/null
+# }
+
+emacs_server_is_running(){
+    lsof -c emacs | grep server | tr -s " " | cut -d' ' -f8
+}
+
+touch ${FILE}
+chmod +x ${FILE}
+
+if emacs_server_is_running; then
+    emacsclient -n ${FILE}
+else
+    emacs --daemon
+    emacsclient -n ${FILE}
+fi
+
+
 
