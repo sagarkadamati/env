@@ -1,0 +1,7 @@
+#!/bin/bash
+
+ENVPATH="/home/sagar/workspace/env"
+
+emacsclient -n ${ENVPATH}/scripts/$1
+chmod +x ${ENVPATH}/scripts/$1
+

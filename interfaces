@@ -1,0 +1,15 @@
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet static
+address 10.24.36.244
+netmask 255.255.254.0
+gateway 10.24.36.1
+dns-search nvidia.com
+dns-nameservers 172.20.232.252 172.20.232.253 10.24.4.101 10.24.4.102 10.25.20.252
+
+auto eth1
+iface eth1 inet static
+address 10.0.0.1
+netmask 255.255.255.0
