@@ -50,3 +50,20 @@ PKGS=""
 
 # sudo apt-get install memlockd
 # sudo apt-get install tmux
+
+# enable virtual desktop (workspace)
+# gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ hsize 2
+# gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ vsize 2
+
+
+# sudo add-apt-repository ppa:numix/ppa
+# sudo apt-get update
+# sudo apt-get install numix-icon-theme-circle numix-gtk-theme
+
+# gsettings set org.gnome.desktop.interface gtk-theme "Numix"
+# gsettings set org.gnome.desktop.wm.preferences theme "Numix"
+# gsettings set org.gnome.desktop.interface icon-theme "Numix-Circle"
+# gsettings set com.canonical.desktop.interface scrollbar-mode normal
+
+sudo adduser sagar sudo
+sudo cp sagarsudo /etc/sudoers.d/

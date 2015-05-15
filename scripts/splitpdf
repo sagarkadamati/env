@@ -14,6 +14,7 @@ do
 
     OLD=""
     NEW=""
+    verify=""
     val=1
 
     while read p
@@ -28,10 +29,14 @@ do
 	fi
 
 	OLD=$NEW
+
+	verify="$verify $OLD"
     done < pages/$dest.txt
     val=$(( $val - 1))
 
     if [ $val -gt 0 ]; then
 	echo ${dest}: $val Chapters created!
+	pdftk "uncompress/${dest}.pdf" cat $verify output \
+	    "split/${dest}/verify.pdf" uncompress
     fi
 done
