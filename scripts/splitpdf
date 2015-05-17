@@ -34,6 +34,8 @@ do
     done < pages/$dest.txt
     val=$(( $val - 1))
 
+    mkdir -p questions
+    touch questions/${dest}.txt
     if [ $val -gt 0 ]; then
 	echo ${dest}: $val Chapters created!
 	pdftk "uncompress/${dest}.pdf" cat $verify output \
