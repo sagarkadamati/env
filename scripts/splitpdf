@@ -5,6 +5,7 @@ src_files=`ls original/*.pdf`
 for src in $src_files
 do
     dest=`echo "$src" | cut -d '/' -f 2`
+    mkdir -p uncompress
     if [ ! -e uncompress/$dest ]; then
 	pdftk "$src" output "uncompress/$dest" uncompress
     fi
