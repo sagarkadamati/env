@@ -66,5 +66,16 @@ PKGS=""
 # gsettings set com.canonical.desktop.interface scrollbar-mode normal
 
 # sudo adduser sagar sudo
-sudo usermod -a -G sudo sagar
-sudo cp sudoall /etc/sudoers.d/
+# sudo usermod -a -G sudo sagar
+# sudo cp sudoall /etc/sudoers.d/
+
+# Lock screen
+gsettings set com.canonical.unity-greeter draw-user-backgrounds 'false'
+gsettings set com.canonical.unity-greeter background '/home/sagar/env/Pictures/52168_Radha-Krishna-ISKCON-Desire-Tree-Devotee-Network_2592x1944.jpg'
+
+# Wallpaper
+gsettings set org.gnome.desktop.background picture-uri file:///home/sagar/env/Pictures/52080_Sri-Radha-Krishna-Lalita-Vishakha-Wallpaper-001-Size-2400-1800_2400x1800.jpg
+
+
+
+
