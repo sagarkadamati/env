@@ -5,32 +5,38 @@
 # pdftk original/Skandamu11A.pdf original/Skandamu11B.pdf \
 #     cat output original/Skandamu11.pdf
 
+# #### Skanda 10 pages
 # lines=`grep . pages/Skandamu10A.txt | wc -l`
-# grep . pages/Skandamu10A.txt |head -$((${lines} - 1)) \
+# grep . pages/Skandamu10A.txt | head -$((${lines} - 1)) \
 #     > pages/Skandamu10.txt
 # lines=`grep . pages/Skandamu10B.txt | wc -l`
-# grep . pages/Skandamu10B.txt |head -$((${lines} - 1)) \
+# grep . pages/Skandamu10B.txt | head -$((${lines} - 1)) \
 #     > pages/Skandamu10B.tmp
 # while read no
 # do
 #     echo $(($no + 251)) >> pages/Skandamu10.txt
 # done < pages/Skandamu10B.tmp
+# lines=`grep . pages/Skandamu10C.txt | wc -l`
+# grep . pages/Skandamu10C.txt > pages/Skandamu10C.tmp
 # while read no
 # do
 #     echo $(($no + 487)) >> pages/Skandamu10.txt
-# done < pages/Skandamu10C.txt
-# rm -rf pages/Skandamu10B.tmp
+# done < pages/Skandamu10C.tmp
+# rm -rf pages/Skandamu10B.tmp pages/Skandamu10C.tmp
 
+# #### Skanda 11 pages
 # lines=`grep . pages/Skandamu11A.txt | wc -l`
-# grep . pages/Skandamu11A.txt |head -$((${lines} - 1)) \
+# grep . pages/Skandamu11A.txt | head -$((${lines} - 1)) \
 #     > pages/Skandamu11.txt
+# lines=`grep . pages/Skandamu10B.txt | wc -l`
+# grep . pages/Skandamu11B.txt > pages/Skandamu11B.tmp
 # while read no
 # do
 #     echo $(($no + 196)) >> pages/Skandamu11.txt
-# done < pages/Skandamu11A.txt
+# done < pages/Skandamu11B.tmp
+# rm -rf pages/Skandamu11B.tmp
 
-
-
+### Processing
 src_files=`ls original/*.pdf`
 
 for src in $src_files
