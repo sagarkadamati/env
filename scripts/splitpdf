@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# pdftk original/Skandamu10A.pdf original/Skandamu10B.pdf \
+#     original/Skandamu10C.pdf cat output original/Skandamu10.pdf
+# pdftk original/Skandamu11A.pdf original/Skandamu11B.pdf \
+#     cat output original/Skandamu11.pdf
+
 src_files=`ls original/*.pdf`
 
 for src in $src_files
