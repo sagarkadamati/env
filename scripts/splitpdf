@@ -39,6 +39,8 @@
 ### Processing
 src_files=`ls original/*.pdf`
 
+src_files=original/Skandamu10.pdf
+
 for src in $src_files
 do
     dest=`echo "$src" | cut -d '/' -f 2`
@@ -58,12 +60,20 @@ do
     while read p
     do
 	NEW=$p
-
+	is_last=`echo ${NEW} | awk '{print $2}'`
+	
 	if [ "X$OLD" != "X" ] && [ "X$NEW" != "X" ]; then
 	    mkdir -p split/${dest}
-	    pdftk "uncompress/${dest}.pdf" cat $OLD-$NEW output \
-		"split/${dest}/${val}.pdf" uncompress
-	    val=$(( $val + 1))
+
+	    if [ "X${is_last}" == "X-1" ]; then
+		pdftk "uncompress/${dest}.pdf" cat $OLD-$(($NEW - 1)) \
+		    output "split/${dest}/${val}.pdf" uncompress
+	    else
+		pdftk "uncompress/${dest}.pdf" cat $OLD-$NEW output \
+		    "split/${dest}/${val}.pdf" uncompress
+	    fi
+
+	    val=$(($val + 1))
 	fi
 
 	OLD=$NEW
