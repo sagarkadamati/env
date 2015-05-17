@@ -12,15 +12,19 @@
 # lines=`grep . pages/Skandamu10B.txt | wc -l`
 # grep . pages/Skandamu10B.txt | head -$((${lines} - 1)) \
 #     > pages/Skandamu10B.tmp
-# while read no
+# while read p
 # do
-#     echo $(($no + 251)) >> pages/Skandamu10.txt
+#     no=`echo ${p} | awk '{print $1}'`
+#     is_last=`echo ${p} | awk '{print $2}'`
+#     echo $(($no + 251)) $is_last >> pages/Skandamu10.txt
 # done < pages/Skandamu10B.tmp
 # lines=`grep . pages/Skandamu10C.txt | wc -l`
 # grep . pages/Skandamu10C.txt > pages/Skandamu10C.tmp
-# while read no
+# while read p
 # do
-#     echo $(($no + 487)) >> pages/Skandamu10.txt
+#     no=`echo ${p} | awk '{print $1}'`
+#     is_last=`echo ${p} | awk '{print $2}'`
+#     echo $(($no + 487)) $is_last >> pages/Skandamu10.txt
 # done < pages/Skandamu10C.tmp
 # rm -rf pages/Skandamu10B.tmp pages/Skandamu10C.tmp
 
@@ -30,9 +34,11 @@
 #     > pages/Skandamu11.txt
 # lines=`grep . pages/Skandamu10B.txt | wc -l`
 # grep . pages/Skandamu11B.txt > pages/Skandamu11B.tmp
-# while read no
+# while read p
 # do
-#     echo $(($no + 196)) >> pages/Skandamu11.txt
+#     no=`echo ${p} | awk '{print $1}'`
+#     is_last=`echo ${p} | awk '{print $2}'`
+#     echo $(($no + 196)) $is_last >> pages/Skandamu11.txt
 # done < pages/Skandamu11B.tmp
 # rm -rf pages/Skandamu11B.tmp
 
@@ -57,14 +63,13 @@ do
 
     while read p
     do
-	NEW=$p
-	is_last=`echo ${NEW} | awk '{print $2}'`
-	
+	NEW=`echo ${p} | awk '{print $1}'`
+	is_last=`echo ${p} | awk '{print $2}'`
+
 	if [ "X$OLD" != "X" ] && [ "X$NEW" != "X" ]; then
 	    mkdir -p split/${dest}
 
 	    if [ "X${is_last}" == "X-1" ]; then
-		NEW=`echo ${NEW} | awk '{print $1}'`
 		pdftk "uncompress/${dest}.pdf" cat $OLD-$(($NEW - 1)) \
 		    output "split/${dest}/${val}.pdf" uncompress
 	    else
