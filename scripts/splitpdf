@@ -5,67 +5,72 @@
 # pdftk original/Skandamu11A.pdf original/Skandamu11B.pdf \
 #     cat output original/Skandamu11.pdf
 
-lines=`grep . pages/Skandamu10A.txt | wc -l`
-grep . pages/Skandamu10A.txt |head -$((${lines} - 1)) > pages/Skandamu10.txt
-lines=`grep . pages/Skandamu10B.txt | wc -l`
-grep . pages/Skandamu10B.txt |head -$((${lines} - 1)) > pages/Skandamu10B.tmp
-while read no
-do
-    echo $(($no + 251)) >> pages/Skandamu10.txt
-done < pages/Skandamu10B.tmp
-while read no
-do
-    echo $(($no + 487)) >> pages/Skandamu10.txt
-done < pages/Skandamu10C.txt
-rm -rf pages/Skandamu10B.tmp
+# lines=`grep . pages/Skandamu10A.txt | wc -l`
+# grep . pages/Skandamu10A.txt |head -$((${lines} - 1)) \
+#     > pages/Skandamu10.txt
+# lines=`grep . pages/Skandamu10B.txt | wc -l`
+# grep . pages/Skandamu10B.txt |head -$((${lines} - 1)) \
+#     > pages/Skandamu10B.tmp
+# while read no
+# do
+#     echo $(($no + 251)) >> pages/Skandamu10.txt
+# done < pages/Skandamu10B.tmp
+# while read no
+# do
+#     echo $(($no + 487)) >> pages/Skandamu10.txt
+# done < pages/Skandamu10C.txt
+# rm -rf pages/Skandamu10B.tmp
 
 # lines=`grep . pages/Skandamu11A.txt | wc -l`
-# grep . pages/Skandamu11A.txt |head -$((${lines} - 1)) > pages/Skandamu11.txt
+# grep . pages/Skandamu11A.txt |head -$((${lines} - 1)) \
+#     > pages/Skandamu11.txt
 # while read no
 # do
 #     echo $(($no + 196)) >> pages/Skandamu11.txt
 # done < pages/Skandamu11A.txt
 
-# src_files=`ls original/*.pdf`
 
-# for src in $src_files
-# do
-#     dest=`echo "$src" | cut -d '/' -f 2`
-#     mkdir -p uncompress
-#     if [ ! -e uncompress/$dest ]; then
-# 	pdftk "$src" output "uncompress/$dest" uncompress
-#     fi
 
-#     dest=`echo "$src" | cut -d '/' -f 2 | awk -F '.' '{print $1}'`
-#     rm -rf split/${dest}
+src_files=`ls original/*.pdf`
 
-#     OLD=""
-#     NEW=""
-#     verify=""
-#     val=1
+for src in $src_files
+do
+    dest=`echo "$src" | cut -d '/' -f 2`
+    mkdir -p uncompress
+    if [ ! -e uncompress/$dest ]; then
+	pdftk "$src" output "uncompress/$dest" uncompress
+    fi
 
-#     while read p
-#     do
-# 	NEW=$p
+    dest=`echo "$src" | cut -d '/' -f 2 | awk -F '.' '{print $1}'`
+    rm -rf split/${dest}
 
-# 	if [ "X$OLD" != "X" ] && [ "X$NEW" != "X" ]; then
-# 	    mkdir -p split/${dest}
-# 	    pdftk "uncompress/${dest}.pdf" cat $OLD-$NEW output \
-# 		"split/${dest}/${val}.pdf" uncompress
-# 	    val=$(( $val + 1))
-# 	fi
+    OLD=""
+    NEW=""
+    verify=""
+    val=1
 
-# 	OLD=$NEW
+    while read p
+    do
+	NEW=$p
 
-# 	verify="$verify $OLD"
-#     done < pages/$dest.txt
-#     val=$(( $val - 1))
+	if [ "X$OLD" != "X" ] && [ "X$NEW" != "X" ]; then
+	    mkdir -p split/${dest}
+	    pdftk "uncompress/${dest}.pdf" cat $OLD-$NEW output \
+		"split/${dest}/${val}.pdf" uncompress
+	    val=$(( $val + 1))
+	fi
 
-#     mkdir -p questions
-#     touch questions/${dest}.txt
-#     if [ $val -gt 0 ]; then
-# 	echo ${dest}: $val Chapters created!
-# 	pdftk "uncompress/${dest}.pdf" cat $verify output \
-# 	    "split/${dest}/verify.pdf" uncompress
-#     fi
-# done
+	OLD=$NEW
+
+	verify="$verify $OLD"
+    done < pages/$dest.txt
+    val=$(( $val - 1))
+
+    mkdir -p questions
+    touch questions/${dest}.txt
+    if [ $val -gt 0 ]; then
+	echo ${dest}: $val Chapters created!
+	pdftk "uncompress/${dest}.pdf" cat $verify output \
+	    "split/${dest}/verify.pdf" uncompress
+    fi
+done
