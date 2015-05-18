@@ -1,0 +1,21 @@
+#!/bin/sh
+
+schemas=`gsettings list-schemas`
+
+for schema in $schemas
+do
+    keys=`gsettings list-keys $schema`
+    for key in $keys
+    do
+	echo "$key" | grep -qi "show"
+	if [ $? -eq 0 ]; then
+	    echo $schema $key
+	fi
+
+	value=`gsettings get "$schema" "$key"`
+	echo "$value" | grep -q "<Super>"
+	if [ $? -eq 0 ]; then
+	    echo $schema $key=$value
+	fi
+    done
+done

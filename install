@@ -76,9 +76,11 @@ PKGS=""
 # # Wallpaper
 # gsettings set org.gnome.desktop.background picture-uri file:///home/sagar/env/Pictures/52080_Sri-Radha-Krishna-Lalita-Vishakha-Wallpaper-001-Size-2400-1800_2400x1800.jpg
 
-gsettings set org.compiz.integrated show-hud "['<Alt><Super>']"
-gsettings set org.compiz.integrated show-launcher "['']"
-gsettings list-keys org.compiz.integrated
+# gsettings set org.compiz.integrated show-hud "['<Alt><Super>']"
+# gsettings set org.compiz.integrated show-launcher "['']"
+# gsettings list-keys org.compiz.integrated
+
+# sudo apt-get install unity-tweak-tool
 
 # #---
 # gsettings set org.gnome.desktop.wm.preferences mouse-button-modifier '<Super>'
@@ -94,3 +96,5 @@ gsettings list-keys org.compiz.integrated
 # gsettings set org.gnome.desktop.wm.keybindings toggle-shaded ['"<Super><Alt>s"']
 
 # gsettings set org.gnome.settings-daemon.plugins.media-keys terminal ''
+
+sudo apt-get install virt-what
