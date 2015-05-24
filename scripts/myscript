@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
+while [ $# -gt 0 ]; do
+  arg=$1
+  case $arg in
+    shortlist)
+      echo `ls ~/env/scripts` shortlist
+      exit 0
+    ;;
+  esac
+  shift
+done
+
 ENVPATH="/home/sagar/env"
 
 FILE="${ENVPATH}/scripts/$1"
