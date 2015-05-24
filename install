@@ -97,4 +97,5 @@ PKGS=""
 
 # gsettings set org.gnome.settings-daemon.plugins.media-keys terminal ''
 
-sudo apt-get install virt-what
+# sudo apt-get install virt-what
+sudo apt-get install imagemagick
