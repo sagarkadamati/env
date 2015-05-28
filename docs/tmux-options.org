@@ -1,0 +1,142 @@
+* set-option [-agoqsuw] [-t target-session | target-window] option value
+        buffer-limit number
+        escape-time time
+        exit-unattached [on | off]
+        quiet [on | off]
+        set-clipboard [on | off]
+        Available session options are:
+        assume-paste-time milliseconds
+        base-index index
+        history-limit lines
+        renumber-windows [on | off]
+        repeat-time time
+        set-remain-on-exit [on | off]
+        terminal-overrides string
+        update-environment variables
+        word-separators string
+
+        bell-action [any | none | current]
+        bell-on-alert [on | off]
+
+        set-titles [on | off]
+        set-titles-string string
+
+        visual-activity [on | off]
+        visual-bell [on | off]
+        visual-content [on | off]
+        visual-silence [on | off]
+
+        status [on | off]
+        status-attr attributes
+        status-bg colour
+        status-fg colour
+        status-interval interval
+        status-justify [left | centre | right]
+        status-keys [vi | emacs]
+        status-left string
+        status-left-attr attributes
+        status-left-bg colour
+        status-left-fg colour
+        status-left-length length
+        status-position [top | bottom]
+        status-right string
+        status-right-attr attributes
+        status-right-bg colour
+        status-right-fg colour
+        status-right-length length
+        status-utf8 [on | off]
+
+        default-command shell-command
+        default-path path
+        default-shell path
+        default-terminal terminal
+
+        destroy-unattached [on | off]
+        detach-on-destroy [on | off]
+
+        display-panes-active-colour colour
+        display-panes-colour colour
+        display-panes-time time
+        display-time time
+
+        lock-after-time number
+        lock-command shell-command
+        lock-server [on | off]
+
+        message-bg colour
+        message-fg colour
+        message-attr attributes
+        message-limit number
+        message-command-bg colour
+        message-command-fg colour
+        message-command-attr attributes
+
+        mouse-utf8 [on | off]
+        mouse-select-pane [on | off]
+        mouse-resize-pane [on | off]
+        mouse-select-window [on | off]
+
+        pane-active-border-bg colour
+        pane-active-border-fg colour
+        pane-border-bg colour
+        pane-border-fg colour
+
+        prefix key
+        prefix2 key
+
+* set-window-option [-agqu] [-t target-window] option value 
+        aggressive-resize [on | off]
+        allow-rename [on | off]
+        alternate-screen [on | off]
+        automatic-rename [on | off]
+        c0-change-interval interval
+        c0-change-trigger trigger
+        clock-mode-colour colour
+        clock-mode-style [12 | 24]
+        force-height height
+        force-width width
+        main-pane-height height
+        main-pane-width width
+        mode-attr attributes
+        mode-bg colour
+        mode-fg colour
+        mode-keys [vi | emacs]
+        mode-mouse [on | off | copy-mode]
+        monitor-activity [on | off]
+        monitor-content match-string
+        monitor-silence [interval]
+        other-pane-height height
+        other-pane-width width
+        pane-base-index index
+        remain-on-exit [on | off]
+        synchronize-panes [on | off]
+        utf8 [on | off]
+
+        window-status-bell-bg colour
+        window-status-bell-fg colour
+        window-status-bell-attr attributes
+
+        window-status-content-attr attributes
+        window-status-content-bg colour
+        window-status-content-fg colour
+
+        window-status-activity-bg colour
+        window-status-activity-fg colour
+        window-status-activity-attr attributes
+
+        window-status-current-bg colour
+        window-status-current-fg colour
+        window-status-current-attr attributes
+        window-status-current-format string
+        window-status-last-bg colour
+        window-status-last-fg colour
+        window-status-last-attr attributes
+
+        window-status-bg colour
+        window-status-fg colour
+        window-status-attr attributes
+        window-status-format string
+        window-status-separator string
+
+        xterm-keys [on | off]
+        wrap-search [on | off]

@@ -1,0 +1,107 @@
+* Building tmux 1.9a statically
+
+At work, I use tmux on daily basis. Unfortunately, the version shipped in epel (extra packages for enterprise linux) is slightly dated, v1.6. I didn¡¦t want to update tmux system wide as this would impact other users. A single statically linked library that I could store in my home area would be perfect.
+I discovered the build process was bit of a challenge. Although I found answers to my problems, they were not in a centrally located. Therefore, I am documenting my steps below.
+These steps allowed me to build tmux 1.9a. These same steps should work for newer versions, however at some point, these steps may break. Additionally, these steps were performed on RHEL6 ¡V they should apply to nearly any distro.
+
+Install glibc-static:
+# yum install glibc-static
+
+Download libevent-2.0.21-stable
+# ./configure --prefix=/tmp/local --disable-shared
+# make
+# make install
+
+Download ncurse 5.9
+# autoreconf -fis
+# ./configure --prefix=/tmp/local --with-default-terminfo-dir=/usr/share/terminfo  --with-terminfo-dirs="/etc/terminfo:/lib/terminfo:/usr/share/terminfo"
+# make
+# make install
+
+Download Tmux Source
+# ./configure --enable-static CFLAGS="-I/tmp/local/include -I/tmp/local/include/ncurses" LDFLAGS="-L/tmp/local/lib -L/tmp/local/include -L/tmp/local/include/ncurses" LIBEVENT_CFLAGS="-I/tmp/local/include" LIBEVENT_LIBS="-L/tmp/local/lib -levent"
+
+MYCFLAGES="-I/tmp/local/include -I/tmp/local/include/ncurses"
+MYLDFLAGS="-L/tmp/local/lib -L/tmp/local/include -L/tmp/local/include/ncurses"
+./configure --enable-static CFLAGS="$MYCFLAGES" LDFLAGS="$MYLDFLAGS" LIBEVENT_CFLAGS="-I/tmp/local/include" LIBEVENT_LIBS="-L/tmp/local/lib -levent"
+
+# make -j5
+# cp tmux /home/#USER/bin
+ 
+
+Troubleshooting / Build Issues:
+
+Problem curses not found:
+checking for LIBEVENT... yes
+checking for library containing setupterm... no
+configure: error: "curses not found"
+Solution: install glibc-static
+
+¡§It attempts to statically link ncurses, and ncurses has a dependency on
+glibc. So in order to statically link ncurses you also have to
+statically link glibc, which requires the static versions of the glibc
+libraries, which RHEL and CentOS don¡¦t include by default.¡¨
+https://groups.google.com/forum/#!topic/iterm2-discuss/wfYur0iSXdQ
+
+Problem "tmux: open terminal failed: missing or unsuitable terminal: xterm"
+ncurses was compiled with the wrong-set of default terminfo paths
+Solution:
+
+set TERMINFO environment variable before starting tmux export TERMINFO=/usr/share/terminfo
+¡V or ¡V
+
+Pass --with-default-terminfo-dir=/usr/share/terminfo --with-terminfo-dirs="/etc/terminfo:/lib/terminfo:/usr/share/terminfo" to the ncurses configure script
+You can verify the TERMINFO default path by running
+
+# strings /path/to/tmux | grep -i terminfo
+/usr/share/terminfo
+TERMINFO
+TERMINFO_DIRS
+/etc/terminfo:/lib/terminfo:/usr/share/terminfo
+%s/.terminfo
+/usr/share/terminfo
+Note: TERMINFO only matters to the server. Therefore, you will need to restart the server after applying one of the above fixes.
+
+¡§Yeah, as I said before, setting TERMINFO only matters to the server.
+This is because it¡¦s the server that does all the work; the clients do
+almost nothing, other than tell the server where to draw things to (and
+what the name of the terminal is, and other environment settings). So,
+it¡¦s the server that does terminal name lookups in ncurses, which is
+affected by its own true environment settings with regard to TERMINFO.
+So once the server is started with a proper TERMINFO, you¡¦re good to go
+(as long as there does exist a terminfo entry for whatever the client¡¦s
+TERM is set to when it attaches).¡¨
+http://permalink.gmane.org/gmane.comp.terminal-emulators.tmux.user/1291
+
+Problem: client.c:(.text+0x6a): undefined reference to `event_del'
+ undefined reference to `bufferevent_disable'
+ undefined reference to `bufferevent_enable'
+ undefined reference to `bufferevent_free'
+ undefined reference to `bufferevent_get_output'
+ undefined reference to `bufferevent_new'
+ undefined reference to `bufferevent_write'
+ undefined reference to `evbuffer_add'
+ undefined reference to `evbuffer_add_buffer'
+ undefined reference to `evbuffer_add_printf'
+ undefined reference to `evbuffer_add_vprintf'
+ undefined reference to `evbuffer_drain'
+ undefined reference to `evbuffer_free'
+ undefined reference to `evbuffer_get_length'
+ undefined reference to `evbuffer_new'
+ undefined reference to `evbuffer_pullup'
+ undefined reference to `evbuffer_readline'
+ undefined reference to `evbuffer_readln'
+ undefined reference to `event_add'
+ undefined reference to `event_del'
+ undefined reference to `event_dispatch'
+ undefined reference to `event_init'
+ undefined reference to `event_initialized'
+ undefined reference to `event_loop'
+ undefined reference to `event_loopexit'
+ undefined reference to `event_pending'
+ undefined reference to `event_reinit'
+ undefined reference to `event_set'
+ undefined reference to `event_set_log_callback'
+Solution: Add -levent to LIBEVENT_LIBS
+
+LIBEVENT_LIBS="-L/tmp/local/lib -levent"

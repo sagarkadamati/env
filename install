@@ -100,5 +100,13 @@ PKGS=""
 # sudo apt-get install virt-what
 # sudo apt-get install imagemagick
 
-sudo cp myscript_completion /etc/bash_completion.d/
-cp tmux.conf ~/.tmux.conf
+# sudo cp myscript_completion /etc/bash_completion.d/
+# cp tmux.conf ~/.tmux.conf
+
+# sudo apt-get install libevent-dev libncurses-dev pkg-config
+# git clone http://git.code.sf.net/p/tmux/tmux-code tmux-tmux-code
+# sudo apt-get install libevent-dev libncurses-dev pkg-config
+# autoreconf -fis
+# ./configure
+# make
+# sudo make install
