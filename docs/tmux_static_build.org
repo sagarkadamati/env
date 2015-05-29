@@ -19,7 +19,8 @@ Download ncurse 5.9
 # make install
 
 Download Tmux Source
-# ./configure --enable-static CFLAGS="-I/tmp/local/include -I/tmp/local/include/ncurses" LDFLAGS="-L/tmp/local/lib -L/tmp/local/include -L/tmp/local/include/ncurses" LIBEVENT_CFLAGS="-I/tmp/local/include" LIBEVENT_LIBS="-L/tmp/local/lib -levent"
+autoreconf -fis
+./configure --enable-static CFLAGS="-I/tmp/local/include -I/tmp/local/include/ncurses" LDFLAGS="-L/tmp/local/lib -L/tmp/local/include -L/tmp/local/include/ncurses" LIBEVENT_CFLAGS="-I/tmp/local/include" LIBEVENT_LIBS="-L/tmp/local/lib -levent"
 
 MYCFLAGES="-I/tmp/local/include -I/tmp/local/include/ncurses"
 MYLDFLAGS="-L/tmp/local/lib -L/tmp/local/include -L/tmp/local/include/ncurses"
