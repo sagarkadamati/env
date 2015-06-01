@@ -10,6 +10,7 @@ cd ../../
 # Build ncurse
 cd ncurses/ncurses-5.9
 autoreconf -fis
+aclocal -I m4 --install
 ./configure --prefix=/tmp/local --with-default-terminfo-dir=/usr/share/terminfo  --with-terminfo-dirs="/etc/terminfo:/lib/terminfo:/usr/share/terminfo"
 make
 make install
