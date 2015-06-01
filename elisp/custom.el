@@ -56,13 +56,13 @@
 ;; (setq term-default-bg-color "#FFFFF0")
 ;; (setq term-default-fg-color "Black")
 
-(setq default-frame-alist
-      (append default-frame-alist
-       '((foreground-color . "Black")
-	 (background-color . "#f1e7d0")
-	 (cursor-color . "#000070")
-	 (frame-name "Little"))
-       ))
+;; (setq default-frame-alist
+;;       (append default-frame-alist
+;;        '((foreground-color . "Black")
+;; 	 (background-color . "#f1e7d0")
+;; 	 (cursor-color . "#000070")
+;; 	 (frame-name "Little"))
+;;        ))
 
 (set-face-background 'mode-line "firebrick")
 (set-face-foreground 'mode-line "#f1e7d0")
@@ -321,13 +321,13 @@
 
 ;; emacs re-initialize
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(fset 'emacs-reload
-   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([134217848 108 111 97 100 45 102 105 108 101 return 1 11 126 47 46 101 109 97 99 115 return 134217848 up return up return] 0 "%d")) arg)))
+;;(fset 'emacs-reload
+;;   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([134217848 108 111 97 100 45 102 105 108 101 return 1 11 126 47 46 101 109 97 99 115 return 134217848 up return up return] 0 "%d")) arg)))
 
 ;; open url
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (fset 'open-url
-   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([24 6 return] 0 "%d")) arg)))
+;;   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([24 6 return] 0 "%d")) arg)))
 
 ;; smart file open at the cursor
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
