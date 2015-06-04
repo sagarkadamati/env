@@ -1,0 +1,11 @@
+babel
+bower
+coffee-script
+coffeelint
+gulp
+jshint
+marked
+svgo
+tldr
+trash
+typescript

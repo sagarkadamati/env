@@ -1,0 +1,3 @@
+loglevel = warn
+viewer = browser
+prefix = ~/.npm-packages
