@@ -1,0 +1,65 @@
+[alias]
+  co        = checkout
+  unstage   = reset HEAD
+  undo      = reset --soft HEAD^
+  lg        = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+  lol       = log --pretty=oneline --abbrev-commit --graph --decorate
+  conflicts = !git ls-files --unmerged | cut -c51- | sort -u | xargs $EDITOR
+  resolve   = !git ls-files --unmerged | cut -c51- | sort -u | xargs git add
+  unpushed  = cherry -v
+  upstream  = rev-parse --symbolic-full-name --abbrev-ref HEAD@{upstream}
+  amend     = commit --amend
+  branch-cleanup = !sh -c 'git branch --merged | grep -v master | xargs git branch -d && git remote prune origin'
+  # Interactive rebase with the given number of latest commits
+  reb = "!r() { git rebase -i HEAD~$1; }; r"
+  # Remove branches that have already been merged with master
+  # a.k.a. ‘delete merged’
+  dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+[core]
+  excludesfile = ~/.gitignore
+  editor       = subl -wn
+  autocrlf     = input
+  whitespace   = space-before-tab, trailing-space
+[help]
+  autocorrect = 1
+[merge]
+  log = true
+[apply]
+  whitespace = fix
+[push]
+  default = current
+[branch]
+  autosetupmerge  = true
+  autosetuprebase = always
+  mergeoptions    = --no-ff
+[status]
+  relativePaths = true
+[format]
+  pretty = %C(yellow)%h%Creset %s %C(red)(%an, %cr)%Creset
+[color]
+  diff   = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui     = auto
+[color "branch"]
+  current = yellow reverse
+  local   = yellow
+  remote  = green
+[color "status"]
+  header    = white dim
+  branch    = yellow
+  added     = green
+  changed   = red
+  untracked = blue
+[color "diff"]
+  meta = blue bold reverse
+  frag = magenta
+  old  = red
+  new  = green
+[difftool]
+  prompt = false
+[difftool "Kaleidoscope"]
+  cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
+[diff]
+  tool = Kaleidoscope

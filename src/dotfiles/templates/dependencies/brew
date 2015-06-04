@@ -1,0 +1,56 @@
+ansifilter
+autojump
+awscli
+bash
+bash-completion2
+boot2docker
+brew-cask
+cask
+coreutils
+curl
+diffutils
+direnv
+distribution
+findutils --with-default-names
+git
+git-extras
+gnu-sed --with-default-names
+gnu-tar --with-default-names
+go
+grep --with-default-names
+gzip
+heroku-toolbelt
+homebrew/completions/boot2docker-completion
+homebrew/completions/bundler-completion
+homebrew/completions/gem-completion
+homebrew/completions/grunt-completion
+homebrew/completions/pip-completion
+homebrew/completions/rails-completion
+homebrew/completions/rake-completion
+homebrew/completions/ruby-completion
+homebrew/completions/tmuxinator-completion
+homebrew/completions/vagrant-completion
+hub
+jq
+man2html
+node
+openssh
+p7zip
+postgis
+postgresql
+python
+python3
+redis
+rename
+rmtrash
+rsync
+shellcheck
+sqlite
+ssh-copy-id
+the_silver_searcher
+tmux
+tree
+unrar
+vim --override-system-vi
+watch
+wget --with-iri
