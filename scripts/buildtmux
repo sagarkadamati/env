@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# Build libevent
+cd libevent/libevent-2.0.22-stable
+./configure --prefix=/tmp/local --disable-shared
+make
+make install
+cd ../../
+
+# Build ncurse
+cd ncurses/ncurses-5.9
+autoreconf -fis
+./configure --prefix=/tmp/local --with-default-terminfo-dir=/usr/share/terminfo  --with-terminfo-dirs="/etc/terminfo:/lib/terminfo:/usr/share/terminfo"
+make
+make install
+cd ../../
+
+# Build tmux
+cd tmux/tmux-2.0
+autoreconf -fis
+MYCFLAGES="-I/tmp/local/include -I/tmp/local/include/ncurses"
+MYLDFLAGS="-L/tmp/local/lib -L/tmp/local/include -L/tmp/local/include/ncurses"
+./configure --enable-static CFLAGS="$MYCFLAGES" LDFLAGS="$MYLDFLAGS" LIBEVENT_CFLAGS="-I/tmp/local/include" LIBEVENT_LIBS="-L/tmp/local/lib -levent"
+make -j5
+cp tmux ~/env/bin
