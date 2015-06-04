@@ -112,5 +112,6 @@ PKGS=""
 # sudo make install
 
 # sudo apt-get install libpodofo-dev
+# sudo apt-get install libpodofo-utils
 # g++ helloworld.cpp -lpodofo
 

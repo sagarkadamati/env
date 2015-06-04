@@ -3,4 +3,4 @@ all:
 run: all
 	@./myPdf
 clean:
-	@rm -rf myPdf *~
+	@rm -rf myPdf *~ output.pdf
