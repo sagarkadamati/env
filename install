@@ -115,3 +115,4 @@ PKGS=""
 # sudo apt-get install libpodofo-utils
 # g++ helloworld.cpp -lpodofo
 
+sudo apt-get install csh ffmpeg

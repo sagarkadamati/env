@@ -33,9 +33,53 @@ int main()
 		while (tok.ReadNext(type, token, var)) {
 			if (type == PoDoFo::ePdfContentsType_Keyword) {
 				// process type, token & var
+				string s(token);
+				string m("Tm");
+
+				if(!s.compare("\'"))
+					cout << token << " ";
+
+				if(!s.compare("Tm")) {
+					cout << token << " ";
+
+					if(var.IsNumber())
+						cout << var.GetNumber() << " ";
+
+					if(var.IsString())
+						cout << var.GetString().GetString();
+				
+					if (var.IsArray()) {
+						PoDoFo::PdfArray& a = var.GetArray();
+						for (size_t i = 0; i < a.GetSize(); ++i)
+							if (a[i].IsNumber())
+								cout << var.GetNumber() << " ";
+					}
+
+					cout << endl;
+				}
+				
+				// if (token == "Tc" || token == "Tw" || token == "Tz" 
+				//     || token == "TL" || token == "T*" || token == "Tr" || token == "Tm")
+				// if(token == m)
+				// 	cout << endl << token << endl;
+
+				// if(var.IsString())
+				// 	// cout << var.GetString().GetString();
+				// 	cout << "S";
+					
+				// if(var.IsNumber())
+				// 	cout << var.GetNumber() << " ";
+				
+				// if (var.IsArray()) {
+				// 	PoDoFo::PdfArray& a = var.GetArray();
+				// 	for (size_t i = 0; i < a.GetSize(); ++i)
+				// 		if (a[i].IsString())
+				// 			// do something with a[i].GetString()
+				// 			cout << "Hello\n"; 
+				// }
 			}
 		}
-
+			
 		pPage = pdfout.CreatePage(page->GetPageSize());
 
 		pFont = pdfout.CreateFont( "Arial" );
@@ -48,6 +92,9 @@ int main()
 		painter.FinishPage();
 	}
 
+	cout << endl;
+
+	pdf.Write("modify.pdf");
 	pdfout.Close();
 
 	return 0;
