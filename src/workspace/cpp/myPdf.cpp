@@ -93,7 +93,8 @@ std::string extract( PdfMemDocument* pDocument, PdfPage* pPage )
 				block << shear_y << " " 
 				      << scale_y << " " 
 				      << offset_x << " " 
-				      << offset_y << " cm " << endl;
+				      << offset_y << " " 
+				      << pszToken << " " << endl;
 			}
 
 			if( strcmp( pszToken, "W" ) == 0 ||
@@ -133,11 +134,10 @@ std::string extract( PdfMemDocument* pDocument, PdfPage* pPage )
 				      << blue << " " 
 				      << pszToken << endl;
 
-				cout << red << " " 
-				      << green << " " 
-				      << blue << " " 
-				      << pszToken << endl;
-
+				// cout << red << " " 
+				//       << green << " " 
+				//       << blue << " " 
+				//       << pszToken << endl;
 			}
 
 			// support 'l' and 'm' tokens
@@ -233,10 +233,34 @@ std::string extract( PdfMemDocument* pDocument, PdfPage* pPage )
 		
 					block << "(" << str 
 					      << ")" << pszToken << endl;
-					// cout << "(" << str 
-					//      << ")" << pszToken << endl;
 					stack.pop();
 				}
+				else if( strcmp( pszToken, "TJ" ) == 0 ) 
+				{
+					PdfArray array = stack.top().GetArray();
+					stack.pop();
+
+					block << "[";
+					
+					for( int i=0; i<static_cast<int>(array.GetSize()); i++ ) 
+					{
+						string str;
+						if( array[i].IsString() || array[i].IsHexString() ) {
+							str = array[i].GetString().GetString();
+							ReplaceStringInPlace(str, "\\", "\\\\");
+							ReplaceStringInPlace(str, "(", "\\(");
+							ReplaceStringInPlace(str, ")", "\\)");
+							
+							block << "("
+							      << str
+							      << ")";
+						}
+						else if( array[i].IsNumber())
+							block << array[i].GetReal();
+					}
+					block << "]" << pszToken << endl;
+				}
+
 			}
 		}
 		else if ( eType == ePdfContentsType_Variant )
@@ -306,7 +330,7 @@ void get_glimpse( PdfMemDocument* pDocument, PdfPage* pPage )
 	PdfContentsTokenizer tokenizer( pPage );
 	
 	while( tokenizer.ReadNext( eType, pszToken, var ) )
-		if( eType == ePdfContentsType_Keyword )
+		if( eType == ePdfContentsType_Keyword ) {
 			if( strcmp( pszToken, "Tj" ) == 0 ||
 			    strcmp( pszToken, "'" ) == 0 ) {
 
@@ -315,6 +339,23 @@ void get_glimpse( PdfMemDocument* pDocument, PdfPage* pPage )
 					if(!is_exist(str.at(i)))
 						glimps[size++] = str.at(i);
 			}
+			else if( strcmp( pszToken, "TJ" ) == 0 ) 
+			{
+				PdfArray array = var.GetArray();
+					
+				for( int i=0; i<static_cast<int>(array.GetSize()); i++ ) 
+				{
+					string str;
+					if( array[i].IsString() || array[i].IsHexString() ) {
+						str = array[i].GetString().GetString();
+						for (int i = 0; i < str.size(); i++)
+							if(!is_exist(str.at(i)))
+								glimps[size++] = str.at(i);
+					}
+				}
+			}
+
+		}
 }
 
 int main()
@@ -322,6 +363,7 @@ int main()
 	int pn, pc;
 
 	PdfMemDocument pdf("/home/sagar/Downloads/Skandamu10A.pdf");
+	// PdfMemDocument pdf("sk10a.pdf");
 
 	PdfPage*       page = pdf.GetPage(1);
 	PdfObject*     contents = page->GetContents();
@@ -333,20 +375,36 @@ int main()
 	pdf_long       lLen;
 	string         str;
 
+	ofstream modified;
+	ofstream actual;
+	modified.open("modified.txt");
+	actual.open("actual.txt");
+
 	PdfError::EnableDebug( false );
 
+	pdf.DeletePages(0, 1);
 	pc = pdf.GetPageCount();
-	for (pn = 1; pn < pc; ++pn) {
+	for (pn = 0; pn < pc; ++pn) {
 		PdfPage*        page = pdf.GetPage(pn);		
 
 		get_glimpse(&pdf, page);
+
+		// page->GetContents()->GetStream()->GetFilteredCopy(&pBuffer, &lLen);
+		// actual << pBuffer;
+		// free(pBuffer);
+
 		str = extract(&pdf, page);
+		// modified << str;
+
 		page->GetContents()->GetStream()->Set(str.c_str());
 
-		// cout << str.c_str();
+		// actual.close();
+		// modified.close();
+
+		// system("diff -up actual.txt modified.txt | egrep '^\\+|^-' > diff.txt");
 	}
 
-	page->GetContents()->GetStream()->Set(process_glimps().c_str());
+	// page->GetContents()->GetStream()->Set(process_glimps().c_str());
 	
 	pdf.Write("modify.pdf");
 	cout << "Total Glimps: " << size;
