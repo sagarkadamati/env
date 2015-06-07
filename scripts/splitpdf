@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# pdftk original/Skandamu10A.pdf original/Skandamu10B.pdf \
-#     original/Skandamu10C.pdf cat output original/Skandamu10.pdf
-# pdftk original/Skandamu11A.pdf original/Skandamu11B.pdf \
-#     cat output original/Skandamu11.pdf
+pdftk original/Skandamu10A.pdf original/Skandamu10B.pdf \
+    original/Skandamu10C.pdf cat output original/Skandamu10.pdf
+pdftk original/Skandamu11A.pdf original/Skandamu11B.pdf \
+    cat output original/Skandamu11.pdf
 
 # #### Skanda 10 pages
 # lines=`grep . pages/Skandamu10A.txt | wc -l`
