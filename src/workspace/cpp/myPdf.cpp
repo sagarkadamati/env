@@ -71,17 +71,42 @@ std::string extract( PdfMemDocument* pDocument, PdfPage* pPage )
 				scale_x  = stack.top().GetReal();
 				stack.pop();
 				
-				block << scale_x << " " << shear_x << " " << shear_y
-				      << " " << scale_y << " " << offset_x << " " << offset_y << " cm " << endl;
+				block << scale_x << " " 
+				      << shear_x << " " 
+				      << shear_y << " " 
+				      << scale_y << " " 
+				      << offset_x << " " 
+				      << offset_y << " cm " << endl;
 			}
 
-			if( strcmp( pszToken, "q" ) == 0 ||
+			if( strcmp( pszToken, "re" ) == 0 ) 
+			{
+				offset_y = stack.top().GetReal();
+				stack.pop();
+				offset_x = stack.top().GetReal();
+				stack.pop();
+				scale_y  = stack.top().GetReal();
+				stack.pop();
+				shear_y  = stack.top().GetReal();
+				stack.pop();
+				
+				block << shear_y << " " 
+				      << scale_y << " " 
+				      << offset_x << " " 
+				      << offset_y << " cm " << endl;
+			}
+
+			if( strcmp( pszToken, "W" ) == 0 ||
+			    strcmp( pszToken, "n" ) == 0 ||
+			    strcmp( pszToken, "q" ) == 0 ||
 			    strcmp( pszToken, "Q" ) == 0 )
 			{
 				block << pszToken << endl;
 			}
 
-			if( strcmp( pszToken, "g" ) == 0 ||
+			if( strcmp( pszToken, "w" ) == 0 ||
+			    strcmp( pszToken, "Tz" ) == 0 ||
+			    strcmp( pszToken, "g" ) == 0 ||
 			    strcmp( pszToken, "G" ) == 0 )
 			{
 				g = stack.top().GetReal();
@@ -103,7 +128,16 @@ std::string extract( PdfMemDocument* pDocument, PdfPage* pPage )
 				green = 0.0;
 				red = 0.0;
 				
-				block << red << " " << green << " " << blue << " " << pszToken << endl;
+				block << red << " " 
+				      << green << " " 
+				      << blue << " " 
+				      << pszToken << endl;
+
+				cout << red << " " 
+				      << green << " " 
+				      << blue << " " 
+				      << pszToken << endl;
+
 			}
 
 			// support 'l' and 'm' tokens
@@ -129,14 +163,19 @@ std::string extract( PdfMemDocument* pDocument, PdfPage* pPage )
 			{
 				if( strcmp( pszToken, "gs" ) == 0 ) 
 				{
-					block << "/" << stack.top().GetName().GetName() << " " << "gs" << endl;
+					block << "/" 
+					      << stack.top().GetName().GetName() 
+					      << " " << "gs" << endl;
 				}
 
 				if( strcmp( pszToken, "Tf" ) == 0 ) 
 				{
 					size = stack.top().GetReal();
 					stack.pop();
-					block << "/" << stack.top().GetName().GetName() << " " << size << " " << "Tf" << endl;
+					block << "/" 
+					      << stack.top().GetName().GetName() 
+					      << " " << size << " " 
+					      << "Tf" << endl;
 				}
 
 				if( strcmp( pszToken, "Tc" ) == 0 ||
@@ -157,9 +196,11 @@ std::string extract( PdfMemDocument* pDocument, PdfPage* pPage )
 					td_x = stack.top().GetReal();
 					stack.pop();
 				
-					block << td_x << " " << td_y << " " << pszToken << endl;
+					block << td_x << " " 
+					      << td_y << " " 
+					      << pszToken << endl;
 				}
-				else if( strcmp( pszToken, "Tm" ) == 0 ) 
+				else if( strcmp( pszToken, "Tm" ) == 0 )
 				{
 					offset_y = stack.top().GetReal();
 					stack.pop();
@@ -174,8 +215,13 @@ std::string extract( PdfMemDocument* pDocument, PdfPage* pPage )
 					scale_x  = stack.top().GetReal();
 					stack.pop();
 				
-					block << scale_x << " " << shear_x << " " << shear_y
-					      << " " << scale_y << " " << offset_x << " " << offset_y << " Tm" << endl;
+					block << scale_x << " " 
+					      << shear_x << " " 
+					      << shear_y << " " 
+					      << scale_y << " " 
+					      << offset_x << " " 
+					      << offset_y << " " 
+					      << pszToken << endl;
 				}
 				else if( strcmp( pszToken, "Tj" ) == 0 ||
 					 strcmp( pszToken, "'" ) == 0 ) 
@@ -185,8 +231,10 @@ std::string extract( PdfMemDocument* pDocument, PdfPage* pPage )
 					ReplaceStringInPlace(str, "(", "\\(");
 					ReplaceStringInPlace(str, ")", "\\)");
 		
-					block << "(" << str << ")" << pszToken << endl;
-					// cout << "(" << stack.top().GetString().GetString() << ")" << pszToken << endl;
+					block << "(" << str 
+					      << ")" << pszToken << endl;
+					// cout << "(" << str 
+					//      << ")" << pszToken << endl;
 					stack.pop();
 				}
 			}
@@ -240,9 +288,6 @@ std::string process_glimps()
 			block << "(\\\\)Tj" << endl;
 		else
 			block << "(" << glimps[i] << ")Tj" << endl;
-
-		// cout << "hi: " << x << endl;
-		// y++;
 	}
 
 	block << "ET" << endl;
@@ -251,46 +296,34 @@ std::string process_glimps()
 	return block.str();
 }
 
-void process_char( PdfMemDocument* pDocument, PdfPage* pPage ) 
+void get_glimpse( PdfMemDocument* pDocument, PdfPage* pPage ) 
 {
 	const char*          pszToken = NULL;
 	PdfVariant           var;
 	EPdfContentsType     eType;
 	string               str;
-	char                 ch;
 
 	PdfContentsTokenizer tokenizer( pPage );
 	
 	while( tokenizer.ReadNext( eType, pszToken, var ) )
-	{
 		if( eType == ePdfContentsType_Keyword )
-		{
 			if( strcmp( pszToken, "Tj" ) == 0 ||
-			    strcmp( pszToken, "'" ) == 0 ) 
-			{
+			    strcmp( pszToken, "'" ) == 0 ) {
+
 				str = var.GetString().GetString();
-				
-				for (int i = 0; i < str.size(); i++) {
-					ch = str.at(i);
-					if(!is_exist(ch)) {
-						// cout << ch << " ";
-						glimps[size++] = ch;
-					}
-				}
+				for (int i = 0; i < str.size(); i++)
+					if(!is_exist(str.at(i)))
+						glimps[size++] = str.at(i);
 			}
-		}
-	}
 }
-				
+
 int main()
 {
 	int pn, pc;
 
-	// PdfMemDocument pdf("/home/sagar/Downloads/Skandamu01.pdf");
+	PdfMemDocument pdf("/home/sagar/Downloads/Skandamu10A.pdf");
 
-	PdfMemDocument pdf("mysample.pdf");
-
-	PdfPage*       page = pdf.GetPage(0);
+	PdfPage*       page = pdf.GetPage(1);
 	PdfObject*     contents = page->GetContents();
 	PdfObject*     resources = page->GetResources();
 	// PdfStream*     stream = contents->GetStream();
@@ -306,14 +339,17 @@ int main()
 	for (pn = 1; pn < pc; ++pn) {
 		PdfPage*        page = pdf.GetPage(pn);		
 
-		process_char(&pdf, page);
-		// str = extract(&pdf, page);
+		get_glimpse(&pdf, page);
+		str = extract(&pdf, page);
+		page->GetContents()->GetStream()->Set(str.c_str());
+
+		// cout << str.c_str();
 	}
 
-	// page->GetContents()->GetStream()->Set(process_glimps().c_str());
-
+	page->GetContents()->GetStream()->Set(process_glimps().c_str());
+	
 	pdf.Write("modify.pdf");
-	cout << "Total: " << size;
+	cout << "Total Glimps: " << size;
 	cout << endl;
 
 	return 0;
