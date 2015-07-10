@@ -106,15 +106,101 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-alias es='emacs --daemon'
-alias ec='emacsclient.emacs -n'
+export NV_BUILD_CONFIGURATION_IS_VERBOSE=1
+export P4CONFIG=~/.p4config
+export P4ROOT=~/p4
 
+alias es='emacs23 --daemon'
+alias ec='emacsclient.emacs23 -n'
+
+
+mkrfs()
+{
+    link=`pwd`
+    cd /
+    sudo unlink nfs
+    sudo ln -s "$link" nfs
+    sudo chown sagar:sagar nfs
+    cd -
+}
+
+PATH=$PATH:~/workspace/env/scripts:/~/env/scripts:/usr/local/cuda-7.0/bin
+LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib64:$LD_LIBRARY_PATH
+
+get-zFAS()
+{
+    cd /home/sagar/workspace/dev-kernel/embedded-linux.xml/zFAS
+    . tmake/scripts/envsetup.sh
+    choose embedded-linux p2360 none release external x11
+}
+
+get-v3l()
+{
+    cd /home/sagar/workspace/dev-kernel/embedded-linux.xml/v3l
+    . tmake/scripts/envsetup.sh
+    choose embedded-linux vcm30t124 none debug internal x11
+}
+
+
+alias grep='/bin/grep -R'
+
+alias envsetup='. tmake/scripts/envsetup.sh'
+
+set_title() { printf "\e]0;Terminal $*\a"; }
+
+set_title
+
+mytitle() {
+    PROJPATH=`pwd | awk '{split($0,a,"/workspace/");$1=a[1] "/"; $2=a[2]; print $1,$2}' | cut -d ' ' -f2`
+
+    WORKSPACE=Workspace
+    PROJECT=""
+    BRANCH=""
+    MANIFEST=""
+    if [ "X$PROJPATH" != "X" ]; then
+	PROJECT=`basename $PROJPATH`
+	TEMP=`dirname $PROJPATH`
+	if [ "X$TEMP" != "X" ]; then
+	    BRANCH=`dirname ${TEMP}`
+	    MANIFEST=`basename ${TEMP}`
+	fi
+    fi
+
+    if [ "X${PROJECT}" != "X" ] && [ "X${BRANCH}" != "X" ] && [ "X${MANIFEST}" != "X" ] && [ "X${PROJECT}" != "X." ] && [ "X${BRANCH}" != "X." ] && [ "X${MANIFEST}" != "X." ]; then
+	set_title :: ${WORKSPACE}  \( ${PROJECT} :: ${BRANCH} :: ${MANIFEST} \)
+    else
+	pwd | grep -q workspace
+	if [ $? -eq 0 ];then
+	    set_title :: ${WORKSPACE}
+	else
+	    set_title
+	fi
+    fi
+}
+
+PS1='$(mytitle)\@ \u@\h (\W)\$ '
 PS1='\@ \u@\h (\W)\$ '
-printf "\033];%s\07" "Terminal"
 
-PATH=$PATH:~/env/scripts
+export TERM=xterm-256color
+PATH="/home/sagar/Downloads/FDK-25-LINUX/FDK/Tools/linux:$PATH"
 
-set_title() { printf "\e]2;Terminal: $*\a"; }
+# Set the name of vim session the terminal is tied up to
+eset(){
+    export VI_SERVER=$1
+}
+eset vimserver
 
-set_title "Terminal"
+# Fire up a new server according to the argument supplied
+vs(){
+    vim --servername $VI_SERVER $1
+}
 
+# Open up the files in the environment Vim server.
+vc(){
+    vim --servername $VI_SERVER --remote-silent $1
+    # tmux switch-client -t VIM
+    tmux select-window -t VIM
+}
+
+# vim --servername vimserver --remote-send "<ESC>:cd `pwd`<ENTER>"
+MYPID=`taskset -p $$`
