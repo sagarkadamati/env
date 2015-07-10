@@ -2,11 +2,53 @@
 
 PKGS=""
 
+## Configure bash
+cp configs/bashrc ~/.bashrc
+
+## Set nopass for sudo
+sudo adduser sagar sudo
+sudo usermod -a -G sudo sagar
+sudo cp configs/sudoall /etc/sudoers.d
+
+## Hide Unity launcher
+# gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-hide-mode 1
+
+## Install terminator
+if ! type terminator > /dev/null; then
+	sudo apt-get install -y terminator
+fi
+
+mkdir -p ~/.config/terminator
+mkdir -p ~/.config/terminator/plugins
+cp configs/terminator ~/.config/terminator/config
+
+## Configure tmux
+cp configs/tmux.conf ~/.tmux.conf
+
+## Set terminator as default terminal
+gsettings set org.gnome.desktop.default-applications.terminal exec x-terminal-emulator
+gsettings set org.gnome.desktop.default-applications.terminal exec-arg ""
+
+## enable virtual desktop (workspace)
+gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ hsize 2
+gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ vsize 2
+
+## Git save credentials
+git config credential.helper store
+
+
+
+
+
+
+
+
+
 # sudo apt-get install linux-headers-generic build-essential git vim pdftk sox terminator minicom
 
 # sudo apt-get install dconf-tools
 
-#sudo apt-get install emacs
+#sudo apt-get install emacs24
 
 # touch ~/.emacs
 # echo ';; -*- mode: emacs-lisp; -*-' >> ~/.emacs
@@ -20,16 +62,9 @@ PKGS=""
 # dpkg -S /bin/ls
 #sudo apt-get install openjdk-6-jre-headless
 
-# git config credential.helper store
 #!/bin/sh
 
 
-# mkdir -p ~/.config/terminator
-# mkdir -p ~/.config/terminator/plugins
-# cp config ~/.config/terminator/config
-
-# gsettings set org.gnome.desktop.default-applications.terminal exec x-terminal-emulator
-# gsettings set org.gnome.desktop.default-applications.terminal exec-arg ""
 
 # sudo apt-get install dconf-tools
 # dconf dump /org/gnome/desktop/wm/keybindings/ > keybindings-backup.dconf
@@ -51,10 +86,6 @@ PKGS=""
 # sudo apt-get install memlockd
 # sudo apt-get install tmux
 
-# enable virtual desktop (workspace)
-# gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ hsize 2
-# gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ vsize 2
-
 
 # sudo add-apt-repository ppa:numix/ppa
 # sudo apt-get update
@@ -64,10 +95,6 @@ PKGS=""
 # gsettings set org.gnome.desktop.wm.preferences theme "Numix"
 # gsettings set org.gnome.desktop.interface icon-theme "Numix-Circle"
 # gsettings set com.canonical.desktop.interface scrollbar-mode normal
-
-# sudo adduser sagar sudo
-# sudo usermod -a -G sudo sagar
-# sudo cp sudoall /etc/sudoers.d/
 
 # # Lock screen
 # gsettings set com.canonical.unity-greeter draw-user-backgrounds 'false'
@@ -81,6 +108,7 @@ PKGS=""
 # gsettings list-keys org.compiz.integrated
 
 # sudo apt-get install unity-tweak-tool
+
 
 # #---
 # gsettings set org.gnome.desktop.wm.preferences mouse-button-modifier '<Super>'
@@ -117,3 +145,4 @@ PKGS=""
 
 # sudo apt-get install csh ffmpeg
 # sudo apt-get install emacs23 cscope cscope-el
+
