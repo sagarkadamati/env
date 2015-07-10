@@ -1,5 +1,7 @@
 #!/bin/sh
 
+NV_EDIDGEN='/home/sagar/workspace/dev-kernel/embedded-linux.xml/zFAS/out/embedded-linux-p2360-debug/nvidia/core-private/utils/EDIDGenerate-hostcc/nv_edidgenerate'
+
 HOFFSET=0
 VOFFSET=0
 HPULSE=0
@@ -35,21 +37,99 @@ VBACK=0
 HBLANK=256
 VBLANK=45
 
-
 # Pixel Clock: 148.5MHz 
-
 # Horizontal Active: 1920 
 # Vertical Active: 1080 
-
 # Horizontal Blanking: 280 
 # Vertical Blanking: 45 
-
 # Horizontal Sync Offset: 88 
 # Horizontal Sync Pulse: 44 
-
 # Vertical Sync Offset: 4 
 # Vertical Sync Pulse: 5 
 
+# ${PCLK},${HACTIVE},${HBLANK},${VACTIVE},${VBLANK},${HOFFSET},${HPULSE},${VOFFSET},${VPULSE}"
 # ./nv_edidgenerate 14850,1920,280,1080,45,88,44,4,5
 
-./nv_edidgenerate "${PCLK},${HACTIVE},${HBLANK},${VACTIVE},${VBLANK},${HOFFSET},${HPULSE},${VOFFSET},${VPULSE}" | grep '|' | cut -d'|' -f2
+# Display resolution in pixels
+RESOLUTION=2820x720
+
+# Horizontal and Vertical Resoulution in pixels
+HACTIVE=`echo ${RESOLUTION} | cut -d'x' -f1`
+VACTIVE=`echo ${RESOLUTION} | cut -d'x' -f2`
+
+# Pixel clock in 10khz
+PCLK=13700
+
+# Horizontal and Vertical front porch in pixels
+HOFFSET=48
+VOFFSET=3
+
+# Horizontal and Vertical sync pulse width in pixels
+HPULSE=32
+VPULSE=6
+
+# Horizontal and Vertical back porch in pixels
+HBACK=80
+VBACK=37
+
+# Horizontal and Vertical blanking in pixels (back porch + sync width + front porch)
+# HBLANK=$(( ${HPULSE} + ${HOFFSET} + ${HBACK} ))
+# VBLANK=$(( ${VPULSE} + ${VOFFSET} + ${VBACK} ))
+HBLANK=256
+VBLANK=45
+
+${NV_EDIDGEN} "${PCLK},${HACTIVE},${HBLANK},${VACTIVE},${VBLANK},${HOFFSET},${HPULSE},${VOFFSET},${VPULSE}" | grep '|' | cut -d '|' -f2
+
+# ${NV_EDIDGEN} 14850,1920,280,1080,45,88,44,4,5 | grep '|' | cut -d '|' -f2
+
+# ${NV_EDIDGEN} 7425,1920,280,1080,45,88,44,4,5 | grep '|' | cut -d '|' -f2
+
+
+# Hor Pixels = 1280; // Pixels
+# Ver Pixels = 720; // Lines
+# Hor Frequency = 45.000; // KHz = 22.2 usec / line
+# Ver Frequency = 60.000; // Hz = 16.7 msec / frame
+# Pixel Clock = 74.250; // MHz = 13.5 nsec ¡À 0.5%
+
+# // H Front Porch = 1.481; // (usec) = 110 chars = 110 Pixels
+# Hor Sync Time = 0.539; // (usec) = 40 chars = 40 Pixels
+# // H Back Porch = 2.963; // (usec) = 220 chars = 220 Pixels
+# // H Left Border = 0.000; // (usec) = 0 chars = 0 Pixels 
+
+
+# pclk: 32709600
+# h_sync_width: 64
+# v_sync_width: 3
+# h_back_porch: 128
+# v_back_porch: 38
+# h_active: 800
+# v_active: 480
+# h_front_porch: 64
+# v_front_porch: 4
+
+# # Display resolution in pixels
+# RESOLUTION=800x480
+
+# # Horizontal and Vertical Resoulution in pixels
+# HACTIVE=`echo ${RESOLUTION} | cut -d'x' -f1`
+# VACTIVE=`echo ${RESOLUTION} | cut -d'x' -f2`
+
+# PCLK=3271
+
+# # Horizontal and Vertical front porch in pixels
+# HOFFSET=64
+# VOFFSET=4
+
+# # Horizontal and Vertical sync pulse width in pixels
+# HPULSE=64
+# VPULSE=3
+
+# # Horizontal and Vertical back porch in pixels
+# HBACK=128
+# VBACK=38
+
+# # Horizontal and Vertical blanking in pixels (back porch + sync width + front porch)
+# # HBLANK=$(( ${HPULSE} + ${HOFFSET} + ${HBACK} ))
+# # VBLANK=$(( ${VPULSE} + ${VOFFSET} + ${VBACK} ))
+# HBLANK=256
+# VBLANK=45

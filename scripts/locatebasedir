@@ -1,0 +1,5 @@
+#!/bin/sh
+
+LOC=`which $0`
+
+dirname `dirname ${LOC}`

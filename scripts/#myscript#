@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-ENVPATH="/home/sagar/workspace/env"
+ENVPATH="/home/sagar/env"
 
 FILE="${ENVPATH}/scripts/$1"
 
-# function emacs_server_is_running()
+1# function emacs_server_is_running()
 # {
 #     ps ux | grep "\bemacs\b" | grep -v grep >/dev/null
 # }

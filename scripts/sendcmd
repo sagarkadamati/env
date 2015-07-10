@@ -1,0 +1,9 @@
+#!/bin/sh
+
+session_name=Workspace
+window=${session}:4
+pane=${window}.0
+tmux send-keys -t "$pane" C-z 'some -new command' Enter
+tmux select-pane -t "$pane"
+tmux select-window -t "$window"
+tmux attach-session -t "$session_name"
