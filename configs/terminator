@@ -61,7 +61,7 @@
     cursor_color = "#000070"
     scroll_background = False
     show_titlebar = False
-    font = Monospace 10
+    font = Inconsolata Medium 12
     background_color = "#fdf6e3"
     foreground_color = "#657b83"
     scrollback_infinite = True

@@ -204,3 +204,5 @@ vc(){
 
 # vim --servername vimserver --remote-send "<ESC>:cd `pwd`<ENTER>"
 MYPID=`taskset -p $$`
+
+eval `dircolors env/configs/dircolors.ansi-light`
