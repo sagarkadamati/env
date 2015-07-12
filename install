@@ -2,16 +2,20 @@
 
 PKGS=""
 
+## Install guest addons virtualbox
+# sudo apt-get install -y virtualbox-guest-dkms
+# sudo apt-get remove -y virtualbox-guest-dkms
+
 ## Configure bash
 cp configs/bashrc ~/.bashrc
 
 ## Set nopass for sudo
-sudo adduser sagar sudo
-sudo usermod -a -G sudo sagar
-sudo cp configs/sudoall /etc/sudoers.d
+# sudo adduser sagar sudo
+# sudo usermod -a -G sudo sagar
+# sudo cp configs/sudoall /etc/sudoers.d
 
 ## Hide Unity launcher
-# gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-hide-mode 1
+gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-hide-mode 1
 
 ## Install terminator
 if ! type terminator > /dev/null; then
@@ -36,6 +40,44 @@ gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ vsize 2
 ## Git save credentials
 git config credential.helper store
 
+## Disable lockscreen
+gsettings set org.gnome.desktop.screensaver lock-enabled false
+
+## Disable screen blankout
+gsettings set org.gnome.desktop.session idle-delay 0
+
+## reset Alt to Alt-Super
+gsettings set org.compiz.integrated show-hud "['<Alt><Super>']"
+
+## Disable Superkey
+dconf write /org/compiz/profiles/unity/plugins/unityshell/show-launcher '""'
+
+## Set Wallpaper
+gsettings set org.gnome.desktop.background picture-uri file:///home/sagar/env/images/Radha-Krishna.jpg
+
+## Set dircolors
+eval `dircolors configs/dircolors.ansi-light`
+
+## Set panel opacity
+# gsettings get org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ panel-opacity
+# gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ panel-opacity 1
+
+# Install sourcecodepro font
+sudo mkdir -p /usr/share/fonts/truetype/source-code-pro
+sudo cp fonts/source-code-pro/TTF/* /usr/share/fonts/truetype/source-code-pro
+
+## Install Mac theme and icons
+#gsettings set org.gnome.desktop.interface gtk-theme "mac-ithemes-v3"
+#gsettings set org.gnome.desktop.wm.preferences theme "mac-ithemes-v3"
+#gsettings set org.gnome.desktop.interface icon-theme "mac-icons-v3"
+
+
+
+
+
+
+
+
 
 
 
@@ -47,30 +89,22 @@ git config credential.helper store
 # sudo apt-get install linux-headers-generic build-essential git vim pdftk sox terminator minicom
 
 # sudo apt-get install dconf-tools
-
-#sudo apt-get install emacs24
+# sudo apt-get install emacs24
 
 # touch ~/.emacs
 # echo ';; -*- mode: emacs-lisp; -*-' >> ~/.emacs
-
 # echo "(load \"~/env/elisp/core-utils.el]\")" >> ~/.emacs
 
 # sudo apt-get install devilspie wmctrl
 # sudo apt-get install texlive-extra-utils
-#sudo apt-get install cscope mplayer
+# sudo apt-get install cscope mplayer
 
 # dpkg -S /bin/ls
-#sudo apt-get install openjdk-6-jre-headless
-
-#!/bin/sh
-
-
+# sudo apt-get install openjdk-6-jre-headless
 
 # sudo apt-get install dconf-tools
 # dconf dump /org/gnome/desktop/wm/keybindings/ > keybindings-backup.dconf
 # dconf load /org/gnome/desktop/wm/keybindings/ < keybindings-backup.dconf
-
-
 
 # gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']"
 # You then set the name, command and binding values
@@ -94,20 +128,17 @@ git config credential.helper store
 # gsettings set org.gnome.desktop.interface gtk-theme "Numix"
 # gsettings set org.gnome.desktop.wm.preferences theme "Numix"
 # gsettings set org.gnome.desktop.interface icon-theme "Numix-Circle"
+
 # gsettings set com.canonical.desktop.interface scrollbar-mode normal
 
 # # Lock screen
 # gsettings set com.canonical.unity-greeter draw-user-backgrounds 'false'
 # gsettings set com.canonical.unity-greeter background '/home/sagar/env/Pictures/52168_Radha-Krishna-ISKCON-Desire-Tree-Devotee-Network_2592x1944.jpg'
 
-# # Wallpaper
-# gsettings set org.gnome.desktop.background picture-uri file:///home/sagar/env/Pictures/52080_Sri-Radha-Krishna-Lalita-Vishakha-Wallpaper-001-Size-2400-1800_2400x1800.jpg
-
-# gsettings set org.compiz.integrated show-hud "['<Alt><Super>']"
 # gsettings set org.compiz.integrated show-launcher "['']"
 # gsettings list-keys org.compiz.integrated
 
-# sudo apt-get install unity-tweak-tool
+sudo apt-get install unity-tweak-tool
 
 
 # #---
@@ -146,3 +177,7 @@ git config credential.helper store
 # sudo apt-get install csh ffmpeg
 # sudo apt-get install emacs23 cscope cscope-el
 
+# sudo add-apt-repository ppa:noobslab/themes
+# sudo apt-get update
+# sudo apt-get install mac-ithemes-v3
+# sudo apt-get install mac-icons-v3
