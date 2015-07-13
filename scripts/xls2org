@@ -7,7 +7,7 @@ IFILE="$1"
 rm -rf "/tmp/xls2org.txt*"
 
 # Convert to text file with delimiter |
-ssconvert -S -O 'separator=|' /tmp/"${IFILE}" /tmp/xls2org.txt
+ssconvert -S -O 'separator=|' "${IFILE}" /tmp/xls2org.txt
 
 # Remove any double quotes
 sed -i 's/"/ /g' /tmp/xls2org.txt.0

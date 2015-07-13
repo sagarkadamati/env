@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# bitwise exclusive OR ( XOR ) example
+echo XOR Truth table:
+
+echo 0XOR0=$(( 0 ^ 0 ))
+echo 0XOR1=$(( 0 ^ 1 ))
+echo 1XOR0=$(( 1 ^ 0 ))
+echo 1XOR1=$(( 1 ^ 1 ))
+
+echo Conditional XOR function example
+
+function xor {
+        if (( $1 ^ $2 )) ;then
+                echo 1
+        else
+                echo 0
+        fi
+}
+
+echo -n 0XOR0= 
+xor 0 0
+echo -n 0XOR1=
+xor 0 1
+echo -n 1XOR0=
+xor 1 0
+echo -n 1XOR1=
+xor 1 1

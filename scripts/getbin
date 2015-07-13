@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+A=`echo $1 | xxd -bc | awk '{print $2 " " $3}'`
+echo "$1: $A"
+B=`echo $2 | xxd -bc | awk '{print $2 " " $3}'`
+echo "$2: $B"
+echo ---------------------
+
+C=${1:0:1}
+D=${2:0:1}
+
+E=`echo "ibase=16; ${C^}" | bc`
+F=`echo "ibase=16; ${D^}" | bc`
+
+G=`echo $(( $E & $F)) | xxd -bc`
+echo -n "DF : "
+echo -n $(( $E & $F)) | xxd -bc | awk '{print $2 | awk '{print $2}'
+
+# echo "DF : "$G $H"
+
+# C=`echo $A | awk '{print $1}'`
+# D=`echo $B | awk '{print $1}'`
+# echo $(($C & $D))
