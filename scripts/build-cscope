@@ -1,0 +1,4 @@
+#!/bin/sh
+
+find core* tests* kernel -name '*.c' -o -name '*.h' > cscope.files
+cscope -bqk
