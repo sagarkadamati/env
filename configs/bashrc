@@ -110,8 +110,8 @@ export NV_BUILD_CONFIGURATION_IS_VERBOSE=1
 export P4CONFIG=~/.p4config
 export P4ROOT=~/p4
 
-alias es='emacs23 --daemon'
-alias ec='emacsclient.emacs23 -n'
+alias es='emacs --daemon'
+alias ec='emacsclient -n'
 
 
 mkrfs()
@@ -124,7 +124,7 @@ mkrfs()
     cd -
 }
 
-PATH=$PATH:~/workspace/env/scripts:/~/env/scripts:/usr/local/cuda-7.0/bin
+PATH=$PATH:~/env/scripts:/~/env/scripts:/usr/local/cuda-7.0/bin
 LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib64:$LD_LIBRARY_PATH
 
 get-zFAS()
@@ -204,3 +204,6 @@ vc(){
 
 # vim --servername vimserver --remote-send "<ESC>:cd `pwd`<ENTER>"
 MYPID=`taskset -p $$`
+
+eval `dircolors env/configs/dircolors.ansi-light`
+PATH=~/env/bin:$PATH
