@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ENVPATH="/home/sagar/workspace/env"
+ENVPATH="/home/sagar/env"
 
 FILE="${ENVPATH}/scripts/$1"
 
