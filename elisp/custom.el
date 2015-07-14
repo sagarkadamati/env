@@ -45,6 +45,12 @@
 ;; (elscreen-toggle-display-tab)
 (display-time)
 
+(defun no-modeline()
+  (interactive)
+  (setq mode-line-format nil))
+
+;; (setq-default mode-line-format nil) 
+
 ;; (setq default-frame-alist
 ;;       (append default-frame-alist
 ;;        '((foreground-color . "Black")
@@ -56,16 +62,29 @@
 ;; (setq term-default-bg-color "#FFFFF0")
 ;; (setq term-default-fg-color "Black")
 
-;; (setq default-frame-alist
-;;       (append default-frame-alist
-;;        '((foreground-color . "Black")
-;; 	 (background-color . "#f1e7d0")
-;; 	 (cursor-color . "#000070")
-;; 	 (frame-name "Little"))
-;;        ))
+(setq default-frame-alist
+      (append default-frame-alist
+       '((foreground-color . "#657B83")
+	 (background-color . "#FDF6E3")
+	 (cursor-color . "#000070")
+	 (frame-name "Little"))
+       ))
 
-(set-face-background 'mode-line "firebrick")
-(set-face-foreground 'mode-line "#f1e7d0")
+(set-background-color "#FDF6E3")
+(set-foreground-color "#657B83")
+
+(set-face-background 'mode-line "#657B83")
+(set-face-foreground 'mode-line "#FDF6E3")
+
+(set-face-background 'mode-line-inactive "#FDF6E3")
+(set-face-foreground 'mode-line-inactive "#657B83")
+
+(set-face-background 'vertical-border "#FDF6E3")
+(set-face-foreground 'vertical-border "#657B83")
+
+(set-face-background 'shadow "#657B83")
+(set-face-foreground 'shadow "#FDF6E3")
+
 
 ;; (setq frames (frame-list))
 ;; (setq frames-len (- (list-length frames) 1))
@@ -135,7 +154,7 @@
 (defun set-pad()                                                        ; set pad frame
   (interactive)
   (set-frame-name "Pad")
-  (find-file-at-point "~/pad.org")
+  (find-file-at-point "~/org/pad.org")
   (set-frame-size (selected-frame) 80 43))
 
 ;; custom frames
@@ -539,12 +558,6 @@
   (interactive)
   (set 'fname (buffer-file-name (window-buffer (minibuffer-selected-window))))
   (shell-command cflow2dot.pl 'fname))
-
-
-
-
-
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Short-cut keys
