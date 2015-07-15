@@ -39,28 +39,52 @@
 (setq debug-on-error t)
 (setq c-default-style "linux")
 
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-;; (elscreen-toggle-display-tab)
+(cond ((> emacs-major-version 20)
+       (tool-bar-mode -1)
+       (menu-bar-mode -1)
+       (scroll-bar-mode -1)
+       ;; (menu-bar-showhide-fringe-menu-customize-disable)
+       (blink-cursor-mode -1)
+       (windmove-default-keybindings 'meta)))
+
 (display-time)
+;; (elscreen-toggle-display-tab)
+
+(set-face-attribute 'mode-line nil :box nil)
+(set-face-attribute 'mode-line-inactive nil :box nil)
+(set-face-attribute 'mode-line-highlight nil :box nil)
+
+;; Highlight line
+(global-hl-line-mode 1)
+;; (set-face-background 'hl-line "#f1e7d0")
+;; (set-face-background 'hl-line "#EEE8D5")
+(set-face-background 'hl-line "#F9F3E2")
+
+(set-cursor-color "#657B83")
 
 (defun no-modeline()
   (interactive)
   (setq mode-line-format nil))
 
-;; (setq-default mode-line-format nil) 
+(defun toggle-mode-line () "toggles the modeline on and off"
+  (interactive) 
+  (setq mode-line-format
+    (if (equal mode-line-format nil)
+        (default-value 'mode-line-format)) )
+  (redraw-display))
 
-;; (setq default-frame-alist
-;;       (append default-frame-alist
-;;        '((foreground-color . "Black")
-;; 	 (background-color . "#FFFFF0")
-;; 	 (cursor-color . "#000070")
-;; 	 (frame-name "Little"))
-;;        ))
+(global-set-key [M-f12] 'toggle-mode-line)
 
-;; (setq term-default-bg-color "#FFFFF0")
-;; (setq term-default-fg-color "Black")
+(defun switch-fullscreen nil
+  (interactive)
+  (let* ((modes '(nil fullboth fullwidth fullheight))
+         (cm (cdr (assoc 'fullscreen (frame-parameters) ) ) )
+         (next (cadr (member cm modes) ) ) )
+    (modify-frame-parameters
+     (selected-frame)
+     (list (cons 'fullscreen next)))))
+
+(global-set-key (kbd "C-; f f")  'switch-fullscreen)
 
 (setq default-frame-alist
       (append default-frame-alist
@@ -73,18 +97,35 @@
 (set-background-color "#FDF6E3")
 (set-foreground-color "#657B83")
 
-(set-face-background 'mode-line "#657B83")
-(set-face-foreground 'mode-line "#FDF6E3")
+(set-face-background 'fringe "#EEE8D5")
 
-(set-face-background 'mode-line-inactive "#FDF6E3")
+(set-face-background 'mode-line "#EEE8D5")
+(set-face-foreground 'mode-line "#657B83")
+
+(set-face-background 'mode-line-inactive "#EEE8D5")
 (set-face-foreground 'mode-line-inactive "#657B83")
 
-(set-face-background 'vertical-border "#FDF6E3")
-(set-face-foreground 'vertical-border "#657B83")
+(set-face-foreground 'vertical-border "#EEE8D5")
 
 (set-face-background 'shadow "#657B83")
 (set-face-foreground 'shadow "#FDF6E3")
 
+(set-face-background 'region "#EEE8D5")
+(set-face-foreground 'region nil)
+
+;; Setting whitespace colors
+(set-face-background 'whitespace-tab "#EEE8D5")
+(set-face-background 'whitespace-space "#EEE8D5")
+(set-face-background 'whitespace-empty "#EEE8D5")
+(set-face-background 'whitespace-hspace "#EEE8D5")
+(set-face-background 'whitespace-indentation "#EEE8D5")
+(set-face-background 'whitespace-line "#EEE8D5")
+(set-face-background 'whitespace-newline "#EEE8D5")
+(set-face-background 'whitespace-space "#EEE8D5")
+(set-face-background 'whitespace-space-after-tab "#EEE8D5")
+(set-face-background 'whitespace-space-before-tab "#EEE8D5")
+(set-face-background 'whitespace-tab "#EEE8D5")
+(set-face-background 'whitespace-trailing "#EEE8D5")
 
 ;; (setq frames (frame-list))
 ;; (setq frames-len (- (list-length frames) 1))
@@ -109,7 +150,41 @@
 (setq x-select-enable-clipboard t)
 (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 
+;; unset global key
+(global-unset-key (kbd "C-;"))                                       ; unset the `C-;` key
+
+;; buffer menu
+(global-set-key (kbd "C-; b m")   'buffer-menu)                      ; list buffer menu
+
+;; revert buffer
+(global-set-key (kbd "C-; b r b") 'revert-buffer)                    ; revert buffer
+
+;; buffer changing
+(global-set-key (kbd "C-; b p")   'previous-buffer)                  ; prev-buffer
+(global-set-key (kbd "C-; b n")   'next-buffer)                      ; next-buffer
+(global-set-key (kbd "C-; b r o") 'toggle-read-only)                 ; read-only-buffer
+
+;; goto buffer starting, and end
+(global-set-key (kbd "C-; b b")   'beginning-of-buffer)              ; goto beging of the buffer
+(global-set-key (kbd "C-; b e")   'end-of-buffer)                    ; goto end of the buffer
+(global-set-key (kbd "C-; b s")   'save-buffer)                      ; save buffer
+(global-set-key (kbd "C-; b q")   'kill-buffer)                      ; kill the buffer
+
 (require 'windmove)
+
+;; window keys
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; moving windows
+(global-set-key (kbd "C-; w l")   'windmove-right)                   ; move to left windnow
+(global-set-key (kbd "C-; w h")   'windmove-left)                    ; move to right window
+(global-set-key (kbd "C-; w k")   'windmove-up)                      ; move to upper window
+(global-set-key (kbd "C-; w j")   'windmove-down)                    ; move to down window
+
+;; window spliting
+(global-set-key (kbd "C-; w v")   'split-window-vertically)          ; split window vertically
+(global-set-key (kbd "C-; w s")   'split-window-horizontally)        ; split window horizontally
+(global-set-key (kbd "C-; w q")   'delete-window)                    ; kill splited window
+(global-set-key (kbd "C-; w b")   'balance-windows)                  ; all windows equal size
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Functions
@@ -137,7 +212,7 @@
 (defun set-terminal()                                                   ; set terminal frame
   (interactive)
   (set-frame-name "emacs-term")
-  (ansi-term "/usr/bin/screen")
+  (ansi-term "/bin/bash")
   (set-frame-size (selected-frame) 150 40))
 
 (defun set-serial()                                                   ; set target console frame
@@ -155,7 +230,8 @@
   (interactive)
   (set-frame-name "Pad")
   (find-file-at-point "~/org/pad.org")
-  (set-frame-size (selected-frame) 80 43))
+  (set-frame-size (selected-frame) 80 43)
+  (toggle-mode-line))
 
 ;; custom frames
 (defun set-custom0()
@@ -274,6 +350,123 @@
      (interactive "p") 
      (select-frame-by-name "emacs-term")))
 
+;; frame keys
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; frame
+(global-set-key (kbd "C-; f c")   
+		(lambda()
+		  (interactive)
+		  (make-frame '(
+				(name . "new-frame")
+			       (width . 80)
+			       (height . 43)))))                   ; create frame
+
+(global-set-key (kbd "C-; f q")   'delete-frame)                     ; delete frame
+(global-set-key (kbd "C-; f o")   'other-frame)                      ; other frame
+(global-set-key (kbd "C-; f g")   'select-frame-by-name)             ; goto frame
+;;(global-set-key (kbd "C-; f s")   'suspend-frame)                    ; minimize frame
+(global-set-key (kbd "C-; f n")   'next-frame)                       ; next frame
+(global-set-key (kbd "C-; f p")   'previous-frame)                   ; previous frame
+
+;; describe help
+(global-set-key (kbd "C-; d f")   'describe-function)                ; function manual
+(global-set-key (kbd "C-; d k")   'describe-key)                     ; key manual
+(global-set-key (kbd "C-; d m")   'man)                              ; man page
+(global-set-key (kbd "C-; d p")   'python-describe-symbol)           ; python manual
+
+;; open the url at cursor
+(global-set-key (kbd "C-; o u")   'open-url)                         ; open url in browser
+
+;; fast scrolling
+(global-set-key (kbd "M-p") 
+		(lambda()
+		  (forward-line -5)))                                ; previous 5 lines
+
+(global-set-key (kbd "M-n") 
+		(lambda() 
+		  (forward-line 5)))                                 ; next 5 lines
+
+;; frames
+(global-set-key (kbd "C-; s c")   'set-serial)              ; set sanskrit frame
+(global-set-key (kbd "C-; s d")   'set-default-font)                 ; set default font
+(global-set-key (kbd "C-; s p")   'set-pad)                          ; set pad size
+(global-set-key (kbd "C-; s t")   'set-terminal)                     ; set terminal size
+(global-set-key (kbd "C-; s m")   'set-main)                         ; set as main frame
+
+;; setting custom frames
+(global-set-key (kbd "C-; s 0")   'set-custom0)
+(global-set-key (kbd "C-; s 1")   'set-custom1)
+(global-set-key (kbd "C-; s 2")   'set-custom2)
+(global-set-key (kbd "C-; s 3")   'set-custom3)
+(global-set-key (kbd "C-; s 4")   'set-custom4)
+(global-set-key (kbd "C-; s 5")   'set-custom5)
+(global-set-key (kbd "C-; s 6")   'set-custom6)
+(global-set-key (kbd "C-; s 7")   'set-custom7)
+(global-set-key (kbd "C-; s 8")   'set-custom8)
+(global-set-key (kbd "C-; s 9")   'set-custom9)
+
+;; goto custom frames
+(global-set-key (kbd "C-; f 0")   (goto-custom0-frame))
+(global-set-key (kbd "C-; f 1")   (goto-custom1-frame))
+(global-set-key (kbd "C-; f 2")   (goto-custom2-frame))
+(global-set-key (kbd "C-; f 3")   (goto-custom3-frame))
+(global-set-key (kbd "C-; f 4")   (goto-custom4-frame))
+(global-set-key (kbd "C-; f 5")   (goto-custom5-frame))
+(global-set-key (kbd "C-; f 6")   (goto-custom6-frame))
+(global-set-key (kbd "C-; f 7")   (goto-custom7-frame))
+(global-set-key (kbd "C-; f 8")   (goto-custom8-frame))
+(global-set-key (kbd "C-; f 9")   (goto-custom9-frame))
+
+(global-set-key (kbd "C-; f b")   (goto-bhagavatam-frame))           ; goto bhagavatam frame
+(global-set-key (kbd "C-; f p")   (goto-pad-frame))                  ; goto pad frame
+(global-set-key (kbd "C-; f m")   (goto-main-frame))                 ; goto main frame
+(global-set-key (kbd "C-; f t")   (goto-terminal-frame))             ; goto terminal frame
+(global-set-key (kbd "C-; f s")   (goto-serial-frame))               ; goto serial frame
+
+;; Other keys
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(global-set-key (kbd "C-; i s")   'search-in-internet)               ; search the google key word
+
+;; insert date
+;; (global-set-key (kbd "C-; i d")   'insert-current-date-time)
+;; (global-set-key (kbd "C-; i t")   'insert-current-time)
+
+;; modes
+(global-set-key (kbd "C-; m w")   'whitespace-mode)                  ; whitespace mode
+(global-set-key (kbd "C-; m o")   'org-mode)                         ; org mode
+
+;; takuzo-san's idea
+(global-set-key (kbd "C-h")       'backward-delete-char)             ; delete char
+(global-set-key (kbd "M-h")       'backward-kill-word)               ; backword kill
+
+;; cscope keys
+(setq cscope-do-not-update-database t)
+
+(global-set-key (kbd "C-; c f t")  'cscope-find-this-text-string)
+(global-set-key (kbd "C-; c f i")  'cscope-find-files-including-file)
+(global-set-key (kbd "C-; c f f")  'cscope-find-this-file)
+(global-set-key (kbd "C-; c c f")  'cscope-find-called-functions)
+
+(global-set-key (kbd "C-; c f s")  'cscope-find-this-symbol)
+(global-set-key (kbd "C-; c g d")  'cscope-find-global-definition)
+(global-set-key (kbd "C-; c f d")  'cscope-find-global-definition-no-prompting)
+(global-set-key (kbd "C-; c u f")  'cscope-find-functions-calling-this-function)
+
+(global-set-key (kbd "C-; c f p")  'cscope-find-egrep-pattern)
+(global-set-key (kbd "C-; c p")    'cscope-pop-mark)
+
+;; (global-set-key (kbd "C-; c s i")  'cscope-set-initial-directory)
+;; (global-set-key (kbd "C-; c u i")  'cscope-unset-initial-directory)
+
+;; (global-set-key (kbd "C-; c n s")  'cscope-next-symbol)
+;; (global-set-key (kbd "C-; c p s")  'cscope-prev-symbol)
+;; (global-set-key (kbd "C-; c n f")  'cscope-next-file)
+;; (global-set-key (kbd "C-; c p f")  'cscope-prev-file)
+
+;; (global-set-key (kbd "C-; c d b")  'cscope-display-buffer)
+;; (global-set-key (kbd "C-; c b t")  'cscope-display-buffer-toggle)
+
 ;; window full screen
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq myreg nil)
@@ -345,7 +538,7 @@
 
 ;; open url
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(fset 'open-url
+;; (fset 'open-url
 ;;   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([24 6 return] 0 "%d")) arg)))
 
 ;; smart file open at the cursor
@@ -553,7 +746,6 @@
 ;; End functions
 
 
-
 (defun cflow2dot ()
   (interactive)
   (set 'fname (buffer-file-name (window-buffer (minibuffer-selected-window))))
@@ -563,23 +755,7 @@
 ;; Short-cut keys
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; unset global key
-(global-unset-key (kbd "C-;"))                                       ; unset the `C-;` key
-
-;; window keys
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; moving windows
-(global-set-key (kbd "C-; w l")   'windmove-right)                   ; move to left windnow
-(global-set-key (kbd "C-; w h")   'windmove-left)                    ; move to right window
-(global-set-key (kbd "C-; w k")   'windmove-up)                      ; move to upper window
-(global-set-key (kbd "C-; w j")   'windmove-down)                    ; move to down window
-
-;; window spliting
-(global-set-key (kbd "C-; w v")   'split-window-vertically)          ; split window vertically
-(global-set-key (kbd "C-; w s")   'split-window-horizontally)        ; split window horizontally
-(global-set-key (kbd "C-; w q")   'delete-window)                    ; kill splited window
-(global-set-key (kbd "C-; w b")   'balance-windows)                  ; all windows equal size
+;; window fullscreen
 (global-set-key (kbd "C-; w f")   'toggle-window-full-screen)        ; window full-screen
 
 ;; window resize horizontally
@@ -603,26 +779,8 @@
 (global-set-key (kbd "C-; b h")   'buf-move-left)                    ; move left window
 (global-set-key (kbd "C-; b l")   'buf-move-right)                   ; move right window
 
-;; buffer menu
-(global-set-key (kbd "C-; b m")   'buffer-menu)                      ; list buffer menu
-
-;; revert buffer
-(global-set-key (kbd "C-; b r b") 'revert-buffer)                    ; revert buffer
-
-;; buffer changing
-(global-set-key (kbd "C-; b p")   'previous-buffer)                  ; prev-buffer
-(global-set-key (kbd "C-; b n")   'next-buffer)                      ; next-buffer
-(global-set-key (kbd "C-; b r o") 'toggle-read-only)                 ; read-only-buffer
-
-;; goto buffer starting, and end
-(global-set-key (kbd "C-; b b")   'beginning-of-buffer)              ; goto beging of the buffer
-(global-set-key (kbd "C-; b e")   'end-of-buffer)                    ; goto end of the buffer
-(global-set-key (kbd "C-; b s")   'save-buffer)                      ; save buffer
-(global-set-key (kbd "C-; b q")   'kill-buffer)                      ; kill the buffer
-
 ;; register keys
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 ;; registers
 (global-set-key (kbd "C-; r s")   'window-configuration-to-register) ; save current window layout
 (global-set-key (kbd "C-; r j")   'jump-to-register)                 ; restore window layout
@@ -641,7 +799,6 @@
 		  (interactive)
 		  (insert "printk(\"DEBUG: %s, %d, %s:  \\n\", __FILE__, __LINE__, __func__);")
 		  (backward-char 36)))		                     ; Insert debug printk
-
 
 ;; macro keys
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -662,131 +819,3 @@
 ;; re-initialize the .emacs file
 (global-set-key (kbd "C-; e i")   'emacs-reload)                     ; re-inistalize emacs
 
-;; frame keys
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; frame
-(global-set-key (kbd "C-; f c")   
-		(lambda()
-		  (interactive)
-		  (make-frame '(
-				(name . "new-frame")
-			       (width . 80)
-			       (height . 43)))))                   ; create frame
-
-(global-set-key (kbd "C-; f q")   'delete-frame)                     ; delete frame
-(global-set-key (kbd "C-; f o")   'other-frame)                      ; other frame
-(global-set-key (kbd "C-; f g")   'select-frame-by-name)             ; goto frame
-;;(global-set-key (kbd "C-; f s")   'suspend-frame)                    ; minimize frame
-(global-set-key (kbd "C-; f n")   'next-frame)                       ; next frame
-(global-set-key (kbd "C-; f p")   'previous-frame)                   ; previous frame
-
-;; describe help
-(global-set-key (kbd "C-; d f")   'describe-function)                ; function manual
-(global-set-key (kbd "C-; d k")   'describe-key)                     ; key manual
-(global-set-key (kbd "C-; d m")   'man)                              ; man page
-(global-set-key (kbd "C-; d p")   'python-describe-symbol)           ; python manual
-
-;; open the url at cursor
-(global-set-key (kbd "C-; o u")   'open-url)                         ; open url in browser
-
-;; fast scrolling
-(global-set-key (kbd "M-p") 
-		(lambda()
-		  (forward-line -5)))                                ; previous 5 lines
-
-(global-set-key (kbd "M-n") 
-		(lambda() 
-		  (forward-line 5)))                                 ; next 5 lines
-
-;; frames
-(global-set-key (kbd "C-; s c")   'set-serial)              ; set sanskrit frame
-(global-set-key (kbd "C-; s d")   'set-default-font)                 ; set default font
-(global-set-key (kbd "C-; s p")   'set-pad)                          ; set pad size
-(global-set-key (kbd "C-; s t")   'set-terminal)                     ; set terminal size
-(global-set-key (kbd "C-; s m")   'set-main)                         ; set as main frame
-
-;; setting custom frames
-(global-set-key (kbd "C-; s 0")   'set-custom0)
-(global-set-key (kbd "C-; s 1")   'set-custom1)
-(global-set-key (kbd "C-; s 2")   'set-custom2)
-(global-set-key (kbd "C-; s 3")   'set-custom3)
-(global-set-key (kbd "C-; s 4")   'set-custom4)
-(global-set-key (kbd "C-; s 5")   'set-custom5)
-(global-set-key (kbd "C-; s 6")   'set-custom6)
-(global-set-key (kbd "C-; s 7")   'set-custom7)
-(global-set-key (kbd "C-; s 8")   'set-custom8)
-(global-set-key (kbd "C-; s 9")   'set-custom9)
-
-;; goto custom frames
-(global-set-key (kbd "C-; f 0")   (goto-custom0-frame))
-(global-set-key (kbd "C-; f 1")   (goto-custom1-frame))
-(global-set-key (kbd "C-; f 2")   (goto-custom2-frame))
-(global-set-key (kbd "C-; f 3")   (goto-custom3-frame))
-(global-set-key (kbd "C-; f 4")   (goto-custom4-frame))
-(global-set-key (kbd "C-; f 5")   (goto-custom5-frame))
-(global-set-key (kbd "C-; f 6")   (goto-custom6-frame))
-(global-set-key (kbd "C-; f 7")   (goto-custom7-frame))
-(global-set-key (kbd "C-; f 8")   (goto-custom8-frame))
-(global-set-key (kbd "C-; f 9")   (goto-custom9-frame))
-
-(global-set-key (kbd "C-; f b")   (goto-bhagavatam-frame))           ; goto bhagavatam frame
-(global-set-key (kbd "C-; f p")   (goto-pad-frame))                  ; goto pad frame
-(global-set-key (kbd "C-; f m")   (goto-main-frame))                 ; goto main frame
-(global-set-key (kbd "C-; f t")   (goto-terminal-frame))             ; goto terminal frame
-(global-set-key (kbd "C-; f s")   (goto-serial-frame))               ; goto serial frame
-
-;; Other keys
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(global-set-key (kbd "C-; i s")   'search-in-internet)               ; search the google key word
-
-;; insert date
-(global-set-key (kbd "C-; i d")   'insert-current-date-time)
-(global-set-key (kbd "C-; i t")   'insert-current-time)
-
-;; modes
-(global-set-key (kbd "C-; m w")   'whitespace-mode)                  ; whitespace mode
-(global-set-key (kbd "C-; m o")   'org-mode)                         ; org mode
-
-;; takuzo-san's idea
-(global-set-key (kbd "C-h")       'backward-delete-char)             ; delete char
-(global-set-key (kbd "M-h")       'backward-kill-word)               ; backword kill
-
-;; cscope keys
-(setq cscope-do-not-update-database t)
-
-(global-set-key (kbd "C-; c f t")  'cscope-find-this-text-string)
-(global-set-key (kbd "C-; c f i")  'cscope-find-files-including-file)
-(global-set-key (kbd "C-; c f f")  'cscope-find-this-file)
-(global-set-key (kbd "C-; c c f")  'cscope-find-called-functions)
-
-(global-set-key (kbd "C-; c f s")  'cscope-find-this-symbol)
-(global-set-key (kbd "C-; c g d")  'cscope-find-global-definition)
-(global-set-key (kbd "C-; c f d")  'cscope-find-global-definition-no-prompting)
-(global-set-key (kbd "C-; c u f")  'cscope-find-functions-calling-this-function)
-
-(global-set-key (kbd "C-; c f p")  'cscope-find-egrep-pattern)
-(global-set-key (kbd "C-; c p")    'cscope-pop-mark)
-
-;; (global-set-key (kbd "C-; c s i")  'cscope-set-initial-directory)
-;; (global-set-key (kbd "C-; c u i")  'cscope-unset-initial-directory)
-
-;; (global-set-key (kbd "C-; c n s")  'cscope-next-symbol)
-;; (global-set-key (kbd "C-; c p s")  'cscope-prev-symbol)
-;; (global-set-key (kbd "C-; c n f")  'cscope-next-file)
-;; (global-set-key (kbd "C-; c p f")  'cscope-prev-file)
-
-;; (global-set-key (kbd "C-; c d b")  'cscope-display-buffer)
-;; (global-set-key (kbd "C-; c b t")  'cscope-display-buffer-toggle)
-
-
-(defun switch-fullscreen nil
-  (interactive)
-  (let* ((modes '(nil fullboth fullwidth fullheight))
-         (cm (cdr (assoc 'fullscreen (frame-parameters) ) ) )
-         (next (cadr (member cm modes) ) ) )
-    (modify-frame-parameters
-     (selected-frame)
-     (list (cons 'fullscreen next)))))
-
-(global-set-key (kbd "C-; f f")  'switch-fullscreen)
