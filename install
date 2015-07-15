@@ -138,7 +138,7 @@ sudo cp fonts/source-code-pro/TTF/* /usr/share/fonts/truetype/source-code-pro
 # gsettings set org.compiz.integrated show-launcher "['']"
 # gsettings list-keys org.compiz.integrated
 
-sudo apt-get install unity-tweak-tool
+# sudo apt-get install unity-tweak-tool
 
 
 # #---
@@ -182,4 +182,4 @@ sudo apt-get install unity-tweak-tool
 # sudo apt-get install mac-ithemes-v3
 # sudo apt-get install mac-icons-v3
 
-sudo apt-get install -y wmctrl
+#sudo apt-get install -y wmctrl
