@@ -1,13 +1,40 @@
 #!/bin/sh
 
-tmux new-session -d -s foo 'exec pfoo'
-tmux send-keys 'bundle exec thin start' 'C-m'
-tmux rename-window 'Foo'
-tmux select-window -t foo:0
-tmux split-window -h 'exec pfoo'
-tmux send-keys 'bundle exec compass watch' 'C-m'
-tmux split-window -v -t 0 'exec pfoo'
-tmux send-keys 'rake ts:start' 'C-m'
-tmux split-window -v -t 1 'exec pfoo'
-tmux -2 attach-session -t foo
+TMUX="tmux -2"
+
+runon()
+{
+    session_name=Workspace
+    window=${session}:$1
+    # pane=${window}.0
+    ${TMUX} send-keys -t "$window" "$2" Enter
+}
+
+${TMUX} new-session -d -s Workspace -n Minicom
+${TMUX} new-window -n Recovery -t Workspace
+${TMUX} new-window -n zFAS -t Workspace
+${TMUX} new-window -n VIM -t Workspace
+${TMUX} select-window -t Workspace:zFAS
+
+runon zFAS "cd ~/workspace/dev-kernel/embedded-linux.xml/zFAS"
+runon zFAS ". tmake/scripts/envsetup.sh"
+runon zFAS "choose embedded-linux p2360 none debug internal armv7"
+runon VIM "vs"
+
+${TMUX} a
+
+# tmux select-pane -t "$pane"
+# tmux select-window -t "$window"
+# tmux attach-session -t "$session_name"
+
+# tmux new-session -d -s foo 'exec pfoo'
+# tmux send-keys 'bundle exec thin start' 'C-m'
+# tmux rename-window 'Foo'
+# tmux select-window -t foo:0
+# tmux split-window -h 'exec pfoo'
+# tmux send-keys 'bundle exec compass watch' 'C-m'
+# tmux split-window -v -t 0 'exec pfoo'
+# tmux send-keys 'rake ts:start' 'C-m'
+# tmux split-window -v -t 1 'exec pfoo'
+# tmux -2 attach-session -t foo
 
