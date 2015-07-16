@@ -100,9 +100,28 @@
 	 (frame-name "Little"))
        ))
 
-(set-face-foreground 'font-lock-string-face "red")
-(set-face-foreground 'font-lock-comment-face "light pink")
-(set-face-attribute 'font-lock-comment-face nil :slant 'italic)
+
+(set-face-attribute  'font-lock-string-face nil :weight 'medium)
+;; (set-face-foreground 'font-lock-string-face "#657B83")
+;; (set-face-foreground 'font-lock-string-face "#586e75")
+(set-face-foreground 'font-lock-string-face "#2aa198")
+(set-face-foreground 'font-lock-constant-face "#2aa198")
+(set-face-foreground 'font-lock-negation-char-face "#2aa198")
+
+(set-face-foreground 'font-lock-comment-delimiter-face "light pink")
+(set-face-attribute  'font-lock-comment-face nil :weight 'medium :slant 'italic)
+;; (set-face-foreground 'font-lock-comment-face "light pink")
+(set-face-foreground 'font-lock-comment-face "#93a1a1")
+
+(set-face-attribute  'font-lock-keyword-face nil :weight 'medium)
+(set-face-foreground 'font-lock-keyword-face "#586e75")
+
+(set-face-foreground 'font-lock-type-face "#b58900")
+(set-face-foreground 'font-lock-preprocessor-face "#6c71c4")
+
+(set-face-attribute  'font-lock-function-name-face nil :weight 'bold)
+(set-face-foreground 'font-lock-function-name-face "#586e75")
+;; "#859900")
 
 (set-background-color "#FDF6E3")
 (set-foreground-color "#657B83")
@@ -124,18 +143,18 @@
 (set-face-foreground 'region nil)
 
 ;; Setting whitespace colors
-(set-face-background 'whitespace-tab "#EEE8D5")
-(set-face-background 'whitespace-space "#EEE8D5")
-(set-face-background 'whitespace-empty "#EEE8D5")
-(set-face-background 'whitespace-hspace "#EEE8D5")
-(set-face-background 'whitespace-indentation "#EEE8D5")
-(set-face-background 'whitespace-line "#EEE8D5")
-(set-face-background 'whitespace-newline "#EEE8D5")
-(set-face-background 'whitespace-space "#EEE8D5")
-(set-face-background 'whitespace-space-after-tab "#EEE8D5")
-(set-face-background 'whitespace-space-before-tab "#EEE8D5")
-(set-face-background 'whitespace-tab "#EEE8D5")
-(set-face-background 'whitespace-trailing "#EEE8D5")
+;; (set-face-background 'whitespace-tab "#EEE8D5")
+;; (set-face-background 'whitespace-space "#EEE8D5")
+;; (set-face-background 'whitespace-empty "#EEE8D5")
+;; (set-face-background 'whitespace-hspace "#EEE8D5")
+;; (set-face-background 'whitespace-indentation "#EEE8D5")
+;; (set-face-background 'whitespace-line "#EEE8D5")
+;; (set-face-background 'whitespace-newline "#EEE8D5")
+;; (set-face-background 'whitespace-space "#EEE8D5")
+;; (set-face-background 'whitespace-space-after-tab "#EEE8D5")
+;; (set-face-background 'whitespace-space-before-tab "#EEE8D5")
+;; (set-face-background 'whitespace-tab "#EEE8D5")
+;; (set-face-background 'whitespace-trailing "#EEE8D5")
 
 ;; (setq frames (frame-list))
 ;; (setq frames-len (- (list-length frames) 1))
