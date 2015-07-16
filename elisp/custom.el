@@ -113,14 +113,16 @@
 ;; (set-face-foreground 'font-lock-comment-face "light pink")
 (set-face-foreground 'font-lock-comment-face "#93a1a1")
 
-(set-face-attribute  'font-lock-keyword-face nil :weight 'medium)
+(set-face-attribute  'font-lock-keyword-face nil :weight 'bold)
 (set-face-foreground 'font-lock-keyword-face "#586e75")
 
+;; (set-face-attribute  'font-lock-type-face nil :weight 'bold)
 (set-face-foreground 'font-lock-type-face "#b58900")
-(set-face-foreground 'font-lock-preprocessor-face "#6c71c4")
 
+(set-face-foreground 'font-lock-preprocessor-face "#6c71c4")
 (set-face-attribute  'font-lock-function-name-face nil :weight 'bold)
-(set-face-foreground 'font-lock-function-name-face "#586e75")
+(set-face-foreground 'font-lock-function-name-face "#6c71c4")
+;; (set-face-foreground 'font-lock-function-name-face "#586e75")
 ;; "#859900")
 
 (set-background-color "#FDF6E3")
