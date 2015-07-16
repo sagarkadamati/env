@@ -50,7 +50,13 @@
 (display-time)
 ;; (elscreen-toggle-display-tab)
 
-(set-face-attribute 'mode-line nil :box nil)
+;; (set-face-attribute 'mode-line nil :box nil)
+(set-face-attribute 'mode-line nil
+   :box nil
+   :background "#EEE8D5"
+   :overline "#EEE8D5"
+   :underline "#EEE8D5")
+
 (set-face-attribute 'mode-line-inactive nil :box nil)
 (set-face-attribute 'mode-line-highlight nil :box nil)
 
