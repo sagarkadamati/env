@@ -62,9 +62,8 @@
 
 ;; Highlight line
 (global-hl-line-mode 1)
-;; (set-face-background 'hl-line "#f1e7d0")
-;; (set-face-background 'hl-line "#EEE8D5")
 (set-face-background 'hl-line "#F9F3E2")
+(set-face-foreground 'hl-line nil)
 
 (set-cursor-color "#657B83")
 
