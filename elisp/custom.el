@@ -117,7 +117,7 @@
 
 ;; (set-face-attribute  'font-lock-type-face nil :weight 'bold)
 (set-face-foreground 'font-lock-type-face "#b58900")
-(set-face-foreground 'font-local-variable-name-face "red")
+;; (set-face-foreground 'font-local-variable-name-face "red")
 
 (set-face-foreground 'font-lock-preprocessor-face "#6c71c4")
 (set-face-attribute  'font-lock-function-name-face nil :weight 'bold)
