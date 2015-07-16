@@ -94,6 +94,10 @@
 	 (frame-name "Little"))
        ))
 
+(set-face-foreground 'font-lock-string-face "red")
+(set-face-foreground 'font-lock-comment-face "light pink")
+(set-face-attribute 'font-lock-comment-face nil :slant 'italic)
+
 (set-background-color "#FDF6E3")
 (set-foreground-color "#657B83")
 
