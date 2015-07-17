@@ -107,7 +107,7 @@
 (set-face-foreground 'font-lock-constant-face "#2aa198")
 (set-face-foreground 'font-lock-negation-char-face "#2aa198")
 
-(set-face-foreground 'font-lock-comment-delimiter-face "light pink")
+(set-face-foreground 'font-lock-comment-delimiter-face "#93a1a1")
 (set-face-attribute  'font-lock-comment-face nil :weight 'medium :slant 'italic)
 ;; (set-face-foreground 'font-lock-comment-face "light pink")
 (set-face-foreground 'font-lock-comment-face "#93a1a1")
@@ -117,7 +117,9 @@
 
 ;; (set-face-attribute  'font-lock-type-face nil :weight 'bold)
 (set-face-foreground 'font-lock-type-face "#b58900")
-(set-face-foreground 'font-lock-variable-name-face "red")
+;; (set-face-foreground 'font-lock-variable-name-face "red")
+;; (set-face-foreground 'font-lock-variable-name-face "#073642")
+(set-face-foreground 'font-lock-variable-name-face "#d33682")
 
 (set-face-foreground 'font-lock-preprocessor-face "#6c71c4")
 (set-face-attribute  'font-lock-function-name-face nil :weight 'bold)
