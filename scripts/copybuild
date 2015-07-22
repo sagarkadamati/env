@@ -46,6 +46,14 @@ ${CP} ${SOURCE}/out/embedded-linux-p2360-release/nvidia/kernel/arch/arm/boot/Ima
 ${CP} ${SOURCE}/out/embedded-linux-p2360-release/nvidia/kernel/arch/arm/boot/zImage                            ~/images
 ${CP} ${SOURCE}/out/embedded-linux-p2360-release/nvidia/kernel/arch/arm/boot/dts/tegra124-p2360.dtb            ~/images
 
+${CP} ${SOURCE}/out/embedded-linux-p2360-release/nvidia/kernel/arch/arm/boot/Image                             ${DEST}/out/embedded-linux-p2360-debug/nvidia/kernel/arch/arm/boot/Image
+${CP} ${SOURCE}/out/embedded-linux-p2360-release/nvidia/kernel/arch/arm/boot/zImage                            ${DEST}/out/embedded-linux-p2360-debug/nvidia/kernel/arch/arm/boot/zImage
+${CP} ${SOURCE}/out/embedded-linux-p2360-release/nvidia/kernel/arch/arm/boot/dts/tegra124-p2360-b00.dtb        ${DEST}/out/embedded-linux-p2360-debug/nvidia/kernel/arch/arm/boot/dts/tegra124-p2360.dtb
+
+${CP} ${SOURCE}/embedded/tools/scripts/bootburn/../../boards/flashing_kernel/zImage                            ${DEST}/embedded/tools/scripts/bootburn/../../boards/p2360/flashing_kernel/zImage
+${CP} ${SOURCE}/embedded/tools/scripts/bootburn/../../boards/flashing_kernel/tegra124-p2360-flashing.dtb       ${DEST}/embedded/tools/scripts/bootburn/../../boards/p2360/flashing_kernel/tegra124-p2360.dtb
+
+
 # ls -l ${DEST}/embedded/tools/scripts/bootburn/../../boards/p2360/flashing_kernel/zImage
 # ls -l ${DEST}/embedded/tools/scripts/bootburn/../../boards/p2360/flashing_kernel//tegra124-p2360.dtb
 # ls -l ${DEST}/out/embedded-linux-p2360-debug/nvidia/kernel/arch/arm/boot/Image

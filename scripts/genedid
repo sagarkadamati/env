@@ -162,27 +162,55 @@ VBACK=0
 # stereo_mode: 0
 # avi_m: 0x2
 
+# # Display resolution in pixels
+# RESOLUTION=1280x720
+
+# # Horizontal and Vertical Resoulution in pixels
+# HACTIVE=`echo ${RESOLUTION} | cut -d'x' -f1`
+# VACTIVE=`echo ${RESOLUTION} | cut -d'x' -f2`
+
+# # Pixel clock in 10khz
+# PCLK=14850
+
+# # Horizontal and Vertical front porch in pixels
+# HOFFSET=88
+# VOFFSET=4
+
+# # Horizontal and Vertical sync pulse width in pixels
+# HPULSE=80
+# VPULSE=5
+
+# # Horizontal and Vertical back porch in pixels
+# HBACK=180
+# VBACK=20
+
+# # Horizontal and Vertical blanking in pixels (back porch + sync width + front porch)
+# HBLANK=$(( ${HPULSE} + ${HOFFSET} + ${HBACK} ))
+# VBLANK=$(( ${VPULSE} + ${VOFFSET} + ${VBACK} ))
+# # HBLANK=256
+# # VBLANK=45
+
 # Display resolution in pixels
-RESOLUTION=1280x720
+RESOLUTION=1280x1080
 
 # Horizontal and Vertical Resoulution in pixels
 HACTIVE=`echo ${RESOLUTION} | cut -d'x' -f1`
 VACTIVE=`echo ${RESOLUTION} | cut -d'x' -f2`
 
 # Pixel clock in 10khz
-PCLK=14850
+PCLK=11554
 
 # Horizontal and Vertical front porch in pixels
-HOFFSET=88
-VOFFSET=4
+HOFFSET=48
+VOFFSET=2
 
 # Horizontal and Vertical sync pulse width in pixels
-HPULSE=80
-VPULSE=5
+HPULSE=112
+VPULSE=3
 
 # Horizontal and Vertical back porch in pixels
-HBACK=180
-VBACK=20
+HBACK=248
+VBACK=37
 
 # Horizontal and Vertical blanking in pixels (back porch + sync width + front porch)
 HBLANK=$(( ${HPULSE} + ${HOFFSET} + ${HBACK} ))
