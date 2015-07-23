@@ -130,7 +130,7 @@
 (set-background-color "#FDF6E3")
 (set-foreground-color "#657B83")
 
-(set-face-background 'fringe "#EEE8D5")
+(set-face-background 'fringe "#FDF6E3")
 
 (set-face-background 'mode-line "#EEE8D5")
 (set-face-foreground 'mode-line "#657B83")
@@ -138,7 +138,17 @@
 (set-face-background 'mode-line-inactive "#EEE8D5")
 (set-face-foreground 'mode-line-inactive "#657B83")
 
+(set-face-background 'vertical-border "#EEE8D5")
 (set-face-foreground 'vertical-border "#EEE8D5")
+
+;; ;; Reverse colors for the border to have nicer line  
+;; (set-face-inverse-video-p 'vertical-border nil)
+;; (set-face-background 'vertical-border (face-background 'default))
+
+;; ;; Set symbol for the border
+;; (set-display-table-slot standard-display-table
+;;                         'vertical-border 
+;;                         (make-glyph-code ?©§))
 
 (set-face-background 'shadow "#657B83")
 (set-face-foreground 'shadow "#FDF6E3")
