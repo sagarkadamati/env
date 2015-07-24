@@ -2,6 +2,11 @@
 
 PKGS=""
 
+## Install sshd
+# sudo apt-get update
+# sudo apt-get install openssh-server
+# sudo ufw allow 22
+
 ## Install guest addons virtualbox
 # sudo apt-get install -y virtualbox-guest-dkms
 # sudo apt-get remove -y virtualbox-guest-dkms
