@@ -1,12 +1,12 @@
 [Desktop Entry]
 Type=X-GNOME-Metatheme
-Name=myfoor
-Comment=Ubuntu myfoo theme
+Name=mytheme
+Comment=Ubuntu mytheme theme
 Encoding=UTF-8
 
 [X-GNOME-Metatheme]
-GtkTheme=myfoo
-MetacityTheme=myfoo
-IconTheme=ubuntu-mono-light
+GtkTheme=mytheme
+MetacityTheme=mytheme
+IconTheme=ubuntu-mono-dark
 CursorTheme=DMZ-White
 ButtonLayout=close,minimize,maximize:

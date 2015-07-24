@@ -6,6 +6,8 @@ PKGS=""
 # sudo apt-get install -y virtualbox-guest-dkms
 # sudo apt-get remove -y virtualbox-guest-dkms
 
+sudo apt-get install -y wmctrl
+
 ## Configure bash
 cp configs/bashrc ~/.bashrc
 
@@ -38,6 +40,10 @@ gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ hsize 2
 gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ vsize 2
 
 ## Git save credentials
+if ! type git > /dev/null; then
+	sudo apt-get install -y git-core
+fi
+
 git config credential.helper store
 
 ## Disable lockscreen
@@ -67,10 +73,9 @@ sudo mkdir -p /usr/share/fonts/truetype/source-code-pro
 sudo cp fonts/source-code-pro/TTF/* /usr/share/fonts/truetype/source-code-pro
 
 ## Install Mac theme and icons
-#gsettings set org.gnome.desktop.interface gtk-theme "mac-ithemes-v3"
-#gsettings set org.gnome.desktop.wm.preferences theme "mac-ithemes-v3"
-#gsettings set org.gnome.desktop.interface icon-theme "mac-icons-v3"
-
+# gsettings set org.gnome.desktop.interface gtk-theme "mac-ithemes-v3"
+# gsettings set org.gnome.desktop.wm.preferences theme "mac-ithemes-v3"
+# gsettings set org.gnome.desktop.interface icon-theme "mac-icons-v3"
 
 
 
@@ -138,7 +143,8 @@ sudo cp fonts/source-code-pro/TTF/* /usr/share/fonts/truetype/source-code-pro
 # gsettings set org.compiz.integrated show-launcher "['']"
 # gsettings list-keys org.compiz.integrated
 
-# sudo apt-get install unity-tweak-tool
+sudo apt-get install unity-tweak-tool
+sudo apt-get install -y unity-webapps-common
 
 
 # #---
@@ -183,3 +189,10 @@ sudo cp fonts/source-code-pro/TTF/* /usr/share/fonts/truetype/source-code-pro
 # sudo apt-get install mac-icons-v3
 
 #sudo apt-get install -y wmctrl
+#sudo usermod -s bash sagar
+sudo apt-get install -y dconf-editor
+
+sudo apt-get install --reinstall gnome-session-bin=3.9.90-0ubuntu12
+sudo apt-get install --reinstall gnome-session-common=3.9.90-0ubuntu12
+sudo apt-get install --reinstall gnome-session=3.9.90-0ubuntu12
+sudo apt-get install --reinstall ubuntu-session=3.9.90-0ubuntu12
