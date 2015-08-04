@@ -1,16 +1,17 @@
 #!/bin/sh
 
 opened=`wmctrl -l | grep 'emacs-main'`
-running=`ps aux | grep 'emacs23 --daemon' | grep -v grep`
+running=`ps aux | grep 'emacs --daemon' | grep -v grep`
 
 if [ "X$opened" == "X" ]; then
     if [ "X$running" == "X" ]; then
-	emacs23 --daemon
+	emacs --daemon
     fi
 
-    emacsclient.emacs23 -n -c
-    emacsclient.emacs23 -n -e '(set-main)'
-    /home/sagar/automate-system/current-max
+    emacsclient -n -c
+    emacsclient -n -e '(set-main)'
+    sleep 1
+    /home/sagar/env/scripts/setemacs
 else
     wmctrl -a emacs-main
 fi

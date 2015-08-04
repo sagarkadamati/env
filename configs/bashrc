@@ -142,7 +142,7 @@ get-v3l()
 }
 
 
-alias grep='/bin/grep -R'
+# alias grep='/bin/grep -R'
 
 alias envsetup='. tmake/scripts/envsetup.sh'
 

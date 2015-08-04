@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PKGS=""
+# PKGS=""
 
 ## Install sshd
 # sudo apt-get update
@@ -11,24 +11,25 @@ PKGS=""
 # sudo apt-get install -y virtualbox-guest-dkms
 # sudo apt-get remove -y virtualbox-guest-dkms
 
+## Install Packages
 sudo apt-get install -y wmctrl
 
-## Configure bash
+## BASH Configuration
 cp configs/bashrc ~/.bashrc
 
 ## Set nopass for sudo
-# sudo adduser sagar sudo
-# sudo usermod -a -G sudo sagar
-# sudo cp configs/sudoall /etc/sudoers.d
+sudo adduser sagar sudo
+sudo usermod -a -G sudo sagar
+sudo cp configs/sudoall /etc/sudoers.d
 
+## UNITY Configuration
 ## Hide Unity launcher
 gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-hide-mode 1
 
-## Install terminator
+## TERMINATOR Configuration
 if ! type terminator > /dev/null; then
 	sudo apt-get install -y terminator
 fi
-
 mkdir -p ~/.config/terminator
 mkdir -p ~/.config/terminator/plugins
 cp configs/terminator ~/.config/terminator/config
@@ -83,6 +84,24 @@ sudo cp fonts/source-code-pro/TTF/* /usr/share/fonts/truetype/source-code-pro
 # gsettings set org.gnome.desktop.interface icon-theme "mac-icons-v3"
 
 
+## Setting keyboard shortcuts
+gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'chrome'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command '/home/sagar/env/automate-system/focus-chrome'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<Primary><Alt>i'
+
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ name 'terminal'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ command '/home/sagar/env/automate-system/focus-terminal'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding '<Primary><Alt>t'
+
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ name 'emacs'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ command '/home/sagar/env/automate-system/focus-emacs'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ binding '<Primary><Alt>e'
+
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ name 'firefox'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ command '/home/sagar/env/automate-system/focus-firefox'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ binding '<Primary><Alt>f'
+
 
 
 
@@ -116,7 +135,7 @@ sudo cp fonts/source-code-pro/TTF/* /usr/share/fonts/truetype/source-code-pro
 # dconf dump /org/gnome/desktop/wm/keybindings/ > keybindings-backup.dconf
 # dconf load /org/gnome/desktop/wm/keybindings/ < keybindings-backup.dconf
 
-# gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']"
+# gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/']"
 # You then set the name, command and binding values
 
 # gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "shutter"
@@ -148,8 +167,8 @@ sudo cp fonts/source-code-pro/TTF/* /usr/share/fonts/truetype/source-code-pro
 # gsettings set org.compiz.integrated show-launcher "['']"
 # gsettings list-keys org.compiz.integrated
 
-sudo apt-get install unity-tweak-tool
-sudo apt-get install -y unity-webapps-common
+# sudo apt-get install unity-tweak-tool
+# sudo apt-get install -y unity-webapps-common
 
 
 # #---
@@ -195,9 +214,29 @@ sudo apt-get install -y unity-webapps-common
 
 #sudo apt-get install -y wmctrl
 #sudo usermod -s bash sagar
-sudo apt-get install -y dconf-editor
+# sudo apt-get install -y dconf-editor
 
-sudo apt-get install --reinstall gnome-session-bin=3.9.90-0ubuntu12
-sudo apt-get install --reinstall gnome-session-common=3.9.90-0ubuntu12
-sudo apt-get install --reinstall gnome-session=3.9.90-0ubuntu12
-sudo apt-get install --reinstall ubuntu-session=3.9.90-0ubuntu12
+# sudo apt-get install --reinstall gnome-session-bin=3.9.90-0ubuntu12
+# sudo apt-get install --reinstall gnome-session-common=3.9.90-0ubuntu12
+# sudo apt-get install --reinstall gnome-session=3.9.90-0ubuntu12
+# sudo apt-get install --reinstall ubuntu-session=3.9.90-0ubuntu12
+
+# sudo apt-get install -y xdotool libwnck-3-dev
+# wnckprop --xid=$(xdotool getactivewindow)
+
+
+# sudo add-apt-repository ppa:nick-athens30/trusty-bfq
+# sudo apt-get update
+# sudo apt-get install linux-image-generic-bfq linux-headers-generic-bfq
+
+# sudo add-apt-repository ppa:danielrichter2007/grub-customizer
+# sudo apt-get update
+# sudo apt-get install grub-customizer
+
+
+# sudo add-apt-repository ppa:noobslab/icons
+# sudo apt-get update
+# sudo apt-get install elementary-icons
+# sudo apt-get install myelementary
+
+# locate panel-shadow.png
