@@ -1,1 +1,2 @@
-sudo apt-get build-dep emacs24
+emacs emacs24
+terminator terminator
