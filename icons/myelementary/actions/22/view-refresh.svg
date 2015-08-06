@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="22"
+   height="22"
+   id="svg7384"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="reload.svg">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="958"
+     inkscape:window-height="1028"
+     id="namedview7"
+     showgrid="true"
+     inkscape:zoom="14.75"
+     inkscape:cx="-4.4406779"
+     inkscape:cy="8"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg7384">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3785"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+  </sodipodi:namedview>
+  <title
+     id="title9167">Gnome Symbolic Icon Theme</title>
+  <defs
+     id="defs11">
+    <linearGradient
+       id="linearGradient3752">
+      <stop
+         style="stop-color:#737373;stop-opacity:1;"
+         offset="0"
+         id="stop3754" />
+      <stop
+         id="stop3762"
+         offset="0.25"
+         style="stop-color:#636363;stop-opacity:1;" />
+      <stop
+         id="stop3760"
+         offset="0.7368421"
+         style="stop-color:#4b4b4b;stop-opacity:1;" />
+      <stop
+         style="stop-color:#3f3f3f;stop-opacity:1;"
+         offset="1"
+         id="stop3756" />
+    </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3752"
+       id="radialGradient3758"
+       cx="8"
+       cy="1.9333334"
+       fx="8"
+       fy="1.9333334"
+       r="6.5"
+       gradientTransform="matrix(-3.0769229,0,0,-3.8974358,35.782049,9.2017137)"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <metadata
+     id="metadata90">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Gnome Symbolic Icon Theme</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     id="path12810"
+     d="m 11.166666,1.6666704 0,2.6666668 c -4.4182794,0 -7.9999994,3.5817205 -7.9999994,7.9999968 0,4.418279 3.58172,7.999999 7.9999994,7.999999 4.41828,0 8,-3.58172 8,-7.999999 l -2.666666,0 c 0,2.945519 -2.387814,5.333333 -5.333334,5.333333 -2.9455195,0 -5.3333328,-2.387814 -5.3333328,-5.333333 0,-2.9455164 2.3878133,-5.3333296 5.3333328,-5.3333296 l 0,2.6666666 6.666667,-3.9999999 -6.666667,-4.0000007 z"
+     style="color:#bebebe;fill:url(#radialGradient3758);fill-opacity:1;fill-rule:nonzero;stroke:#4b4b4b;stroke-width:1.33333325;stroke-opacity:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+     inkscape:connector-curvature="0" />
+</svg>

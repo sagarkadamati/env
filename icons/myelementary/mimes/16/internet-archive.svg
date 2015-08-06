@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="16"
+   height="16"
+   id="svg7384"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="internet-archive.svg">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1855"
+     inkscape:window-height="1056"
+     id="namedview21"
+     showgrid="true"
+     inkscape:zoom="45.25756"
+     inkscape:cx="5.5265035"
+     inkscape:cy="7.9999999"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg7384">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3028" />
+  </sodipodi:namedview>
+  <title
+     id="title9167">Gnome Symbolic Icon Theme</title>
+  <defs
+     id="defs11">
+    <linearGradient
+       id="linearGradient4125">
+      <stop
+         id="stop4127"
+         style="stop-color:#bebebe;stop-opacity:0.72941178"
+         offset="0" />
+      <stop
+         id="stop4129"
+         style="stop-color:#c8c8c8;stop-opacity:1"
+         offset="0.08611956" />
+      <stop
+         id="stop4131"
+         style="stop-color:#cdcdcd;stop-opacity:0.87843138"
+         offset="0.92370826" />
+      <stop
+         id="stop4133"
+         style="stop-color:#d3d3d3;stop-opacity:0.74901962"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       x1="8"
+       y1="11.333334"
+       x2="8"
+       y2="4.666667"
+       id="linearGradient4032"
+       xlink:href="#linearGradient4125"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.64285714,0,0,1.5,9.3571429,-3.0000004)" />
+    <linearGradient
+       id="linearGradient4114-1">
+      <stop
+         id="stop4116-38"
+         style="stop-color:#bebebe;stop-opacity:0.40000001"
+         offset="0" />
+      <stop
+         id="stop4122-7"
+         style="stop-color:#c8c8c8;stop-opacity:0.4173913"
+         offset="0.08611956" />
+      <stop
+         id="stop4124-4"
+         style="stop-color:#cdcdcd;stop-opacity:0.4173913"
+         offset="0.92370826" />
+      <stop
+         id="stop4118-9"
+         style="stop-color:#d3d3d3;stop-opacity:0"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       x1="8"
+       y1="11.333334"
+       x2="8"
+       y2="4.666667"
+       id="linearGradient4052"
+       xlink:href="#linearGradient4114-1"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.64285714,0,0,1.5,7.3571429,-4e-7)" />
+  </defs>
+  <metadata
+     id="metadata90">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Gnome Symbolic Icon Theme</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     inkscape:connector-curvature="0"
+     d="m 3.3199973,2.5143678 0,4.4329078 9.3600037,0 0,-4.4329078 z m 2.6950985,1.5930765 c 0.024247,-0.00145 0.048591,-0.00145 0.072842,0 C 6.427032,4.0458829 6.786013,4.3333385 6.779923,4.6615578 l 0,0.069266 2.3308956,0 0,-0.069266 c -0.00432,-0.2927446 0.2748341,-0.5620032 0.5827242,-0.5620032 0.3078902,0 0.5870742,0.2692586 0.5827242,0.5620032 l 0,0.069266 c 0,0.6043716 -0.5298706,1.1082268 -1.1654479,1.1082268 l -2.3308957,0 c -0.6355774,0 -1.1654481,-0.5038552 -1.1654481,-1.1082268 l 0,-0.069266 C 5.6019104,4.4210086 5.7744045,4.182428 6.0150963,4.1074443 z"
+     id="rect11668-7"
+     style="color:#000000;fill:#3b3b3b;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+     sodipodi:nodetypes="cccccccccccscsssscc" />
+  <rect
+     style="fill:none;stroke:#3b3b3b;stroke-width:1.4551748;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     id="rect3800"
+     width="12.544825"
+     height="13.544826"
+     x="1.7275875"
+     y="0.72758543" />
+  <path
+     sodipodi:nodetypes="cccccccccccscsssscc"
+     style="color:#000000;fill:#3b3b3b;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+     id="path3802"
+     d="m 3.3199973,8.055503 0,4.432907 9.3600037,0 0,-4.432907 z m 2.6950985,1.5930761 c 0.024247,-0.00141 0.048591,-0.00141 0.072842,0 C 6.427032,9.5869601 6.786013,9.8744738 6.779923,10.202694 l 0,0.06921 2.3308956,0 0,-0.06921 c -0.0043,-0.2927469 0.2748336,-0.5620039 0.5827238,-0.5620039 0.3078906,0 0.5870736,0.269257 0.5827236,0.5620039 l 0,0.06921 c 0,0.604368 -0.5298702,1.108225 -1.1654475,1.108225 l -2.3308956,0 c -0.6355774,0 -1.1654481,-0.503857 -1.1654481,-1.108225 l 0,-0.06921 C 5.601909,9.9621483 5.7744044,9.7235627 6.0150963,9.6485791 z"
+     inkscape:connector-curvature="0" />
+</svg>

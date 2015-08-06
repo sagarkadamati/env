@@ -483,21 +483,21 @@
 (global-set-key (kbd "C-h")       'backward-delete-char)             ; delete char
 (global-set-key (kbd "M-h")       'backward-kill-word)               ; backword kill
 
-;; cscope keys
+;; ;; cscope keys
 (setq cscope-do-not-update-database t)
 
-(global-set-key (kbd "C-; c f t")  'cscope-find-this-text-string)
-(global-set-key (kbd "C-; c f i")  'cscope-find-files-including-file)
-(global-set-key (kbd "C-; c f f")  'cscope-find-this-file)
-(global-set-key (kbd "C-; c c f")  'cscope-find-called-functions)
+;; (global-set-key (kbd "C-; c f t")  'cscope-find-this-text-string)
+;; (global-set-key (kbd "C-; c f i")  'cscope-find-files-including-file)
+;; (global-set-key (kbd "C-; c f f")  'cscope-find-this-file)
+;; (global-set-key (kbd "C-; c c f")  'cscope-find-called-functions)
 
-(global-set-key (kbd "C-; c f s")  'cscope-find-this-symbol)
-(global-set-key (kbd "C-; c g d")  'cscope-find-global-definition)
-(global-set-key (kbd "C-; c f d")  'cscope-find-global-definition-no-prompting)
-(global-set-key (kbd "C-; c u f")  'cscope-find-functions-calling-this-function)
+;; (global-set-key (kbd "C-; c f s")  'cscope-find-this-symbol)
+;; (global-set-key (kbd "C-; c g d")  'cscope-find-global-definition)
+;; (global-set-key (kbd "C-; c f d")  'cscope-find-global-definition-no-prompting)
+;; (global-set-key (kbd "C-; c u f")  'cscope-find-functions-calling-this-function)
 
-(global-set-key (kbd "C-; c f p")  'cscope-find-egrep-pattern)
-(global-set-key (kbd "C-; c p")    'cscope-pop-mark)
+;; (global-set-key (kbd "C-; c f p")  'cscope-find-egrep-pattern)
+;; (global-set-key (kbd "C-; c p")    'cscope-pop-mark)
 
 ;; (global-set-key (kbd "C-; c s i")  'cscope-set-initial-directory)
 ;; (global-set-key (kbd "C-; c u i")  'cscope-unset-initial-directory)
@@ -862,3 +862,5 @@
 ;; re-initialize the .emacs file
 (global-set-key (kbd "C-; e i")   'emacs-reload)                     ; re-inistalize emacs
 
+;; autocomplete-filename
+(global-set-key (kbd "C-; a f")   'comint-dynamic-complete-filename) ; autocomplete filename in buffer

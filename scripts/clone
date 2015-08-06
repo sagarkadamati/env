@@ -1,0 +1,15 @@
+#!/bin/sh
+
+BRANCH=rel-23
+MANIFEST=k310-embedded.xml
+SOURCE="$1"
+
+CONFIGURE="-u ssh://git-master:12001/tegra/manifest.git --manifest-branch=${BRANCH} --manifest-name={MANIFEST}"
+
+cd ~/workspace
+
+mkdir -p "${BRANCH}/${MANIFEST}/${SOURCE}"
+cd "${BRANCH}/${MANIFEST}/${SOURCE}"
+
+repo init ${CONFIGURE}
+repo sync

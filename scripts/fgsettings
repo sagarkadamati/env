@@ -1,0 +1,9 @@
+#!/bin/sh
+
+for s in `gsettings list-schemas`
+do 
+    for k in `gsettings list-keys $s`
+    do
+	echo $s: $k
+    done
+done

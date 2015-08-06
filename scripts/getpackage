@@ -1,0 +1,27 @@
+#!/bin/sh
+
+BASEDIR=`locatebasedir`
+PKG_LIST="${BASEDIR}/packages"
+PKG_LIST_UPDATE="${BASEDIR}/packages.new"
+
+if [ "X-p" == "X$1" ]; then
+    PKG="$2"
+else
+    BINARY="$1"
+    PKG=`grep -w ${BINARY} ${PKG_LIST} | awk -F'|' '{print $2}'`
+fi
+
+if [ "X${PKG}" == "X" ]; then
+    echo "getpackage: no package found for ${BINARY} command"
+    exit
+else
+    dpkg-query -l ${PKG} > /dev/null
+    if [ "$?" -eq 0 ]; then
+	echo "getpackage: ${PKG} already installed!"
+	exit
+    else
+	touch "${PKG_LIST_UPDATE}"
+	echo "${PKG}" >> "${PKG_LIST_UPDATE}"
+	sudo apt-get install -y ${PKG}
+    fi
+fi

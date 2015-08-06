@@ -2,6 +2,8 @@
 
 # PKGS=""
 
+
+
 ## Install sshd
 # sudo apt-get update
 # sudo apt-get install openssh-server
@@ -240,3 +242,5 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 # sudo apt-get install myelementary
 
 # locate panel-shadow.png
+
+sudo dpkg --add-architecture i386

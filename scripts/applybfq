@@ -1,0 +1,15 @@
+#!/bin/sh
+
+VERSION=4.0.0-v7r8 # the version you want
+# git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git linux
+# cd linux
+# git checkout -b the-name-you-like desired-source-kernel-release
+wget -nd --no-parent --level 1 -r -R "*.html*" --reject $VERSION \
+    http://algogroup.unimore.it/people/paolo/disk_sched/patches/$VERSION
+
+# git am *BFQ*.patch
+
+# wget -nd --no-parent --level 1 -r -R "*.html*" \
+#     http://ck.kolivas.org/patches/bfs/4.0/4.0/4.0-sched-bfs-462.patch
+
+# patch -p1 4.0-sched-bfs-462.patch

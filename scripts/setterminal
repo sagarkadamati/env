@@ -1,0 +1,16 @@
+#!/bin/sh
+
+res=`wmctrl -d | awk '{print $9}'`
+
+width=`echo $res | awk -F'x' '{print $1}'`
+height=`echo $res | awk -F'x' '{print $2}'`
+
+terminalid=`wmctrl -l | grep 'Terminal' | awk '{print $1}'`
+echo "$terminalid" $width $height
+
+# wmctrl -r "Terminal :: Workspace :: Env" -e 1,0,0,$((${width} - 60)),$((${height} - 50))
+# windowtool.py -d 0 "$terminalid"
+# wmctrl -r "Terminal" -e 1,24,49,${width},$((${height} + 5))
+
+windowtool.py -d 0 "$terminalid"
+wmctrl -r "Terminal" -e 1,0,0,${width},${height}
