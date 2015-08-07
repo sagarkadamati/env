@@ -5,4 +5,5 @@ libpodofo|libpodofo-dev
 pdftk|pdftk
 libz.so.1|lib32z1
 cdefs|gcc-multilib g++-multilib
+g++|g++
 
