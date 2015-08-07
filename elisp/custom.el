@@ -98,7 +98,10 @@
 	 (cursor-color . "#000070")
 	 (frame-name "Little"))
        ))
+;; background rgb(253,246,227)
+;; forground rgb(101,123,131)
 
+(setq doc-view-continuous t)
 
 (set-face-attribute  'font-lock-string-face nil :weight 'medium)
 ;; (set-face-foreground 'font-lock-string-face "#657B83")
@@ -258,11 +261,22 @@
   (ansi-term "/bin/bash")
   (set-frame-size (selected-frame) 150 40))
 
+
+
 (defun set-serial()                                                   ; set target console frame
   (interactive)
   (set-frame-name "Target Console")
   (ansi-term "/usr/bin/sudo /usr/bin/screen /dev/ttyUSB0 115200")
   (set-frame-size (selected-frame) 150 40))
+
+(defun set-bagavatam()                                                       ; set main frame
+  (interactive)
+  (set-frame-name "Bagavatam")
+  (set-frame-size (selected-frame) 62 18)
+  (toggle-mode-line))
+
+  ;; Width: 612
+  ;; Height: 342
 
 (defun set-main()                                                       ; set main frame
   (interactive)
@@ -386,7 +400,7 @@
 (defun goto-bhagavatam-frame(&optional arg)
    (lambda (&optional arg) 
      (interactive "p") 
-     (select-frame-by-name "Bhagavatam")))
+     (select-frame-by-name "Bagavatam")))
 
 (defun goto-terminal-frame(&optional arg)
    (lambda (&optional arg) 
@@ -436,6 +450,7 @@
 (global-set-key (kbd "C-; s p")   'set-pad)                          ; set pad size
 (global-set-key (kbd "C-; s t")   'set-terminal)                     ; set terminal size
 (global-set-key (kbd "C-; s m")   'set-main)                         ; set as main frame
+(global-set-key (kbd "C-; s b")   'set-bagavatam)                         ; set as main frame
 
 ;; setting custom frames
 (global-set-key (kbd "C-; s 0")   'set-custom0)

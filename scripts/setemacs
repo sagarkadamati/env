@@ -6,7 +6,7 @@ width=`echo $res | awk -F'x' '{print $1}'`
 height=`echo $res | awk -F'x' '{print $2}'`
 
 # echo $width $height
-wmctrl -r emacs-main -e 1,30,49,$((${width} - 60)),$((${height} - 20))
+wmctrl -r emacs-main -e 1,25,49,$((${width} - 40)),$((${height} - 15))
 
 emacsid=`wmctrl -l | grep 'emacs-main' | awk '{print $1}'`
 windowtool.py -d 0 "$emacsid"

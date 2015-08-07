@@ -1,3 +1,8 @@
 emacs|emacs24
 terminator|terminator
 ia32|libc6:i386 libncurses5:i386 libstdc++6:i386
+libpodofo|libpodofo-dev
+pdftk|pdftk
+libz.so.1|lib32z1
+cdefs|gcc-multilib g++-multilib
+

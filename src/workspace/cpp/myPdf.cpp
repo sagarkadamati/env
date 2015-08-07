@@ -130,14 +130,18 @@ std::string extract( PdfMemDocument* pDocument, PdfPage* pPage , string removefo
 					red = stack.top().GetReal();
 					stack.pop();
 
-					blue = 0.0;
-					green = 0.0;
-					red = 0.0;
+					// red = 0.0;
+					// green = 0.0;
+					// blue = 0.0;
+
+					red = 0.396;
+					green = 0.482;
+					blue = 0.514;
 				
-					// block << red << " " 
-					//       << green << " " 
-					//       << blue << " " 
-					//       << pszToken << endl;
+					block << red << " " 
+					      << green << " " 
+					      << blue << " " 
+					      << pszToken << endl;
 
 					// cout << red << " " 
 					//       << green << " " 
@@ -448,8 +452,8 @@ void convert(string input,string output, string removefont, int del_start, int d
 int main()
 {
 	system("mkdir -p finial");
-	convert("org/Skandamu01.pdf" , "finial/Skandamu01.pdf" , "F1" , 11, 0);
-	// convert("org/Skandamu02.pdf" , "finial/Skandamu02.pdf" , "R10", 1, 0);
+	// convert("org/Skandamu01.pdf" , "finial/Skandamu01.pdf" , "F1" , 11, 0);
+	convert("org/Skandamu02.pdf" , "finial/Skandamu02.pdf" , "R10", 1, 0);
  	// convert("org/Skandamu03.pdf" , "finial/Skandamu03.pdf" , "R10", 1, 0);
 	// convert("org/Skandamu04.pdf" , "finial/Skandamu04.pdf" , "F3" , 1, 0);
 	// convert("org/Skandamu05.pdf" , "finial/Skandamu05.pdf" , "R10", 1, 4);
