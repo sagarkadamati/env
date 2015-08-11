@@ -410,14 +410,12 @@
 (defun goto-page-bagavatam()
   (interactive)
   (let* ((current (org-get-tags-string))
-	 (current-tag (org-split-string current ":"))
-	 (select-frame-by-name "Bagavatam")
- 	 (doc-view-goto-page current-tag)
-	 (message current))))
-  ;; (doc-view-fit-width-to-window)
-  ;; (set-frame-size (selected-frame) 62 18))
+	 (current-tag (org-split-string current ":")))
+    (select-frame-by-name "Bagavatam")
+    (doc-view-goto-page
+     (string-to-number (car current-tag)))))
 
-;; (global-set-key (kbd "C-; g g")   (goto-page-bagavatam))
+(global-set-key (kbd "C-; g g") 'goto-page-bagavatam)
 
 ;; frame keys
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
