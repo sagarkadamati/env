@@ -19,16 +19,27 @@
 ** Maharaja Pariksit Cursed by a Brahmana Boy				:118:
 ** The Appearance of Sukadeva Gosvami					:125:
 * 02: The Cosmic Manifestation
-** The First Step in God Realization					  :1:
-** The Lord in the Heart						 :10:
-** Pure Devotional Service: The Change in Heart				 :22:
-** The Process of Creation						 :28:
-** The Cause of All Causes						 :35:
-** Purusa-sukta Confirmed						 :48:
-** Scheduled Incarnations with Specific Functions			 :59:
-** Questions by King Pariksit						 :74:
-** Answers by Citing the Lord's Version					 :81:
-** Bhagavatam Is the Answer to All Questions				:101:
+** Chapters
+*** The First Step in God Realization					  :1:
+*** The Lord in the Heart						 :10:
+*** Pure Devotional Service: The Change in Heart			 :22:
+*** The Process of Creation						 :28:
+*** The Cause of All Causes						 :35:
+*** Purusa-sukta Confirmed						 :48:
+*** Scheduled Incarnations with Specific Functions			 :59:
+*** Questions by King Pariksit						 :74:
+*** Answers by Citing the Lord's Version				 :81:
+*** Bhagavatam Is the Answer to All Questions				:101:
+** Topics
+*** E: Pariksit enquiry what to do before deads 			  :1:
+*** E: Pariksit enquiry about Dharana 					  :6:
+*** D: To which god we need to pry for particular need 			 :22:
+*** E: Saunika asking suta to tell all the discussions 			 :24:
+*** E: Pariksit enquiry about how god created this world 		 :28:
+*** D: Suka maharshi namskars 						 :30:
+*** E: Narada enquiry about how god created this world 			 :35:
+*** C: Brahma Explains Bhagavatam to Narada 				 :37:
+*** E: Pariksit enquiry about all things in Bhagavatam 			 :74:
 * 03: The Status Quo
 ** Questions by Vidura							  :1:
 ** Remembrance of Lord Krsna						  :6:
