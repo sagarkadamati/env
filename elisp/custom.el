@@ -65,6 +65,19 @@
 (set-face-background 'hl-line "#F9F3E2")
 (set-face-foreground 'hl-line nil)
 
+(defun org-goto-last-heading-in-tree ()
+  (interactive)
+  (org-forward-heading-same-level 1)     ; 1. Move to next tree
+  (outline-previous-visible-heading 1)   ; 2. Move to last heading in previous tree
+  (let ((org-special-ctrl-a/e t))        ; 3. Ignore tags when
+    (org-end-of-line)))                  ;    moving to the end of the line
+(define-key org-mode-map (kbd "C-c g") 'org-goto-last-heading)
+
+(defun org-goto-top-heading ()
+  (interactive)
+  (org-backward-heading-same-level 2))    ; 1. Move to next tree
+
+
 (set-cursor-color "#657B83")
 
 (defun no-modeline()
