@@ -75,7 +75,7 @@
   (interactive) 
   (setq mode-line-format
     (if (equal mode-line-format nil)
-        (default-value 'mode-line-format)) )
+        (default-value 'mode-line-format)))
   (redraw-display))
 
 (global-set-key [M-f12] 'toggle-mode-line)
@@ -411,11 +411,49 @@
   (interactive)
   (let* ((current (org-get-tags-string))
 	 (current-tag (org-split-string current ":")))
+    (set-mark-command nil)
+    (set-mark-command nil)
+    (setq m (mark-marker))
+    (outline-up-heading 10)
+    (setq heading (org-get-heading))
+    (set-mark-command m)
     (select-frame-by-name "Bagavatam")
+    (set-frame-size (selected-frame) 62 18)
+    (setq mode-line-format nil)
+    (if (get-buffer (concat heading ".pdf"))
+	(switch-to-buffer (concat heading ".pdf"))
+      (find-file-at-point (concat "/home/sagar/env/bhagavatam/" heading ".pdf")))
+    ;; (doc-view-fit-width-to-window)
     (doc-view-goto-page
      (string-to-number (car current-tag)))))
 
 (global-set-key (kbd "C-; g g") 'goto-page-bagavatam)
+
+(defun goto-content-bagavatam()
+  (interactive)
+  (set-frame-name "Bagavatam")
+  (setq mode-line-format nil)
+  (if (get-buffer "/home/sagar/env/org/Bhagavatam.org")
+      (switch-to-buffer "/home/sagar/env/org/Bhagavatam.org")
+    (find-file-at-point "/home/sagar/env/org/Bhagavatam.org"))
+  (set-frame-size (selected-frame) 80 40))
+
+(global-set-key (kbd "C-; g c") 'goto-content-bagavatam)
+
+(defun get-heading()
+  (interactive)
+  (set-mark-command nil)
+  (set-mark-command nil)
+  (setq m (mark-marker))
+  (outline-up-heading 10)
+  (select-frame-by-name "Bagavatam")
+  (if (get-buffer (concat (org-get-heading) ".pdf"))
+      (switch-to-buffer (concat (org-get-heading) ".pdf"))
+    (find-file-at-point (concat "/home/sagar/env/bagavatam/" (org-get-heading) ".pdf")))
+  ;; (princ (concat "/home/sagar/env/bagavatam/" (org-get-heading) ".pdf")))
+  (set-mark-command m))
+
+(global-set-key (kbd "C-; g b") 'get-heading)
 
 ;; frame keys
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

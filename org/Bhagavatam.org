@@ -1,4 +1,4 @@
-* 01: Creation
+* 01 Creation
 ** Questions by the Sages						  :1:
 ** Divinity and Divine Service						  :7:
 ** Krsna's the Source of All Incarnations				 :15:
@@ -18,7 +18,7 @@
 ** Punishment and Reward of Kali					:111:
 ** Maharaja Pariksit Cursed by a Brahmana Boy				:118:
 ** The Appearance of Sukadeva Gosvami					:125:
-* 02: The Cosmic Manifestation
+* 02 The Cosmic Manifestation
 ** Chapters
 *** The First Step in God Realization					  :1:
 *** The Lord in the Heart						 :10:
@@ -40,7 +40,7 @@
 *** E: Narada enquiry about how god created this world 			 :35:
 *** C: Brahma Explains Bhagavatam to Narada 				 :37:
 *** E: Pariksit enquiry about all things in Bhagavatam 			 :74:
-* 03: The Status Quo
+* 03 The Status Quo
 ** Questions by Vidura							  :1:
 ** Remembrance of Lord Krsna						  :6:
 ** The Lord's Pastimes Out of Vrndavana					 :13:
@@ -74,7 +74,7 @@
 ** Lord Kapila's Instructions on the Movements of the Living Entities	:217:
 ** Entanglement in Fruitive Activities					:225:
 ** Activities of Kapila							:234:
-* 04: The Creation of the Fourth Order
+* 04 The Creation of the Fourth Order
 ** Genealogical Table of the Daughters of Manu				  :1:
 ** Daksa Curses Lord Siva						 :12:
 ** Talks Between Lord Siva and Sati					 :18:
@@ -106,7 +106,7 @@
 ** Talks Between Narada and King Pracinabarhi				:195:
 ** The Activities of the Pracetas					:218:
 ** Narada Instructs the Pracetas					:226:
-* 05: The Creative Impetus
+* 05 The Creative Impetus
 ** The Activities of Maharaja Priyavrata				  :1:
 ** The Activities of Maharaja Agnidhra					 :11:
 ** Rsabhadeva's Appearance in the Womb of Merudevi, the Wife of King Nabhi :14:
@@ -133,7 +133,7 @@
 ** The Subterranean Heavenly Planets					:167:
 ** The Glories of Lord Ananta						:175:
 ** A Description of the Hellish Planets					:178:
-* 06: Prescribed Duties for Mankind
+* 06 Prescribed Duties for Mankind
 ** The History of the Life of Ajamila					  :1:
 ** Ajamila Delivered by the Visnudutas					 :13:
 ** Yamaraja Instructs His Messengers					 :22:
@@ -153,7 +153,7 @@
 ** Mother Parvati Curses Citraketu					:126:
 ** Diti Vows to Kill King Indra						:132:
 ** Performing the Pumsavana Ritualistic Ceremony			:144:
-* 07: The Science of God
+* 07 The Science of God
 ** The Supreme Lord Is Equal to Everyone				  :1:
 ** Hiranyakasipu, King of the Demons					 :11:
 ** Hiranyakasipu's Plan to Become Immortal				 :21:
@@ -169,7 +169,7 @@
 ** The Behavior of a Perfect Person					:126:
 ** Ideal Family Life							:135:
 ** Instructions for Civilized Human Beings				:144:
-* 08: Withdrawal of the Cosmic Creations
+* 08 Withdrawal of the Cosmic Creations
 ** The Manus, Administrators of the Universe				  :1:
 ** The Elephant Gajendra's Crisis					  :7:
 ** Gajendra's Prayers of Surrender					 :13:
@@ -194,7 +194,7 @@
 ** Bali Maharaja Surrenders His Life					:184:
 ** The Demigods Regain the Heavenly Planets				:193:
 ** Matsya, the Lord's Fish Incarnation					:198:
-* 09: Liberation
+* 09 Liberation
 ** King Sudyumna Becomes a Woman					  :1:
 ** The Dynasties of the Sons of Manu					  :8:
 ** The Marriage of Sukanya and Cyavana Muni				 :14:
@@ -219,7 +219,7 @@
 ** The Descendants of Ajamidha						:156:
 ** The Dynasties of the Sons of Yayati					:167:
 ** Krsna, the Supreme Personality of Godhead				:174:
-* 10: The Summum Bonum
+* 10 The Summum Bonum
 ** The Advent of Lord Krsna: Introduction				  :1:
 ** Prayers by the Demigods for Lord Krsna in the Womb			 :14:
 ** The Birth of Lord Krsna						 :23:
@@ -310,7 +310,7 @@
 ** Lord Siva Saved from Vrkasura					:673:
 ** Krsna and Arjuna Retrieve a Brahmana's Sons				:683:
 ** Summary of Lord Krsna's Glories					:694:
-* 11: General History
+* 11 General History
 ** The Curse upon the Yadu Dynasty					  :1:
 ** Maharaja Nimi Meets the Nine Yogendras				  :6:
 ** Liberation from the Illusory Energy					 :18:
@@ -342,7 +342,7 @@
 ** Bhakti-yoga								:269:
 ** The Disappearance of the Yadu Dynasty				:278:
 ** The Disappearance of Lord Sri Krsna					:285:
-* 12: The Age of Deterioration
+* 12 The Age of Deterioration
 ** The Degraded Dynasties of Kali-yuga					  :1:
 ** The Symptoms of Kali-yuga						  :6:
 ** The Bhumi-gita							 :14:
