@@ -65,17 +65,17 @@
 (set-face-background 'hl-line "#F9F3E2")
 (set-face-foreground 'hl-line nil)
 
-(defun org-goto-last-heading-in-tree ()
-  (interactive)
-  (org-forward-heading-same-level 1)     ; 1. Move to next tree
-  (outline-previous-visible-heading 1)   ; 2. Move to last heading in previous tree
-  (let ((org-special-ctrl-a/e t))        ; 3. Ignore tags when
-    (org-end-of-line)))                  ;    moving to the end of the line
-(define-key org-mode-map (kbd "C-c g") 'org-goto-last-heading)
+;; (defun org-goto-last-heading-in-tree ()
+;;   (interactive)
+;;   (org-forward-heading-same-level 1)     ; 1. Move to next tree
+;;   (outline-previous-visible-heading 1)   ; 2. Move to last heading in previous tree
+;;   (let ((org-special-ctrl-a/e t))        ; 3. Ignore tags when
+;;     (org-end-of-line)))                  ;    moving to the end of the line
+;; (define-key org-mode-map (kbd "C-c g") 'org-goto-last-heading)
 
-(defun org-goto-top-heading ()
-  (interactive)
-  (org-backward-heading-same-level 2))    ; 1. Move to next tree
+;; (defun org-goto-top-heading ()
+;;   (interactive)
+;;   (org-backward-heading-same-level 2))    ; 1. Move to next tree
 
 
 (set-cursor-color "#657B83")
@@ -282,9 +282,9 @@
   (ansi-term "/usr/bin/sudo /usr/bin/screen /dev/ttyUSB0 115200")
   (set-frame-size (selected-frame) 150 40))
 
-(defun set-bagavatam()                                                       ; set main frame
+(defun set-bhagavatam()                                                       ; set main frame
   (interactive)
-  (set-frame-name "Bagavatam")
+  (set-frame-name "Bhagavatam")
   (set-frame-size (selected-frame) 62 18)
   (toggle-mode-line))
 
@@ -300,8 +300,7 @@
   (interactive)
   (set-frame-name "Pad")
   (find-file-at-point "~/org/pad.org")
-  (set-frame-size (selected-frame) 80 43)
-  (toggle-mode-line))
+  (set-frame-size (selected-frame) 80 43))
 
 ;; custom frames
 (defun set-custom0()
@@ -413,14 +412,14 @@
 (defun goto-bhagavatam-frame(&optional arg)
    (lambda (&optional arg) 
      (interactive "p") 
-     (select-frame-by-name "Bagavatam")))
+     (select-frame-by-name "Bhagavatam")))
 
 (defun goto-terminal-frame(&optional arg)
    (lambda (&optional arg) 
      (interactive "p") 
      (select-frame-by-name "emacs-term")))
 
-(defun goto-page-bagavatam()
+(defun goto-page-bhagavatam()
   (interactive)
   (let* ((current (org-get-tags-string))
 	 (current-tag (org-split-string current ":")))
@@ -430,7 +429,7 @@
     (outline-up-heading 10)
     (setq heading (org-get-heading))
     (set-mark-command m)
-    (select-frame-by-name "Bagavatam")
+    (select-frame-by-name "Bhagavatam")
     (set-frame-size (selected-frame) 62 18)
     (setq mode-line-format nil)
     (if (get-buffer (concat heading ".pdf"))
@@ -440,33 +439,33 @@
     (doc-view-goto-page
      (string-to-number (car current-tag)))))
 
-(global-set-key (kbd "C-; g g") 'goto-page-bagavatam)
-
-(defun goto-content-bagavatam()
+(defun goto-content-bhagavatam()
   (interactive)
-  (set-frame-name "Bagavatam")
+  (set-frame-name "Bhagavatam")
   (setq mode-line-format nil)
   (if (get-buffer "/home/sagar/env/org/Bhagavatam.org")
       (switch-to-buffer "/home/sagar/env/org/Bhagavatam.org")
     (find-file-at-point "/home/sagar/env/org/Bhagavatam.org"))
-  (set-frame-size (selected-frame) 80 40))
+  (set-frame-size (selected-frame) 80 40)
+  (read-only-mode))
 
-(global-set-key (kbd "C-; g c") 'goto-content-bagavatam)
+(global-set-key (kbd "C-; g g") 'goto-page-bhagavatam)
+(global-set-key (kbd "C-; g c") 'goto-content-bhagavatam)
 
-(defun get-heading()
-  (interactive)
-  (set-mark-command nil)
-  (set-mark-command nil)
-  (setq m (mark-marker))
-  (outline-up-heading 10)
-  (select-frame-by-name "Bagavatam")
-  (if (get-buffer (concat (org-get-heading) ".pdf"))
-      (switch-to-buffer (concat (org-get-heading) ".pdf"))
-    (find-file-at-point (concat "/home/sagar/env/bagavatam/" (org-get-heading) ".pdf")))
-  ;; (princ (concat "/home/sagar/env/bagavatam/" (org-get-heading) ".pdf")))
-  (set-mark-command m))
+;; (defun get-heading()
+;;   (interactive)
+;;   (set-mark-command nil)
+;;   (set-mark-command nil)
+;;   (setq m (mark-marker))
+;;   (outline-up-heading 10)
+;;   (select-frame-by-name "Bhagavatam")
+;;   (if (get-buffer (concat (org-get-heading) ".pdf"))
+;;       (switch-to-buffer (concat (org-get-heading) ".pdf"))
+;;     (find-file-at-point (concat "/home/sagar/env/Bhagavatam/" (org-get-heading) ".pdf")))
+;;   ;; (princ (concat "/home/sagar/env/Bhagavatam/" (org-get-heading) ".pdf")))
+;;   (set-mark-command m))
 
-(global-set-key (kbd "C-; g b") 'get-heading)
+;; (global-set-key (kbd "C-; g b") 'get-heading)
 
 ;; frame keys
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -511,7 +510,7 @@
 (global-set-key (kbd "C-; s p")   'set-pad)                          ; set pad size
 (global-set-key (kbd "C-; s t")   'set-terminal)                     ; set terminal size
 (global-set-key (kbd "C-; s m")   'set-main)                         ; set as main frame
-(global-set-key (kbd "C-; s b")   'set-bagavatam)                         ; set as main frame
+(global-set-key (kbd "C-; s b")   'set-bhagavatam)                         ; set as main frame
 
 ;; setting custom frames
 (global-set-key (kbd "C-; s 0")   'set-custom0)
