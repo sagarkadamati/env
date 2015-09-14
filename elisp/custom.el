@@ -285,6 +285,9 @@
 (defun set-bhagavatam()                                                       ; set main frame
   (interactive)
   (set-frame-name "Bhagavatam")
+  (if (get-buffer "/home/sagar/env/org/Bhagavatam.org")
+      (switch-to-buffer "/home/sagar/env/org/Bhagavatam.org")
+    (find-file-at-point "/home/sagar/env/org/Bhagavatam.org"))
   (set-frame-size (selected-frame) 62 18)
   (toggle-mode-line))
 
@@ -431,11 +434,11 @@
     (set-mark-command m)
     (select-frame-by-name "Bhagavatam")
     (set-frame-size (selected-frame) 62 18)
-    (setq mode-line-format nil)
     (if (get-buffer (concat heading ".pdf"))
 	(switch-to-buffer (concat heading ".pdf"))
       (find-file-at-point (concat "/home/sagar/env/bhagavatam/" heading ".pdf")))
     ;; (doc-view-fit-width-to-window)
+    (setq mode-line-format nil)
     (doc-view-goto-page
      (string-to-number (car current-tag)))))
 

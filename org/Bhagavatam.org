@@ -40,40 +40,49 @@
 *** E: Narada enquiry about how god created this world 			 :35:
 *** C: Brahma Explains Bhagavatam to Narada 				 :37:
 *** E: Pariksit enquiry about all things in Bhagavatam 			 :74:
+*** C: Brahma meditation						 :82:
+*** C: Bhagavatam is for all answers					:101:
 * 03 The Status Quo
-** Questions by Vidura							  :1:
-** Remembrance of Lord Krsna						  :6:
-** The Lord's Pastimes Out of Vrndavana					 :13:
-** Vidura Approaches Maitreya						 :17:
-** Vidura's Talks with Maitreya						 :22:
-** Creation of the Universal Form					 :33:
-** Further Inquires by Vidura						 :41:
-** Manifestation of Brahma from Garbhodakasayi Visnu			 :50:
-** Brahma's Prayers for Creative Energy					 :56:
-** Divisions of the Creation						 :66:
-** Calculation of Time, from the Atom					 :71:
-** Creation of the Kumaras and Others					 :81:
-** The Appearance of Lord Varaha					 :91:
-** Pregnancy of Diti in the Evening					 :97:
-** Description of the Kingdom of God					:103:
-** The Two Doorkeepers of Vaikuntha, Jaya and Vijaya, Cursed by the Sages :109:
-** Victory of Hiranyaksa Over All the Directions of the Universe	:115:
-** The Battle Between Lord Boar and the Demon Hiranyaksa		:118:
-** The Killing of the Demon Hiranyaksa					:122:
-** Conversation Between Maitreya and Vidura				:127:
-** Conversation Between Manu and Kardama				:135:
-** The Marriage of Kardama Muni and Devahuti				:142:
-** Devahuti's Lamentation						:147:
-** The Renunciation of Kardama Muni					:154:
-** The Glories of Devotional Service					:160:
-** Fundamental Principles of Material Nature				:168:
-** Understanding Material Nature					:183:
-** Kapila's Instructions on the Execution of Devotional Service		:190:
-** Explanation of Devotional Service by Lord Kapila			:199:
-** Description by Lord Kapila of Adverse Fruitive Activities		:209:
-** Lord Kapila's Instructions on the Movements of the Living Entities	:217:
-** Entanglement in Fruitive Activities					:225:
-** Activities of Kapila							:234:
+** Chapters
+*** Questions by Vidura							  :1:
+*** Remembrance of Lord Krsna						  :6:
+*** The Lord's Pastimes Out of Vrndavana				 :13:
+*** Vidura Approaches Maitreya						 :17:
+*** Vidura's Talks with Maitreya					 :22:
+*** Creation of the Universal Form					 :33:
+*** Further Inquires by Vidura						 :41:
+*** Manifestation of Brahma from Garbhodakasayi Visnu			 :50:
+*** Brahma's Prayers for Creative Energy				 :56:
+*** Divisions of the Creation						 :66:
+*** Calculation of Time, from the Atom					 :71:
+*** Creation of the Kumaras and Others					 :81:
+*** The Appearance of Lord Varaha					 :91:
+*** Pregnancy of Diti in the Evening					 :97:
+*** Description of the Kingdom of God					:103:
+*** The Two Doorkeepers of Vaikuntha, Jaya and Vijaya, Cursed by the Sages :109:
+*** Victory of Hiranyaksa Over All the Directions of the Universe	:115:
+*** The Battle Between Lord Boar and the Demon Hiranyaksa		:118:
+*** The Killing of the Demon Hiranyaksa					:122:
+*** Conversation Between Maitreya and Vidura				:127:
+*** Conversation Between Manu and Kardama				:135:
+*** The Marriage of Kardama Muni and Devahuti				:142:
+*** Devahuti's Lamentation						:147:
+*** The Renunciation of Kardama Muni					:154:
+*** The Glories of Devotional Service					:160:
+*** Fundamental Principles of Material Nature				:168:
+*** Understanding Material Nature					:183:
+*** Kapila's Instructions on the Execution of Devotional Service	:190:
+*** Explanation of Devotional Service by Lord Kapila			:199:
+*** Description by Lord Kapila of Adverse Fruitive Activities		:209:
+*** Lord Kapila's Instructions on the Movements of the Living Entities	:217:
+*** Entanglement in Fruitive Activities					:225:
+*** Activities of Kapila						:234:
+** Topics
+*** Brahma Meditaion
+*** Time
+*** Varaha Avataram
+*** Kardhama Prajapati Marriage
+*** Kapila Gita
 * 04 The Creation of the Fourth Order
 ** Genealogical Table of the Daughters of Manu				  :1:
 ** Daksa Curses Lord Siva						 :12:
@@ -356,3 +365,23 @@
 ** Summary Description of the Mahapurusa				 :72:
 ** The Topics of Srimad-Bhagavatam Summarized				 :80:
 ** The Glories of Srimad-Bhagavatam					 :88:
+* All Stories
+** Narada Muni
+** Asvatthama's deeds
+** Jay Vijaya
+** Hiranyaksa
+** Kradama Muni
+** Dhruva Maharaj
+** King Vena
+** King Puranjana
+** Bharata Maharaja
+** Sage Visvarupa
+** Vrtrasura
+** Chitraketu
+** Elephant Gajendra
+** Maya Danava
+** Ocean Churning
+** Bali Maharaja
+** Lord's Matsya Incartaion
+** King Sudyumna
+** Ambarisa Maharaja
