@@ -1,0 +1,19 @@
+#!/bin/sh
+
+res=`wmctrl -d | awk '{print $9}'`
+
+width=` echo $res | awk -F'x' '{print $1}'`
+height=`echo $res | awk -F'x' '{print $2}'`
+
+width=$((${width} - 100))
+height=$((${height} - 52))
+
+# echo $width $height
+wmctrl -e 1,50,50,${width},${height} -r Coder    
+wmctrl -e 1,50,50,${width},${height} -r Terminal
+
+# wmctrl -e 1,50,50,${width},${height} -r Audacity
+# wmctrl -e 1,50,50,${width},${height} -r Chrome
+
+# emacsid=`wmctrl -l | grep 'Coder' | awk '{print $1}'`
+# windowtool.py -d 1 "$emacsid"

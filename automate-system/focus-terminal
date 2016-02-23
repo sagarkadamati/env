@@ -1,9 +1,10 @@
 #!/bin/sh
 
 opened=`wmctrl -l | grep Terminal`
+echo $opened
 
 if [ "X$opened" == "X" ]; then
-    x-terminal-emulator
+    gnome-terminal
 else 
     wmctrl -a "Terminal"
 fi

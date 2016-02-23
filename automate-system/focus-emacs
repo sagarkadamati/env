@@ -9,10 +9,10 @@ if [ "X$opened" == "X" ]; then
     fi
 
     emacsclient -n -c
-    emacsclient -n -e '(set-main)'
+    emacsclient -n -e '(coder)'
     sleep 1
     /home/sagar/env/scripts/setemacs
 else
-    wmctrl -a emacs-main
+    wmctrl -a Coder
 fi
 

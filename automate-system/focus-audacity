@@ -1,0 +1,11 @@
+#!/bin/sh
+
+opened=`wmctrl -l | grep Audacity`
+echo $opened
+
+if [ "X$opened" == "X" ]; then
+    audacity
+else 
+    wmctrl -a "Audacity"
+fi
+
