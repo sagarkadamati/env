@@ -1,6 +1,6 @@
 #!/bin/sh
 
-opened=`wmctrl -l | grep 'emacs-main'`
+opened=`wmctrl -l | grep 'Coder'`
 running=`ps aux | grep 'emacs --daemon' | grep -v grep`
 
 if [ "X$opened" == "X" ]; then

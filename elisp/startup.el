@@ -57,10 +57,11 @@
   (set-frame-name "Coder")
   (set-frame-size (selected-frame) 120 33))
 
-(load "colors.el")
-
-(require 'android-mode)
-(custom-set-variables '(android-mode-sdk-dir "~/android/android-sdk-linux"))
-
 (coder)
-(server-start)
+
+(load "colors.el")
+(load "modeline.el")
+;; (server-start)
+
+;; (require 'android-mode)
+;; (custom-set-variables '(android-mode-sdk-dir "~/android/android-sdk-linux"))

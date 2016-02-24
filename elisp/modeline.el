@@ -21,6 +21,8 @@
 (setq powerline-color1 "#EEE8D5")
 (setq powerline-color2 "#F9F3E2")
 
+(setq powerline-arrow-shape 'curve)   ;; give your mode-line curves
+
 (set-face-attribute 'mode-line nil
                     :background "#EEE8D5"
                     :foreground "#657B83"

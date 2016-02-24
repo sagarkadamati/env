@@ -13,8 +13,8 @@
        ))
 
 ;; Frame Transparent Mode
-(set-frame-parameter (selected-frame) 'alpha '(90 90))
-(add-to-list 'default-frame-alist '(alpha 90 90))
+(set-frame-parameter (selected-frame) 'alpha '(95 95))
+(add-to-list 'default-frame-alist '(alpha 95 95))
 
 (set-face-attribute 'fringe nil
 		    :background "#FDF6E3")
@@ -37,17 +37,17 @@
 ;; Mode line
 (set-face-attribute 'mode-line nil
 		    :box nil
-		    :background "#EEE8D5"
+		    :background "#F9F3E2"
 		    :foreground "#657B83"
-		    :overline "#EEE8D5"
-		    :underline "#EEE8D5")
+		    :overline "#F9F3E2"
+		    :underline "#F9F3E2")
 
 (set-face-attribute 'mode-line-inactive nil
 		    :box nil
-		    :background "#EEE8D5"
+		    :background "#F9F3E2"
 		    :foreground "#657B83"
-		    :overline "#EEE8D5"
-		    :underline "#EEE8D5")
+		    :overline "#F9F3E2"
+		    :underline "#F9F3E2")
 
 ;; Coding (Keyword color)
 (set-face-attribute  'font-lock-string-face nil :weight 'medium)
