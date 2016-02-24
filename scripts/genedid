@@ -1,0 +1,414 @@
+#!/bin/sh
+
+NV_EDIDGEN='/home/sagar/workspace/dev-kernel/embedded-linux.xml/zFAS/out/embedded-linux-p2360-debug/nvidia/core-private/utils/EDIDGenerate-hostcc/nv_edidgenerate'
+NV_EDIDGEN='/home/sagar/workspace/dev-kernel/embedded-linux.xml/out/embedded-linux-p2360-debug/nvidia/core-private/utils/EDIDGenerate-hostcc/nv_edidgenerate'
+
+NV_EDIDGEN='edidgen'
+
+HOFFSET=0
+VOFFSET=0
+HPULSE=0
+VPULSE=0
+HBACK=0
+VBACK=0
+EXIST=""
+
+RESOLUTION=1280x1082@15fps
+
+# Display resolution in pixels
+if [ "X$1" != "X" ]; then
+    RESOLUTION="$1"
+fi
+
+# Horizontal and Vertical Resoulution in pixels
+HACTIVE=`echo ${RESOLUTION} | cut -d'x' -f1`
+VACTIVE=`echo ${RESOLUTION} | cut -d'x' -f2 | cut -d'@' -f1`
+
+case ${RESOLUTION} in
+    "1280x1082@30fps" )
+
+	# Pixel clock in 10khz
+	PCLK=6603
+	# PCLK=14050
+	# PCLK=11554
+	
+	# Horizontal and Vertical front porch in pixels
+	HOFFSET=88
+	VOFFSET=8
+	
+	# Horizontal and Vertical sync pulse width in pixels
+	HPULSE=44
+	VPULSE=4
+	
+	# Horizontal and Vertical back porch in pixels
+	HBACK=148
+	VBACK=317
+
+	# Horizontal and Vertical blanking in pixels (back porch + sync width + front porch)
+	HBLANK=$(( ${HPULSE} + ${HOFFSET} + ${HBACK} ))
+	VBLANK=$(( ${VPULSE} + ${VOFFSET} + ${VBACK} ))
+
+	EXIST=true
+	;;
+    "1280x1082@15fps" )
+
+	# Pixel clock in 10khz
+	PCLK=$(( 6603 / 2 ))
+	
+	# Horizontal and Vertical front porch in pixels
+	HOFFSET=88
+	VOFFSET=8
+	
+	# Horizontal and Vertical sync pulse width in pixels
+	HPULSE=44
+	VPULSE=4
+	
+	# Horizontal and Vertical back porch in pixels
+	HBACK=148
+	VBACK=317
+
+	# Horizontal and Vertical blanking in pixels (back porch + sync width + front porch)
+	HBLANK=$(( ${HPULSE} + ${HOFFSET} + ${HBACK} ))
+	VBLANK=$(( ${VPULSE} + ${VOFFSET} + ${VBACK} ))
+
+	EXIST=true
+	;;
+    "1280x1082@10fps" )
+
+	# Pixel clock in 10khz
+	PCLK=$(( 6603 / 3 ))
+	
+	# Horizontal and Vertical front porch in pixels
+	HOFFSET=88
+	VOFFSET=8
+	
+	# Horizontal and Vertical sync pulse width in pixels
+	HPULSE=44
+	VPULSE=4
+	
+	# Horizontal and Vertical back porch in pixels
+	HBACK=148
+	VBACK=317
+
+	# Horizontal and Vertical blanking in pixels (back porch + sync width + front porch)
+	HBLANK=$(( ${HPULSE} + ${HOFFSET} + ${HBACK} ))
+	VBLANK=$(( ${VPULSE} + ${VOFFSET} + ${VBACK} ))
+
+	EXIST=true
+	;;
+    "1280x1082@5fps" )
+
+	# Pixel clock in 10khz
+	PCLK=$(( 6603 / 6 ))
+	
+	# Horizontal and Vertical front porch in pixels
+	HOFFSET=88
+	VOFFSET=8
+	
+	# Horizontal and Vertical sync pulse width in pixels
+	HPULSE=44
+	VPULSE=4
+	
+	# Horizontal and Vertical back porch in pixels
+	HBACK=148
+	VBACK=317
+
+	# Horizontal and Vertical blanking in pixels (back porch + sync width + front porch)
+	HBLANK=$(( ${HPULSE} + ${HOFFSET} + ${HBACK} ))
+	VBLANK=$(( ${VPULSE} + ${VOFFSET} + ${VBACK} ))
+
+	EXIST=true
+	;;
+    *)
+	echo "Timing info for ${RESOLUTION} doesn't exist"
+	exit
+esac
+
+echo ""
+echo "=== Timing Info ==="
+echo "Resolution    : ${RESOLUTION}"
+echo "pclk(10k)     : ${PCLK}"
+echo "h_sync_width  : ${HPULSE}"
+echo "v_sync_width  : ${VPULSE}"
+echo "h_back_porch  : ${HBACK}"
+echo "v_back_porch  : ${VBACK}"
+echo "h_active      : ${HACTIVE}"
+echo "v_active      : ${VACTIVE}"
+echo "h_front_porch : ${HOFFSET}"
+echo "v_front_porch : ${VOFFSET}"
+echo ""
+echo "HBLANK        : ${HBLANK}"
+echo "VBLANK        : ${VBLANK}"
+echo ""
+
+echo "=== Edid for above timing ==="
+if [ "X${EXIST}" == "Xtrue" ]; then
+    echo "nvidia,edid = ["
+    ${NV_EDIDGEN} "${PCLK},${HACTIVE},${HBLANK},${VACTIVE},${VBLANK},${HOFFSET},${HPULSE},${VOFFSET},${VPULSE}" | grep '|' | cut -d '|' -f2
+    echo '];'
+fi
+
+echo ""
+
+
+
+
+# # Display resolution in pixels
+# RESOLUTION=1920x1080
+
+# # Horizontal and Vertical Resoulution in pixels
+# HACTIVE=`echo ${RESOLUTION} | cut -d'x' -f1`
+# VACTIVE=`echo ${RESOLUTION} | cut -d'x' -f2`
+
+# # Pixel clock in 10khz
+# PCLK=3326
+
+# # Horizontal and Vertical front porch in pixels
+# HOFFSET=64
+# VOFFSET=4
+
+# # Horizontal and Vertical sync pulse width in pixels
+# HPULSE=64
+# VPULSE=3
+
+# # Horizontal and Vertical back porch in pixels
+# HBACK=0
+# VBACK=0
+
+# # Horizontal and Vertical blanking in pixels (back porch + sync width + front porch)
+# # HBLANK=$(( ${HPULSE} + ${HOFFSET} + ${HBACK} ))
+# # VBLANK=$(( ${VPULSE} + ${VOFFSET} + ${VBACK} ))
+# HBLANK=256
+# VBLANK=45
+
+# Pixel Clock: 148.5MHz 
+# Horizontal Active: 1920 
+# Vertical Active: 1080 
+# Horizontal Blanking: 280 
+# Vertical Blanking: 45 
+# Horizontal Sync Offset: 88 
+# Horizontal Sync Pulse: 44 
+# Vertical Sync Offset: 4 
+# Vertical Sync Pulse: 5 
+
+# ${PCLK},${HACTIVE},${HBLANK},${VACTIVE},${VBLANK},${HOFFSET},${HPULSE},${VOFFSET},${VPULSE}"
+# ./nv_edidgenerate 14850,1920,280,1080,45,88,44,4,5
+
+# # Display resolution in pixels
+# RESOLUTION=2820x720
+
+# # Horizontal and Vertical Resoulution in pixels
+# HACTIVE=`echo ${RESOLUTION} | cut -d'x' -f1`
+# VACTIVE=`echo ${RESOLUTION} | cut -d'x' -f2`
+
+# # Pixel clock in 10khz
+# PCLK=13700
+
+# # Horizontal and Vertical front porch in pixels
+# HOFFSET=48
+# VOFFSET=3
+
+# # Horizontal and Vertical sync pulse width in pixels
+# HPULSE=32
+# VPULSE=6
+
+# # Horizontal and Vertical back porch in pixels
+# HBACK=80
+# VBACK=37
+
+# # Horizontal and Vertical blanking in pixels (back porch + sync width + front porch)
+# # HBLANK=$(( ${HPULSE} + ${HOFFSET} + ${HBACK} ))
+# # VBLANK=$(( ${VPULSE} + ${VOFFSET} + ${VBACK} ))
+# HBLANK=256
+# VBLANK=45
+
+# ${NV_EDIDGEN} "${PCLK},${HACTIVE},${HBLANK},${VACTIVE},${VBLANK},${HOFFSET},${HPULSE},${VOFFSET},${VPULSE}" | grep '|' | cut -d '|' -f2
+
+# ${NV_EDIDGEN} 14850,1920,280,1080,45,88,44,4,5 | grep '|' | cut -d '|' -f2
+
+# ${NV_EDIDGEN} 7425,1920,280,1080,45,88,44,4,5 | grep '|' | cut -d '|' -f2
+
+# Hor Pixels = 1280; // Pixels
+# Ver Pixels = 720; // Lines
+# Hor Frequency = 45.000; // KHz = 22.2 usec / line
+# Ver Frequency = 60.000; // Hz = 16.7 msec / frame
+# Pixel Clock = 74.250; // MHz = 13.5 nsec ¡À 0.5%
+
+# // H Front Porch = 1.481; // (usec) = 110 chars = 110 Pixels
+# Hor Sync Time = 0.539; // (usec) = 40 chars = 40 Pixels
+# // H Back Porch = 2.963; // (usec) = 220 chars = 220 Pixels
+# // H Left Border = 0.000; // (usec) = 0 chars = 0 Pixels 
+
+# pclk: 32709600
+# h_sync_width: 64
+# v_sync_width: 3
+# h_back_porch: 128
+# v_back_porch: 38
+# h_active: 800
+# v_active: 480
+# h_front_porch: 64
+# v_front_porch: 4
+
+# # Display resolution in pixels
+# RESOLUTION=800x480
+
+# # Horizontal and Vertical Resoulution in pixels
+# HACTIVE=`echo ${RESOLUTION} | cut -d'x' -f1`
+# VACTIVE=`echo ${RESOLUTION} | cut -d'x' -f2`
+
+# PCLK=3271
+
+# # Horizontal and Vertical front porch in pixels
+# HOFFSET=64
+# VOFFSET=4
+
+# # Horizontal and Vertical sync pulse width in pixels
+# HPULSE=64
+# VPULSE=3
+
+# # Horizontal and Vertical back porch in pixels
+# HBACK=128
+# VBACK=38
+
+# # Horizontal and Vertical blanking in pixels (back porch + sync width + front porch)
+# # HBLANK=$(( ${HPULSE} + ${HOFFSET} + ${HBACK} ))
+# # VBLANK=$(( ${VPULSE} + ${VOFFSET} + ${VBACK} ))
+# HBLANK=256
+# VBLANK=45
+
+# pclk: 74250000
+# h_ref_to_sync: 1
+# v_ref_to_sync: 1
+# h_sync_width: 80
+# v_sync_width: 5
+# h_back_porch: 180
+# v_back_porch: 20
+# h_active: 1280
+# v_active: 720
+# h_front_porch: 110
+# v_front_porch: 5
+# flags: 0x0
+# stereo_mode: 0
+# avi_m: 0x1
+
+# pclk: 148500000
+# h_ref_to_sync: 1
+# v_ref_to_sync: 1
+# h_sync_width: 44
+# v_sync_width: 5
+# h_back_porch: 148
+# v_back_porch: 36
+# h_active: 1920
+# v_active: 1080
+# h_front_porch: 88
+# v_front_porch: 4
+# flags: 0x0
+# stereo_mode: 0
+# avi_m: 0x2
+
+# # Display resolution in pixels
+# RESOLUTION=1280x720
+
+# # Horizontal and Vertical Resoulution in pixels
+# HACTIVE=`echo ${RESOLUTION} | cut -d'x' -f1`
+# VACTIVE=`echo ${RESOLUTION} | cut -d'x' -f2`
+
+# # Pixel clock in 10khz
+# PCLK=14850
+
+# # Horizontal and Vertical front porch in pixels
+# HOFFSET=88
+# VOFFSET=4
+
+# # Horizontal and Vertical sync pulse width in pixels
+# HPULSE=80
+# VPULSE=5
+
+# # Horizontal and Vertical back porch in pixels
+# HBACK=180
+# VBACK=20
+
+# # Horizontal and Vertical blanking in pixels (back porch + sync width + front porch)
+# HBLANK=$(( ${HPULSE} + ${HOFFSET} + ${HBACK} ))
+# VBLANK=$(( ${VPULSE} + ${VOFFSET} + ${VBACK} ))
+# # HBLANK=256
+# # VBLANK=45
+
+# Display resolution in pixels
+RESOLUTION=1280x1080
+
+# Horizontal and Vertical Resoulution in pixels
+HACTIVE=`echo ${RESOLUTION} | cut -d'x' -f1`
+VACTIVE=`echo ${RESOLUTION} | cut -d'x' -f2`
+
+# Pixel clock in 10khz
+PCLK=7425
+
+# Horizontal and Vertical front porch in pixels
+HOFFSET=88
+VOFFSET=4
+
+# Horizontal and Vertical sync pulse width in pixels
+HPULSE=44
+VPULSE=5
+
+# Horizontal and Vertical back porch in pixels
+HBACK=148
+VBACK=36
+
+# Horizontal and Vertical blanking in pixels (back porch + sync width + front porch)
+HBLANK=$(( ${HPULSE} + ${HOFFSET} + ${HBACK} ))
+VBLANK=$(( ${VPULSE} + ${VOFFSET} + ${VBACK} ))
+# HBLANK=256
+# VBLANK=45
+
+# pclk: 74250000
+# h_active: 1920
+# v_active: 1080
+# h_front_porch: 88
+# v_front_porch: 4
+# h_sync_width: 44
+# v_sync_width: 5
+# h_back_porch: 148
+# v_back_porch: 36
+
+
+# pclk: 74250000
+# h_sync_width: 44
+# v_sync_width: 5
+# h_back_porch: 148
+# v_back_porch: 36
+# h_active: 1920
+# v_active: 1080
+# h_front_porch: 88
+# v_front_porch: 4
+
+# # Display resolution in pixels
+# RESOLUTION=1920x1080
+
+# # Horizontal and Vertical Resoulution in pixels
+# HACTIVE=`echo ${RESOLUTION} | cut -d'x' -f1`
+# VACTIVE=`echo ${RESOLUTION} | cut -d'x' -f2`
+
+# # Pixel clock in 10khz
+# PCLK=7425
+
+# # Horizontal and Vertical front porch in pixels
+# HOFFSET=88
+# VOFFSET=4
+
+# # Horizontal and Vertical sync pulse width in pixels
+# HPULSE=44
+# VPULSE=5
+
+# # Horizontal and Vertical back porch in pixels
+# HBACK=148
+# VBACK=36
+
+# # Horizontal and Vertical blanking in pixels (back porch + sync width + front porch)
+# HBLANK=$(( ${HPULSE} + ${HOFFSET} + ${HBACK} ))
+# VBLANK=$(( ${VPULSE} + ${VOFFSET} + ${VBACK} ))
+# # HBLANK=256
+# # VBLANK=45
+
+# ${NV_EDIDGEN} "${PCLK},${HACTIVE},${HBLANK},${VACTIVE},${VBLANK},${HOFFSET},${HPULSE},${VOFFSET},${VPULSE}" | grep '|' | cut -d '|' -f2

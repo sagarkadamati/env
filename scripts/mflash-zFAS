@@ -1,0 +1,12 @@
+#!/bin/sh
+
+cd /home/sagar/workspace/dev-kernel/embedded-linux.xml/zFAS
+
+. tmake/scripts/envsetup.sh
+choose embedded-linux vcm30t124 none debug internal x11 armv7
+
+cd -
+
+sudo /home/sagar/bin/phidget_controller -d 0 -R
+sleep 1
+flash -R

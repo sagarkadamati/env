@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# pdftops -level3 source.pdf - | psbook | psnup -2 -W5.5in -H8.5in | ps2pdf - booklet.pdf
+pdftops -level3 source.pdf - | psbook | ps2pdf - booklet.pdf

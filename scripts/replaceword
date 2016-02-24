@@ -1,0 +1,11 @@
+#!/bin/sh
+
+OLD="GFP_KERNEL"
+NEW="GFP_ATOMIC"
+
+grep -rli "${OLD}" * | xargs -i@ sed -i "s/${OLD}/${NEW}/g" @
+
+OLD="printf(GFP_ATOMIC"
+NEW="printf(GFP_KERNEL"
+
+grep -rli "${OLD}" * | xargs -i@ sed -i "s/${OLD}/${NEW}/g" @

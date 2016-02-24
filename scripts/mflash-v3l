@@ -1,0 +1,17 @@
+#!/bin/sh
+
+cd /home/sagar/workspace/dev-kernel/embedded-linux.xml/v3l
+
+if [ X"$1" == "X-v"]; then
+    . tmake/scripts/envsetup.sh
+    choose embedded-linux vcm30t124 none debug internal x11 armv7
+else
+    . tmake/scripts/envsetup.sh > /dev/null
+    choose embedded-linux vcm30t124 none debug internal x11 armv7 > /dev/null
+fi
+
+cd -
+
+sudo phidget_controller -d 0 -R
+sleep 1
+flash -R -n eth1

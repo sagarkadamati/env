@@ -1,0 +1,62 @@
+#!/bin/sh
+set -e
+
+rm -rf /tmp/bugscrub.xls /tmp/scrub.txt* /tmp/cmd.sh /tmp/block.txt*
+cp "$1" /tmp/"$1"
+
+ssconvert -S -O 'separator=|' /tmp/"$1" /tmp/scrub.txt
+
+sed -i 's/"/ /g' /tmp/scrub.txt.0
+sed -i 's/$/|/g' /tmp/scrub.txt.0
+sed -i 's/^/|#/g' /tmp/scrub.txt.0
+sed -i '/^|#|/d' /tmp/scrub.txt.0
+sed -i 's/^|#B/|B/g' /tmp/scrub.txt.0
+# sed -i '/|--/a |B' /tmp/scrub.txt.0
+sed -i 's/||||||||||||||//g' /tmp/scrub.txt.0
+
+LINES=`wc -l /tmp/scrub.txt.0 | cut -d ' ' -f 1`
+sed -e 's/^|# /\* /g' /tmp/scrub.txt.0 | tail -"$(( $LINES - 1 ))" > /tmp/scrub.txt
+
+# sed -i '/^|BugID/i |-' /tmp/scrub.txt
+# sed -i '/^|BugID/a |-' /tmp/scrub.txt
+
+# sed -i '/^\*/i |-' /tmp/scrub.txt
+# sed -i '/^\*/i -' /tmp/scrub.txt
+# sed -i 's/^-//g' /tmp/scrub.txt
+# echo '|-' >> /tmp/scrub.txt
+
+# LINES=`wc -l /tmp/scrub.txt | cut -d ' ' -f 1`
+# echo '#+STARTUP: align' > bugscrub.org
+# tail -"$(( $LINES - 2 ))" /tmp/scrub.txt >> bugscrub.org
+
+
+
+
+# BEFORE=" Embedded Resource Manager"
+# AFTER=" Embedded Multimedia"
+# echo "sed -e '/${BEFORE}/!b;:a;/${AFTER}/!{$!{N;ba}};{/[0-9]/p}' < /tmp/scrub.txt" > /tmp/cmd.sh
+# . /tmp/cmd.sh > /tmp/block.txt.0
+
+# LINES=`wc -l /tmp/block.txt.0 | cut -d ' ' -f 1`
+# head -"$(( $LINES - 1 ))" /tmp/block.txt.0 | tail -"$(( $LINES - 4 ))" >> /tmp/block.txt
+
+# echo '#+STARTUP: align' > /tmp/bugscrub.txt
+# echo "* Embedded Resource Manager" >> /tmp/bugscrub.txt
+# echo '|-' >> /tmp/bugscrub.txt
+# cat /tmp/block.txt >> /tmp/bugscrub.txt
+# echo '|-' >> /tmp/bugscrub.txt
+
+# sed -e 's/^|# B/|B/g' /tmp/bugscrub.txt > bugscrub.org
+
+
+
+
+
+
+
+
+# grep '|# ' /tmp/scrub.txt | cut -d '|' -f2 | cut -d '#' -f2  > /tmp/headers.txt
+# cat /tmp/headers.txt
+# mapfile < /tmp/headers.txt
+# echo "*${MAPFILE[0]}" > /tmp/block.txt
+

@@ -1,0 +1,37 @@
+#!/bin/sh
+
+session_name=Workspace
+window=${session_name}:Minicom
+
+MINICOM="${window}.1"
+CLIENT="${window}.2"
+OUTLIERS="${window}.3"
+
+run_app()
+{
+    sleep 20
+    tmux send-keys -t "${CLIENT}" '' Enter
+    tmux send-keys -t "${OUTLIERS}" '' Enter
+
+    sleep 1    
+    tmux send-keys -t "${MINICOM}" 'dmesg -C' Enter
+    tmux send-keys -t "${MINICOM}" 'mv *.log logs' Enter
+    tmux send-keys -t "${MINICOM}" './startTVIC.sh 0' Enter
+    
+    sleep 7
+    # tmux select-window -t "${CLIENT}"
+    tmux send-keys -t "${CLIENT}" C-l
+    tmux send-keys -t "${CLIENT}" "echo \"Start: \$(date)\"; ./startTVIPExe.sh 1 ;echo \"End: \$(date)\"" Enter
+    
+    sleep 3
+    # tmux select-window -t "${OUTLIERS}"
+    tmux send-keys -t "${OUTLIERS}" C-l
+    tmux send-keys -t "${OUTLIERS}" "grep \"abs mFeature\" *.log | awk '\$10 > 7'" Enter
+}
+
+tmux select-window -t "${window}"
+# run_app
+
+# tmux send-keys -t "${MINICOM}" 'echo hi minicom' Enter
+# tmux send-keys -t "${CLIENT}" 'echo hi client' Enter
+# tmux send-keys -t "${OUTLIERS}" 'echo hi outliers' Enter

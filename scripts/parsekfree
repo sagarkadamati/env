@@ -1,0 +1,42 @@
+#!/bin/sh
+
+FILE=/home/sagar/cuda-times/dmesg_mutexunmaplock-debug.txt
+
+i=8
+lines=`wc -l ${FILE} | awk '{print $1}'`
+# lines=19
+while [ $i -lt ${lines} ];
+do
+    bloop=`head -$i ${FILE}  | tail -8 | head -1 | awk '{print $3}'`
+    aloop=`head -$i ${FILE}  | tail -8 | head -2 | tail -1 | awk '{print $3}'`
+    bkfree=`head -$i ${FILE} | tail -8 | head -3 | tail -1 | awk '{print $3}'`
+    akfree=`head -$i ${FILE} | tail -8 | head -4 | tail -1 | awk '{print $3}'`
+    bfunc=`head -$i ${FILE}  | tail -8 | head -5 | tail -1 | awk '{print $3}'`
+    afunc=`head -$i ${FILE}  | tail -8 | head -6 | tail -1 | awk '{print $3}'`
+
+    # echo $bloop
+    functime=`bc <<< "scale=6;${afunc}-${bfunc}"`
+    looptime=`bc <<< "scale=6;${aloop}-${bloop}"`
+    kfreetime=`bc <<< "scale=6;${akfree}-${bkfree}"`
+
+    at=`bc <<< "scale=6;${looptime}+${kfreetime}"`
+    ct=`bc <<< "scale=6;${at}-${functime}"`
+
+    if [ "X${ct:0:1}" == "X-" ]; then
+	val=${ct:2:6}
+	if [ $val -gt 1000 ]; then
+	    echo greater $val
+	else
+	    echo less $val
+	fi
+    fi
+    
+    echo "func time   : 0${functime}"
+    echo "loop + kfree: 0${at}"
+    echo "time diff   : 0.${val}"
+    echo "loop time   : 0${looptime}"
+    echo "kfree time  : 0${kfreetime}"
+    echo
+
+    i=$(( $i + 8))
+done

@@ -1,0 +1,29 @@
+#!/bin/bash
+set -e
+
+# bash /home/sagar/buildbrain/release/BuildBrain/SDK/p2360-linux/embedded-23.19/0015/vibrante-p2360-linux-23.19.01-6158438-oss-minimal-pdk.run
+
+# bash /home/sagar/buildbrain/release/BuildBrain/SDK/p2360-linux/embedded-23.19/0015/vibrante-p2360-linux-23.19.01-6158438-ubuntu-rootfs.run
+
+# bash /home/sagar/buildbrain/release/BuildBrain/SDK/p2360-linux/embedded-23.19/0015/vibrante-p2360-linux-23.19.01-6158438-yocto-minimal-rootfs.run
+
+# bash /home/sagar/buildbrain/release/BuildBrain/SDK/p2360-linux/embedded-23.19/0015/vibrante-p2360-linux-23.19.01-6158438-nv-minimal-pdk.run
+
+if [ "X" == "X$1" ]; then
+    bash *-oss-minimal-pdk.run
+    bash *-ubuntu-rootfs.run
+    bash *-yocto-minimal-rootfs.run
+    bash *-nv-minimal-pdk.run
+else
+    file=`ls "${1}*-oss-minimal-pdk.run"`
+    bash "$file"
+
+    file=`"${1}*-ubuntu-rootfs.run"`
+    bash "$file"
+
+    file=`"${1}*-yocto-minimal-rootfs.run"`
+    bash "$file"
+
+    file=`"${1}*-nv-minimal-pdk.run"`
+    bash "$file"
+fi

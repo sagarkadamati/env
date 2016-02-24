@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+REFID=${1}
+CID=${REFID:(-2)}
+PATCHSET=${2}
+
+git log | head -1 | awk '{print $2}' | git reset --hard
+
+# git fetch ssh://skadamati@git-master.nvidia.com:12001/linux-3.10 \
+#     refs/changes/${CID}/${REFID}/${PATCHSET} && git cherry-pick FETCH_HEAD
+
+# git push origin HEAD:refs/for/embedded/23.19

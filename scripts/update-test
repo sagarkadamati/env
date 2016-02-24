@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cd /home/sagar/workspace/dev-kernel/embedded-linux.xml/zFAS/out/embedded-linux-p2360-debug
+sudo cp nvidia/tests/nvdisp/hdmi-embedded-linux/nvdc_hdmi_standalone target_rootfs/root
+

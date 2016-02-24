@@ -1,0 +1,4 @@
+#!/bin/sh
+
+tmux capture-pane -S -0 -t "${1}"
+tmux save-buffer -

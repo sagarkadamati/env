@@ -1,0 +1,7 @@
+#!/bin/sh
+
+while true
+do
+    # ssh nvidia@10.0.0.7
+    ssh nvidia@10.0.0.3
+done

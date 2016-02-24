@@ -1,0 +1,28 @@
+#!/usr/bin/env python
+
+from PIL import Image
+image = Image.open("/home/sagar/create.png")
+image_out = Image.new(image.mode,image.size)
+
+pixels = list(image.getdata())
+
+print len(pixels)
+for idx in range(0, len(pixels)):
+    for r in range(3, 7):
+        value = (r, 0, 0, 255)
+        pixels[idx] = value
+        idx += 1
+    for g in range(2, 7):
+        value = (0, g, 0, 255)
+        pixels[idx] = value
+        idx += 1
+    for b in range(3, 7):
+        value = (0, 0, b, 255)
+        pixels[idx] = value
+        try:
+            idx += 1
+        except IndexError:
+            print End
+
+image_out.putdata(pixels)
+image_out.save('test_out.png')

@@ -1,0 +1,25 @@
+#!/bin/sh
+
+export P4ROOT=/home/sagar/p4
+
+CURRENT=`pwd`
+cd /home/sagar/workspace/dev-kernel/embedded-linux.xml/v3l
+
+if [ X"$1" == "X-v"]; then
+    . tmake/scripts/envsetup.sh
+    choose embedded-linux vcm30t124 none debug internal x11 armv7
+else
+    . tmake/scripts/envsetup.sh > /dev/null
+    choose embedded-linux vcm30t124 none debug internal x11 armv7> /dev/null
+fi
+
+tmp -j12 "$1"
+
+if [ X"kernel" != X"$1" ]; then
+    tmp -j12 systemimage
+
+    yes | image delete_rootfs
+    image create_rootfs
+fi
+
+cd ${CURRENT}

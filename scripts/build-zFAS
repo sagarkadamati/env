@@ -1,0 +1,29 @@
+#!/bin/bash
+
+export P4ROOT=/home/sagar/p4
+REPO="/home/sagar/workspace/dev-kernel/embedded-linux.xml/zFAS"
+
+CURRENT=`pwd`
+
+cd ${REPO}
+
+. tmake/scripts/envsetup.sh > /dev/null
+choose embedded-linux p2360 none debug internal x11 armv7 > /tmp/config
+
+tmp -j12 "$1"
+
+if [ X"$1" == "X" ] ; then
+    tmp -j12 systemimage
+
+    yes | image delete_rootfs
+    image create_rootfs
+fi
+
+OUT_ROOT=`grep Output /tmp/config | cut -d ' ' -f 4 | xargs basename`
+LINK="${REPO}/out/${OUT_ROOT}/target_rootfs"
+
+sudo unlink /nfs
+sudo ln -s "${LINK}" /nfs
+sudo unlink /nfs; sudo ln -s /home/sagar/workspace/dev-kernel/embedded-linux.xml/zFAS/out/embedded-linux-p2360-debug/target_rootfs /nfs
+
+cd ${CURRENT}

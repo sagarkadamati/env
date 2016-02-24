@@ -1,0 +1,8 @@
+#!/bin/sh
+
+. /home/sagar/workspace/dev-kernel/embedded-linux.xml/zFAS/tmake/scripts/envsetup.sh > /dev/null
+choose embedded-linux vcm30t124 none debug internal x11 > /dev/null
+
+tmm
+tmm systemimage > /dev/null
+image update_rootfs > /dev/null

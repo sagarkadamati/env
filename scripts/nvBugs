@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+
+BFILE="$1"
+SFILE="$2"
+OFILE="/home/sagar/org/nvBugs.org"
+
+echo '#+STARTUP: align indent' > "${OFILE}"
+
+echo "" >> "${OFILE}"
+xls2org ${BFILE}
+echo "* MyBugs" >> "${OFILE}"
+cat /tmp/xls2org.txt.0 >> "${OFILE}"
+
+echo "" >> "${OFILE}"
+xls2org ${SFILE}
+echo "* BugScrub" >> "${OFILE}"
+sed -i 's/^\*/\*\*/g' /tmp/xls2org.txt.0
+tail -n +6 /tmp/xls2org.txt.0 >> "${OFILE}"
+
+

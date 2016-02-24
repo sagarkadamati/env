@@ -1,0 +1,80 @@
+#!/bin/bash
+
+session_name=Workspace
+window=${session_name}:Minicom
+
+MINICOM="${window}.1"
+CLIENT="${window}.2"
+OUTLIERS="${window}.3"
+
+select_window()
+{
+    tmux select-window -t "${1}"
+}
+
+collect_logs_on_target()
+{
+    tmux send-keys -t "${OUTLIERS}" C-l
+    tmux send-keys -t "${OUTLIERS}" "grep \"abs mFeature\" *.log | awk '\$10 > 7'" Enter
+
+    tmux send-keys -t "${OUTLIERS}" "rm -rf /home/nvidia/logs" Enter
+    tmux send-keys -t "${OUTLIERS}" "mkdir /home/nvidia/logs" Enter
+    tmux send-keys -t "${OUTLIERS}" "mv *.log /home/nvidia/logs" Enter
+    tmux send-keys -t "${OUTLIERS}" "dmesg > /home/nvidia/logs/dmesg" Enter
+    tmux send-keys -t "${OUTLIERS}" "sync" Enter
+}
+
+collect_logs()
+{
+    echo "Error Found: Collection logs - ${1}"
+
+    LOG_DIR="/home/sagar/carmeqlogs/${1}"
+    mkdir -p "${LOG_DIR}"
+
+    collect_logs_on_target
+
+    sleep 1
+    getbuffer "${MINICOM}" > ${LOG_DIR}/minicom
+    getbuffer "${CLIENT}"  > ${LOG_DIR}/client
+    getbuffer "${OUTLIERS}"  > ${LOG_DIR}/outliers
+
+    sleep 60
+    scp -r nvidia@10.0.0.3:/home/nvidia/logs ${LOG_DIR}
+
+    sync
+    echo "--- Done ---"
+}
+
+run_carmeq()
+{
+    echo "${1}Running carmeq ..."
+
+    # select_window "Workspace:zFAS"
+    tmux send-keys -t "Workspace:zFAS" "sendcmd && tmp kernel && flash -R -k /home/sagar/workspace/branches/k310-embedded.xml/embedded/zFAS-23.21/embedded/tools/boards/p2360/nvflash/quickboot_snor_linux.cfg && getminicom" Enter
+}
+
+count=0
+
+run_carmeq ""
+sleep 1
+tmux send-keys -t "${CLIENT}" C-l
+
+while true;
+do
+    getbuffer "${CLIENT}" | grep -q Error
+    if [ $? -eq 0 ]; then
+
+	# select_window "Workspace:Debug"
+	collect_logs "${count}"
+
+	run_carmeq "Re-"
+	sleep 1
+	tmux send-keys -t "${CLIENT}" C-l
+
+	count=$(( ${count} + 1 ));
+    fi
+    
+    sleep 1
+done
+
+

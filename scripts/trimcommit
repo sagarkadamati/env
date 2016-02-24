@@ -1,0 +1,3 @@
+#!/bin/sh
+
+git filter-branch -f --msg-filter "grep -v -E \"(Tested-by)|(Reviewed-by)|(GVS):\"" HEAD~1..HEAD
