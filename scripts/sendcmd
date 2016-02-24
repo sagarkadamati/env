@@ -3,13 +3,26 @@
 session_name=Workspace
 window=${session_name}:Recovery
 # pane=${window}.0
-# tmux send-keys -t "${window}" 'tegrarecovery' Enter
-tmux send-keys -t "${window}" 'tegrareset' Enter
 
-sleep 1
-window=${session_name}:zFAS
-tmux send-keys -t "${window}" C-z 'flash -R' Enter
+if [ "${1}" == A03 ]; then
+    tmux send-keys -t "${window}" 'tegrarecovery' Enter
+    sleep 1
+    tmux send-keys -t "${window}" 'tegrareset' Enter
+else
+    # tmux send-keys -t "${window}" '3' Enter
+    # sleep 1
+    # tmux send-keys -t "${window}" '4' Enter
+    # sleep 2
+    # tmux send-keys -t "${window}" '' Enter
 
-# tmux select-pane -t "$pane"
-# tmux select-window -t "$window"
-# tmux attach-session -t "$session_name"
+    sleep 1
+    tmux send-keys -t "${window}" '3' Enter
+    sleep 1
+    tmux send-keys -t "${window}" '2' Enter
+    sleep 2
+    tmux send-keys -t "${window}" '' Enter
+fi
+
+###########################################
+# tmux select-window -t "${window}"
+# tmux select-window -t "Workspace:Minicom"

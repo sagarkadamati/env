@@ -2,6 +2,8 @@
 
 # PKGS=""
 
+
+
 ## Install sshd
 # sudo apt-get update
 # sudo apt-get install openssh-server
@@ -17,7 +19,7 @@ sudo apt-get install -y wmctrl
 ## BASH Configuration
 cp configs/bashrc ~/.bashrc
 
-## Set nopassword for sudo
+## Set nopass for sudo
 sudo adduser sagar sudo
 sudo usermod -a -G sudo sagar
 sudo cp configs/sudoall /etc/sudoers.d
@@ -27,19 +29,19 @@ sudo cp configs/sudoall /etc/sudoers.d
 gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-hide-mode 1
 
 ## TERMINATOR Configuration
-#if ! type terminator > /dev/null; then
-#	sudo apt-get install -y terminator
-#fi
-#mkdir -p ~/.config/terminator
-#mkdir -p ~/.config/terminator/plugins
-#cp configs/terminator ~/.config/terminator/config
+if ! type terminator > /dev/null; then
+	sudo apt-get install -y terminator
+fi
+mkdir -p ~/.config/terminator
+mkdir -p ~/.config/terminator/plugins
+cp configs/terminator ~/.config/terminator/config
 
 ## Configure tmux
 cp configs/tmux.conf ~/.tmux.conf
 
 ## Set terminator as default terminal
-#gsettings set org.gnome.desktop.default-applications.terminal exec x-terminal-emulator
-#gsettings set org.gnome.desktop.default-applications.terminal exec-arg ""
+gsettings set org.gnome.desktop.default-applications.terminal exec x-terminal-emulator
+gsettings set org.gnome.desktop.default-applications.terminal exec-arg ""
 
 ## enable virtual desktop (workspace)
 gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ hsize 2
@@ -48,8 +50,9 @@ gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ vsize 2
 ## Git save credentials
 if ! type git > /dev/null; then
 	sudo apt-get install -y git-core
-	git config credential.helper store
 fi
+
+git config credential.helper store
 
 ## Disable lockscreen
 gsettings set org.gnome.desktop.screensaver lock-enabled false
@@ -67,15 +70,15 @@ dconf write /org/compiz/profiles/unity/plugins/unityshell/show-launcher '""'
 gsettings set org.gnome.desktop.background picture-uri file:///home/sagar/env/images/Radha-Krishna.jpg
 
 ## Set dircolors
-# eval `dircolors configs/dircolors.ansi-light`
+eval `dircolors configs/dircolors.ansi-light`
 
 ## Set panel opacity
 # gsettings get org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ panel-opacity
 # gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ panel-opacity 1
 
 # Install sourcecodepro font
-# sudo mkdir -p /usr/share/fonts/truetype/source-code-pro
-# sudo cp fonts/source-code-pro/TTF/* /usr/share/fonts/truetype/source-code-pro
+sudo mkdir -p /usr/share/fonts/truetype/source-code-pro
+sudo cp fonts/source-code-pro/TTF/* /usr/share/fonts/truetype/source-code-pro
 
 ## Install Mac theme and icons
 # gsettings set org.gnome.desktop.interface gtk-theme "mac-ithemes-v3"
@@ -84,22 +87,33 @@ gsettings set org.gnome.desktop.background picture-uri file:///home/sagar/env/im
 
 
 ## Setting keyboard shortcuts
-# gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/']"
-# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'chrome'
-# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command '/home/sagar/env/automate-system/focus-chrome'
-# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<Primary><Alt>i'
+gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'chrome'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command '/home/sagar/env/automate-system/focus-chrome'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<Primary><Alt>i'
 
-# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ name 'terminal'
-# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ command '/home/sagar/env/automate-system/focus-terminal'
-# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding '<Primary><Alt>t'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ name 'terminal'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ command '/home/sagar/env/automate-system/focus-terminal'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding '<Primary><Alt>t'
 
-# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ name 'emacs'
-# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ command '/home/sagar/env/automate-system/focus-emacs'
-# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ binding '<Primary><Alt>e'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ name 'emacs'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ command '/home/sagar/env/automate-system/focus-emacs'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ binding '<Primary><Alt>e'
 
-# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ name 'firefox'
-# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ command '/home/sagar/env/automate-system/focus-firefox'
-# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ binding '<Primary><Alt>f'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ name 'firefox'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ command '/home/sagar/env/automate-system/focus-firefox'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ binding '<Primary><Alt>f'
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -229,4 +243,8 @@ gsettings set org.gnome.desktop.background picture-uri file:///home/sagar/env/im
 
 # locate panel-shadow.png
 
-# sudo dpkg --add-architecture i386
+sudo dpkg --add-architecture i386
+
+# sudo apt-get install libnotify-bin
+
+# sudo apt-get install -y lib32z1 lib32ncurses5 lib32bz2-1.0 libxml2:i386 libstdc++6:i386 libgtk2.0-0:i386 libpango1.0-0:i386

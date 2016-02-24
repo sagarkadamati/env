@@ -53,11 +53,13 @@
 ;; (set-face-attribute 'mode-line nil :box nil)
 (set-face-attribute 'mode-line nil
    :box nil
-   :background "#EEE8D5"
-   :overline "#EEE8D5"
-   :underline "#EEE8D5")
+   :background "#F9F3E2")
 
-(set-face-attribute 'mode-line-inactive nil :box nil)
+(set-face-attribute 'mode-line-inactive nil
+   :box nil
+   :background "#F9F3E2")
+
+;; (set-face-attribute 'mode-line-inactive nil :box nil)
 (set-face-attribute 'mode-line-highlight nil :box nil)
 
 ;; Highlight line
@@ -942,3 +944,31 @@
 
 ;; autocomplete-filename
 (global-set-key (kbd "C-; a f")   'comint-dynamic-complete-filename) ; autocomplete filename in buffer
+
+(defun bury-compile-buffer-if-successful (buffer string)
+  "Bury a compilation buffer if succeeded without warnings "
+  (if (and
+       (string-match "compilation" (buffer-name buffer))
+       (string-match "finished" string)
+       (not
+        (with-current-buffer buffer
+          (goto-char (point-min))
+          (search-forward "warning" nil t))))
+      (run-with-timer 1 nil
+                      (lambda (buf)
+                        (bury-buffer buf)
+                        (switch-to-prev-buffer (get-buffer-window buf) 'kill))
+                      buffer)))
+(add-hook 'compilation-finish-functions 'bury-compile-buffer-if-successful)
+
+(defun show-bug-in-browser ()
+  (interactive)
+  (let ((match (thing-at-point-looking-at "\\([0-9]+\\)")))
+    (if match
+      (let ((tkt (buffer-substring-no-properties (match-beginning 1)
+      						(match-end 1))))
+	(browse-url (concat "nvbugs/" tkt))
+	)
+    )))
+
+(global-set-key (kbd "C-; r b") 'show-bug-in-browser)

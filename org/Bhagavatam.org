@@ -320,37 +320,74 @@
 ** Krsna and Arjuna Retrieve a Brahmana's Sons				:683:
 ** Summary of Lord Krsna's Glories					:694:
 * 11 General History
-** The Curse upon the Yadu Dynasty					  :1:
-** Maharaja Nimi Meets the Nine Yogendras				  :6:
-** Liberation from the Illusory Energy					 :18:
-** Drumila Explains the Incarnations of Godhead to King Nimi		 :32:
-** Narada Concludes His Teachings to Vasudeva				 :39:
-** The Yadu Dynasty Retires to Prabhasa					 :53:
-** Lord Krsna Instructs Uddhava						 :61:
-** The Story of Pingala							 :77:
-** Detachment from All that Is Material					 :85:
-** The Nature of Fruitive Activity					 :93:
-** The Symptoms of Conditioned and Liberated Living Entities		:100:
-** Beyond Renunciation and Knowledge					:111:
-** The Hamsa-avatara Answers the Questions of the Sons of Brahma	:117:
-** Lord Krsna Explains the Yoga System to Sri Uddhava			:132:
-** Lord Krsna's Description of Mystic Yoga Perfections			:142:
-** The Lord's Opulence							:149:
-** Lord Krsna's Description of the Varnasrama System			:157:
-** Description of Varnasrama-dharma					:170:
-** The Perfection of Spiritual Knowledge				:179:
-** Pure Devotional Service Surpasses Knowledge and Detachment		:188:
-** Lord Krsna's Explanation of the Vedic Path				:197:
-** Enumeration of the Elements of Material Creation			:206:
-** The Song of the Avanti Brahmana					:217:
-** The Philosophy of Sankhya						:229:
-** The Three Modes of Nature and Beyond					:235:
-** The Aila-gita							:244:
-** Lord Krsna's Instructions on the Process of Deity Worship		:251:
-** Jana-yoga								:260:
-** Bhakti-yoga								:269:
-** The Disappearance of the Yadu Dynasty				:278:
-** The Disappearance of Lord Sri Krsna					:285:
+** Chapters
+*** The Curse upon the Yadu Dynasty					  :1:
+*** Maharaja Nimi Meets the Nine Yogendras				  :6:
+*** Liberation from the Illusory Energy					 :18:
+*** Drumila Explains the Incarnations of Godhead to King Nimi		 :32:
+*** Narada Concludes His Teachings to Vasudeva				 :39:
+*** The Yadu Dynasty Retires to Prabhasa				 :53:
+*** Lord Krsna Instructs Uddhava					 :61:
+*** The Story of Pingala						 :77:
+*** Detachment from All that Is Material				 :85:
+*** The Nature of Fruitive Activity					 :93:
+*** The Symptoms of Conditioned and Liberated Living Entities		:100:
+*** Beyond Renunciation and Knowledge					:111:
+*** The Hamsa-avatara Answers the Questions of the Sons of Brahma	:117:
+*** Lord Krsna Explains the Yoga System to Sri Uddhava			:132:
+*** Lord Krsna's Description of Mystic Yoga Perfections			:142:
+*** The Lord's Opulence							:149:
+*** Lord Krsna's Description of the Varnasrama System			:157:
+*** Description of Varnasrama-dharma					:170:
+*** The Perfection of Spiritual Knowledge				:179:
+*** Pure Devotional Service Surpasses Knowledge and Detachment		:188:
+*** Lord Krsna's Explanation of the Vedic Path				:197:
+*** Enumeration of the Elements of Material Creation			:206:
+*** The Song of the Avanti Brahmana					:217:
+*** The Philosophy of Sankhya						:229:
+*** The Three Modes of Nature and Beyond				:235:
+*** The Aila-gita							:244:
+*** Lord Krsna's Instructions on the Process of Deity Worship		:251:
+*** Jana-yoga								:260:
+*** Bhakti-yoga								:269:
+*** The Disappearance of the Yadu Dynasty				:278:
+*** The Disappearance of Lord Sri Krsna					:285:
+** Concepts
+*** Before
+**** The Curse upon the Yadu Dynasty					  :1:
+**** Maharaja Nimi Meets the Nine Yogendras				  :6:
+**** Liberation from the Illusory Energy				 :18:
+**** Drumila Explains the Incarnations of Godhead to King Nimi		 :32:
+**** Narada Concludes His Teachings to Vasudeva				 :39:
+**** The Yadu Dynasty Retires to Prabhasa				 :53:
+*** Urdhava Gita
+**** Lord Krsna Instructs Uddhava					 :61:
+**** The Story of Pingala						 :77:
+**** Detachment from All that Is Material				 :85:
+**** The Nature of Fruitive Activity					 :93:
+**** The Symptoms of Conditioned and Liberated Living Entities		:100:
+**** Beyond Renunciation and Knowledge					:111:
+**** The Hamsa-avatara Answers the Questions of the Sons of Brahma	:117:
+**** Lord Krsna Explains the Yoga System to Sri Uddhava			:132:
+**** Lord Krsna's Description of Mystic Yoga Perfections		:142:
+**** The Lord's Opulence						:149:
+**** Lord Krsna's Description of the Varnasrama System			:157:
+**** Description of Varnasrama-dharma					:170:
+**** The Perfection of Spiritual Knowledge				:179:
+**** Pure Devotional Service Surpasses Knowledge and Detachment		:188:
+**** Lord Krsna's Explanation of the Vedic Path				:197:
+**** Enumeration of the Elements of Material Creation			:206:
+**** The Song of the Avanti Brahmana					:217:
+**** The Philosophy of Sankhya						:229:
+**** The Three Modes of Nature and Beyond				:235:
+**** The Aila-gita							:244:
+**** Lord Krsna's Instructions on the Process of Deity Worship		:251:
+**** Jana-yoga								:260:
+**** Bhakti-yoga							:269:
+*** After
+**** The Disappearance of the Yadu Dynasty				:278:
+**** The Disappearance of Lord Sri Krsna				:285:
+
 * 12 The Age of Deterioration
 ** The Degraded Dynasties of Kali-yuga					  :1:
 ** The Symptoms of Kali-yuga						  :6:

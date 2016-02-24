@@ -1,10 +1,18 @@
 #!/bin/sh
 
 # find core* gpu/drv/* tests* -name '*.c' -o \
-find . \
-    -name '*.c' -o \
+
+# find core* tests* kernel \
+#     -name '*.c' -o \
+#     -name '*.h' -o \
+#     -name '*.cpp' -o \
+#     -name '*.c++' \
+#     > cscope.files
+
+find . -name '*.c' -o \
     -name '*.h' -o \
     -name '*.cpp' -o \
     -name '*.c++' \
     > cscope.files
+
 cscope -b -q -k

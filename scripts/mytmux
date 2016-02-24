@@ -2,6 +2,10 @@
 
 TMUX="tmux -2"
 
+if [ "X$1" == "X" ]; then
+    BRANCH="23.22"
+fi
+
 runon()
 {
     session_name=Workspace
@@ -13,19 +17,25 @@ runon()
 ${TMUX} new-session -d -s "Workspace" -n "Minicom"
 
 ${TMUX} new-window -n "Recovery" -t "Workspace"
-${TMUX} new-window -n "zFAS"     -t "Workspace"
+
 ${TMUX} new-window -n "rel-23"   -t "Workspace"
+${TMUX} new-window -n "zFAS"     -t "Workspace"
+
 ${TMUX} new-window -n "Env"      -t "Workspace"
 ${TMUX} new-window -n "Debug"    -t "Workspace"
 
 ${TMUX} select-window -t "Workspace:zFAS"
 
-runon zFAS "cd ~/workspace/dev-kernel/embedded-linux.xml/zFAS"
-runon zFAS ". tmake/scripts/envsetup.sh"
-runon zFAS "choose embedded-linux p2360 none debug internal armv7"
+runon Minicom "sudo minicom -D /dev/ttyUSB0"
+runon Recovery "sudo minicom -D /dev/ttyUSB1"
 
-runon zFAS "cd ~/workspace/branches/k310-embedded.xml/embedded/zFAS-23.10.04"
-runon zFAS ". tmake/scripts/envsetup.sh"
-runon zFAS "choose embedded-linux p2360 none release internal armv7"
+runon rel-23 "cd ~/workspace/branches/k310-embedded.xml/rel-23"
+runon rel-23 ". tmake/scripts/envsetup.sh"
+runon rel-23 "choose embedded-linux p2360 none release external armv7"
 
-${TMUX} a
+runon zFAS "cd ~/workspace/branches/k310-embedded.xml/embedded/zFAS-${BRANCH}"
+
+runon zFAS ". tmake/scripts/envsetup.sh"
+runon zFAS "choose embedded-linux p2360 none release external armv7"
+
+tmux a

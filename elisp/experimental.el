@@ -192,7 +192,7 @@
 
 (defun show-ticket-in-browser ()
   (interactive)
-  (let ((match (thing-at-point-looking-at "#\\([0-9]+\\)")))
+  (let ((match (thing-at-point-looking-at "\\([0-9]+\\)")))
     (if match
       (let ((tkt (buffer-substring-no-properties (match-beginning 1)
       						(match-end 1))))

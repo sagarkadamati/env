@@ -26,18 +26,18 @@ sed -i 's/^|# B/|B/g' /tmp/xls2org.txt.0
 sed -i '/^|#|/d' /tmp/xls2org.txt.0
 sed -i 's/||||||||||||||//g' /tmp/xls2org.txt.0
 
-# Generate if any headers present
-sed -i 's/^|# /\* /g' /tmp/xls2org.txt.0
+# # Generate if any headers present
+# sed -i 's/^|# /\* /g' /tmp/xls2org.txt.0
 
-# Generate Table block
-sed -i '/^\*/i |-' /tmp/xls2org.txt.0
-sed -i '/^\*/i -' /tmp/xls2org.txt.0
-sed -i 's/^-//g' /tmp/xls2org.txt.0
-echo '|-' >> /tmp/xls2org.txt.0
+# # Generate Table block
+# sed -i '/^\*/i |-' /tmp/xls2org.txt.0
+# sed -i '/^\*/i -' /tmp/xls2org.txt.0
+# sed -i 's/^-//g' /tmp/xls2org.txt.0
+# echo '|-' >> /tmp/xls2org.txt.0
 
-# Generating BugID table block
-sed -i '/^|BugID/i |-' /tmp/xls2org.txt.0
-sed -i '/^|BugID/a |-' /tmp/xls2org.txt.0
-sed -i '/^|Bug ID/i |-' /tmp/xls2org.txt.0
-sed -i '/^|Bug ID/a |-' /tmp/xls2org.txt.0
+# # Generating BugID table block
+# sed -i '/^|BugID/i |-' /tmp/xls2org.txt.0
+# sed -i '/^|BugID/a |-' /tmp/xls2org.txt.0
+# sed -i '/^|Bug ID/i |-' /tmp/xls2org.txt.0
+# sed -i '/^|Bug ID/a |-' /tmp/xls2org.txt.0
 
