@@ -6,8 +6,8 @@ width=`echo $res | awk -F'x' '{print $1}'`
 height=`echo $res | awk -F'x' '{print $2}'`
 
 # echo $width $height
-wmctrl -r Coder -e 1,50,50,$((${width} - 100)),$((${height} - 50))
-# wmctrl -r Coder -e 1,25,49,$((${width} - 40)),$((${height} - 15))
+# wmctrl -r Coder -e 1,50,50,$((${width} - 100)),$((${height} - 50))
+wmctrl -r Coder -e 1,25,49,$((${width} - 40)),$((${height} - 15))
 
 emacsid=`wmctrl -l | grep 'Coder' | awk '{print $1}'`
-windowtool.py -d 1 "$emacsid"
+windowtool.py -d 0 "$emacsid"

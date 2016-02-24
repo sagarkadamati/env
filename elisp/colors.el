@@ -6,10 +6,10 @@
 ;; Frame color
 (setq default-frame-alist
       (append default-frame-alist
-       '((foreground-color . "#657B83")
-	 (background-color . "#FDF6E3")
-	 (cursor-color . "#000070")
-	 (frame-name "Little"))
+       '((background-color . "#FDF6E3")
+	 (foreground-color . "#657B83")
+	 (cursor-color . "#657B83")
+	 (frame-name "Coder"))
        ))
 
 ;; Frame Transparent Mode
@@ -30,6 +30,7 @@
 (set-face-attribute 'region nil
 		    :background "#EEE8D5"
 		    :foreground nil)
+(set-face-foreground 'region nil)
 
 (set-face-attribute 'hl-line nil
 		    :background "#F9F3E2"

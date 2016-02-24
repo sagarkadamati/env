@@ -23,14 +23,14 @@
 
 (setq powerline-arrow-shape 'curve)   ;; give your mode-line curves
 
-(set-face-attribute 'mode-line nil
-                    :background "#EEE8D5"
-                    :foreground "#657B83"
-                    :box nil)
-(set-face-attribute 'mode-line-inactive nil
-                    :background "#EEE8D5"
-                    :foreground "#657B83"
-                    :box nil)
+;; (set-face-attribute 'mode-line nil
+;;                     :background "#EEE8D5"
+;;                     :foreground "#657B83"
+;;                     :box nil)
+;; (set-face-attribute 'mode-line-inactive nil
+;;                     :background "#EEE8D5"
+;;                     :foreground "#657B83"
+;;                     :box nil)
 
 (defun get-arrow-dots
   (leftp width height)
@@ -382,7 +382,7 @@ install the memoized function over the original function."
 (defun powerline-pull-right
   (powerline-items)
   (append 
-   (list (powerline-make-fill powerline-color2  (powerline-items-length powerline-items)) )
+   (list (powerline-make-fill powerline-color2 (- (powerline-items-length powerline-items) 5)))
    powerline-items
    ))
 
