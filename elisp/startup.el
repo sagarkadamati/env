@@ -89,6 +89,9 @@
 		(lambda()
 		  (forward-line 5)))                                 ; next 5 lines
 
+;; describe help
+(global-set-key (kbd "C-; r r")   'remember)
+
 (load "frames.el")
 (load "modeline.el")
 (load "colors.el")
