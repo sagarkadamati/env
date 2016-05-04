@@ -33,7 +33,7 @@ runon rel-23 "cd ~/workspace/branches/k310-embedded.xml/rel-23"
 runon rel-23 ". tmake/scripts/envsetup.sh"
 runon rel-23 "choose embedded-linux p2360 none release external armv7"
 
-runon zFAS "cd ~/workspace/branches/k310-embedded.xml/embedded/zFAS-${BRANCH}"
+runon zFAS "cd /home/sagar/workspace/branches/k310-embedded.xml/embedded-cust/audi/zfas-1"
 
 runon zFAS ". tmake/scripts/envsetup.sh"
 runon zFAS "choose embedded-linux p2360 none release external armv7"

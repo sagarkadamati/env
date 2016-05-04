@@ -1,3 +1,5 @@
+(setq c-default-style "linux")
+
 ;; Disable Emacs controls
 (cond ((> emacs-major-version 20)
        (tool-bar-mode -1)

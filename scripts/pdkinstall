@@ -11,19 +11,29 @@ set -e
 
 if [ "X" == "X$1" ]; then
     bash *-oss-minimal-pdk.run
-    bash *-ubuntu-rootfs.run
     bash *-yocto-minimal-rootfs.run
+    bash *-ubuntu-rootfs.run
     bash *-nv-minimal-pdk.run
 else
-    file=`ls "${1}*-oss-minimal-pdk.run"`
-    bash "$file"
+    gcp "${1}-oss-minimal-pdk.run" \
+	"${1}-ubuntu-rootfs.run" \
+	"${1}-yocto-minimal-rootfs.run" \
+	"${1}-nv-minimal-pdk.run" .
 
-    file=`"${1}*-ubuntu-rootfs.run"`
-    bash "$file"
+    # cp "${1}-oss-minimal-pdk.run" .
+    # cp "${1}-ubuntu-rootfs.run" .
+    # cp "${1}-yocto-minimal-rootfs.run" .
+    # cp "${1}-nv-minimal-pdk.run" .
 
-    file=`"${1}*-yocto-minimal-rootfs.run"`
-    bash "$file"
+    # file=`"${1}-oss-minimal-pdk.run"`
+    # bash "$file"
 
-    file=`"${1}*-nv-minimal-pdk.run"`
-    bash "$file"
+    # file=`"${1}-ubuntu-rootfs.run"`
+    # bash "$file"
+
+    # file=`"${1}-yocto-minimal-rootfs.run"`
+    # bash "$file"
+
+    # file=`"${1}-nv-minimal-pdk.run"`
+    # bash "$file"
 fi
