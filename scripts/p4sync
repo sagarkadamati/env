@@ -1,0 +1,32 @@
+#!/bin/bash
+# Usage p4sync <path <option>>
+# e.g. p4sync //sw -f
+# :)
+
+if [ "$1" == "" ]; then
+    path=//sw
+else
+    path=$1
+fi
+
+for name in `p4 dirs -C $path/\*`; 
+do 
+    ret=`p4 fstat -C  $path/\* | grep depotFile | sed -e 's/^.*depotFile//'`
+
+    if [ "$ret" != "" ]; then
+        p4 sync $2 `p4 fstat -C  $path/\* | grep depotFile | sed -e 's/^.*depotFile//'`
+    fi
+    
+    echo Trying $name
+    ret=`p4 sync $2 $name/... 3>&2 2>&1 1>&3`
+
+    flagM=`echo $ret | grep "maxresults"`
+    if [ -z "$flagM" ]; then
+        echo "$ret"
+    else
+        echo Too large... #$ret
+        echo "Stepping into $name"
+        $0 $name $2
+    fi
+done
+

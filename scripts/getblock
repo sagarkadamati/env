@@ -1,0 +1,18 @@
+#!/bin/sh
+
+FILE="$3"
+
+BLOCK_START="$1"
+BLOCK_END="$2"
+
+# sed -n "/${BLOCK_START}/!b;:a;/${BLOCK_END}/!{$!{N;ba}};{/./p}" ${FILE}
+
+sed -n /${BLOCK_START}/,/${BLOCK_END}/p ${FILE}
+
+# sed -n "
+# /Beginning of block/,/End of block/ {
+#    N
+#    /End of block/ { 
+#       s/some_pattern/&/p
+#       }
+#    }"
