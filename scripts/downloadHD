@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# wget hdpopcorns.com/dark-knight-2008-720p-1080p/
+
+# Th3-D2rk-Kn1ght-2008-1080p-hdp0pc0rns.mp4
+# http://85.25.185.104/downloads/Th3-D2rk-Kn1ght-2008-1080p-hdp0pc0rns.mp4?st=-AtiPlPXDJNAMcPJC85elg&e=1501083606
+axel -n 200 "http://85.25.185.104/downloads/Th3-D2rk-Kn1ght-2008-1080p-hdp0pc0rns.mp4"

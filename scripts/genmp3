@@ -1,0 +1,30 @@
+#!/bin/bash
+
+rm -rf out 
+mkdir -p out
+
+get_tmpfile()
+{
+    for i in `seq 1 100`; do
+	if [ ! -e /tmp/files$i ]; then
+	    echo /tmp/files$i;
+	    break;
+	fi
+    done
+}
+
+TMPFILE=`get_tmpfile`
+
+ls *.mp4 *.m4a *.webm *.mkv *.avi > ${TMPFILE}
+while read FILENAME ; do
+
+    FILE="${FILENAME%.*}"
+    EXT="${FILENAME##*.}"
+
+    OUTPUT="out/${FILE}.mp3"
+
+    avconv -i "$FILENAME" "${OUTPUT}" < /dev/null
+    
+done < ${TMPFILE}
+
+rm -rf ${TMPFILE}

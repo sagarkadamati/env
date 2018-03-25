@@ -1,0 +1,84 @@
+#!/bin/bash
+
+update_movie_list()
+{
+    rm /tmp/page.txt /tmp/titles.txt /home/sagar/flac/movies.txt
+    
+    for page_no in `seq 1 22`
+    do
+	PAGE="http://www.hqzone.telugump3.co/index.php?p=${page_no}&d=/FLACs"
+	wget ${PAGE} -O /tmp/page.txt
+
+	grep 'FLACs Songs Download' /tmp/page.txt >> /tmp/titles.txt
+	rm -rf /tmp/page.txt
+    done
+
+    MOVIES=`awk -F" " '{ for (i=4; i<=NF; i++) print $i }' titles.txt | grep 'alt="' | awk -F'"' '{print $2}' | sort`
+    for mov in ${MOVIES}
+    do
+	MOVIE="${mov:1:${#mov}-1}"
+	echo ${MOVIE} >> /home/sagar/flac/movies.txt
+    done
+
+    rm /tmp/page.txt /tmp/titles.txt
+}
+
+# wget -o stdout ${URL}
+
+get_movie_songs()
+{
+    MOVIE="${1}"
+    HOST="http://www.hqzone.telugump3.co"
+
+    mkdir "${MOVIE}"
+    cd "${MOVIE}"
+
+    rm -rf /tmp/songs.txt
+    wget "http://www.hqzone.telugump3.co/index.php?d=/FLACs/${MOVIE}" -O /tmp/songs.txt
+    # awk -F">" '{ for (i=4; i<=NF; i++) print $i }' /tmp/songs.txt | grep filename | awk -F'"' '{print $2}' > /tmp/songs.url
+    # awk -F">" '{ for (i=4; i<=NF; i++) print $i }' /tmp/songs.txt | grep flac     | awk -F"<" '{print $1}' > /tmp/songs.list
+
+    IFS_SAVE="${IFS}"
+    IFS=$'\n'
+    FURLS=($(awk -F">" '{ for (i=4; i<=NF; i++) print $i }' /tmp/songs.txt | grep filename | awk -F'"' '{print $2}'))
+    FILES=($(awk -F">" '{ for (i=4; i<=NF; i++) print $i }' /tmp/songs.txt | grep flac     | awk -F"<" '{print $1}'))
+    IFS="${IFS_SAVE}"
+    
+    FILE_COUNT=${#FILES[@]}
+    for i in `seq 0 $(($FILE_COUNT - 1))`
+    do
+	# echo "${HOST}/${FURLS[$i]}"
+	wget "${HOST}/${FURLS[$i]}" -O /tmp/song.url
+
+	FURL=`awk -F">" '{ for (i=4; i<=NF; i++) print $i }' /tmp/song.url | grep '/load.php?id=' | awk -F"'" '{print $2}'`
+
+	# echo "${HOST}/${FURL:2:${#FURL}-1}"
+	wget -U "Mozilla" "${HOST}/${FURL:2:${#FURL}-1}" -O "${FILES[$i]}"
+    done
+}
+
+download_flac()
+{
+    rm /tmp/error.txt
+    while read MOVIE
+    do
+	cd /home/sagar/flac
+
+	find . -type d -empty | xargs rm -rf
+	ls | grep -v txt > /home/sagar/flac/blacklist.txt
+
+	grep -q "$MOVIE" /home/sagar/flac/blacklist.txt
+	if [ $? -eq 0 ]; then
+	    continue
+	fi
+	
+	get_movie_songs "${MOVIE}"
+
+    done < /home/sagar/flac/movies.txt
+}
+
+if [ "X$1" == "Xupdate" ]; then
+    update_movie_list
+fi
+
+download_flac

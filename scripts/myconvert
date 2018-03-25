@@ -1,0 +1,9 @@
+#!/bin/bash
+
+files=`ls /home/sagar/workspace/nvgpu/gk20a/*.c`
+
+for file in $files
+do
+    cflow2dot.py $file -o `basename $file.svg`
+    convert -resize 7680x4320 `basename $file.svg` `basename $file.jpg`
+done

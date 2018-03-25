@@ -4,6 +4,8 @@ opened=`wmctrl -l | grep 'Chrome'`
 
 if [ "X$opened" == "X" ]; then
     google-chrome
+    # sleep 1
+    # /home/sagar/env/scripts/setchrome
 else 
     wmctrl -a '- Google Chrome'
 fi

@@ -1,0 +1,35 @@
+#!/bin/bash
+
+mkdir -p out
+# filename without extension
+file="${1%.*}"
+file_in="$1"
+file_out="${file}.mp4"
+
+# ffmpeg -i ${file_in} \
+#        -s 320x240 \
+#        -r 30000/1001 \
+#        -b 200k \
+#        -bt 240k \
+#        -vcodec libx264 \
+#        -coder 0 \
+#        -bf 0 \
+#        -refs 1 \
+#        -flags2 \
+#        -wpred-dct8x8 \
+#        -level 30 \
+#        -maxrate 10M \
+#        -bufsize 10M \
+#        -acodec libfaac \
+#        -ac 2 \
+#        -ar 48000 \
+#        -ab 192k \
+#        out/${file_out}
+
+# -preset ultrafast -qp 0 \
+
+ffmpeg -i ${file_in} \
+       -c:v libx264 \
+       -profile:v high -level 4.2 \
+       -strict -2 \
+       out/${file_out}

@@ -1,0 +1,4 @@
+# !/bin/bash
+
+axel -n 200 "$1"
+# https://s3.amazonaws.com/firmwaredownloads/update_kindle_paperwhite_v2_5.8.9.2.bin

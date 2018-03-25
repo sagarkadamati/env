@@ -1,0 +1,38 @@
+#!/bin/bash
+
+mkdir -p out
+
+EXT="${1##*.}"
+FILE_INPUT="${1%.*}"
+FILE_OUTPUT="${FILE_INPUT}"
+
+START_TIME="$2"
+END_TIME="$3"
+
+StartDate=$(date -u -d "${START_TIME}" +"%s")
+FinalDate=$(date -u -d "${END_TIME}" +"%s")
+DURATION=`date -u -d "0 $FinalDate sec - $StartDate sec" +"%H:%M:%S"`
+
+rm -rf "out/${FILE_OUTPUT}.${EXT}"
+
+for i in `seq 1 99`
+do
+    if [ -e "out/${FILE_OUTPUT}.${EXT}" ]; then
+	COUNT=`echo $i | wc -c`
+	if [ "X2" == "X$COUNT" ]; then
+	    PART=0${i}
+	else
+	    PART=${i}
+	fi
+	
+	if [ ! -e "out/${FILE_OUTPUT}-${PART}.${EXT}" ]; then
+	    FILE_OUTPUT=${FILE_OUTPUT}-${PART}
+	    break
+	fi
+    else
+	break
+    fi
+done
+
+# echo avconv -ss ${START_TIME} -i "${FILE_INPUT}.${EXT}" -vcodec copy -acodec copy -t ${DURATION} "out/${FILE_OUTPUT}.${EXT}"
+avconv -ss ${START_TIME} -i "${FILE_INPUT}.${EXT}" -vcodec copy -acodec copy -t ${DURATION} "out/${FILE_OUTPUT}.${EXT}"

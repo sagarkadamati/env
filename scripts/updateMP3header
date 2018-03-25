@@ -1,0 +1,89 @@
+#!/bin/bash
+
+updateHEADER()
+{
+    # -a "ARTIST", --artist="ARTIST"
+    #                       Set the artist information
+    # -A "ALBUM", --album="ALBUM"
+    #                       Set the album title information
+    # -t "SONG", --song="SONG"
+    #                       Set the song title information
+    # -c "DESCRIPTION":"COMMENT":"LANGUAGE", --comment="DESCRIPTION":"COMMENT":"LANGUAGE"
+    #                       Set the comment information
+    # -g "GENRE", --genre="GENRE"
+    #                       Set the genre or genre number
+    # -y YYYY[-MM-DD], --year=YYYY[-MM-DD], --date=YYYY[-MM-DD]
+    #                       Set the year/date
+    # -T "num/num", --track="num/num"
+    #                       Set the track number/(optional) total tracks
+
+    TRACKNUM="$1"
+    FILENAME="${3}"
+    TITLE=`echo ${FILENAME} | awk '{ $(NF+1) = $1; $1 = "" } sub(FS,"")' | awk -F'.mp3' | awk -F'.flac' '{print $1}'`
+    GENRE="Religious"
+    ARTIST="$4"
+
+    mid3v2 --artist="${ARTIST}"  \
+           --album="${ALBUM}"    \
+           --song="${TITLE}"     \
+           --genre="${GENRE}"    \
+           --track="${TRACKNUM}" \
+           "${FILENAME}"
+
+    if [ "X$5" == "Xcover" ]; then
+        IMAGE=cover.jpg
+        if [ -f "${IMAGE}" ]; then
+            eyeD3 --add-image="${IMAGE}":FRONT_COVER "${FILENAME}"
+        fi
+
+        IMAGE=cover.png
+        if [ -f "${IMAGE}" ]; then
+            eyeD3 --add-image="${IMAGE}":FRONT_COVER "${FILENAME}"
+        fi
+
+    fi
+}
+
+# IFS='\n'
+# FILES=`ls *.mp3`
+# for FILE in ${FILES}
+# do
+#     echo ${FILE} | awk '{ $(NF+1) = $1; $1 = "" } sub(FS,"")' | awk -F'.mp3' '{print $1}'
+# done
+
+filecount=`ls *.mp3 | wc -l`
+zeros=`echo ${filecount} | bc | wc -c`
+zeros=$(($zeros - 1))
+
+PWDPATH=`pwd`
+ALBUM=`basename "${PWDPATH}"`
+
+if [ "X$1" == "X-c" ] || [ "X$2" == "X-c" ]; then
+    COVER='cover'
+fi
+
+for no in `seq 1 ${filecount}`
+do
+    FILENO="${no}"
+
+    count=`echo $no | wc -c`
+    if [ "X${zeros}" == "X3" ]; then
+        case ${count} in
+        2)
+            FILENO="00${no}"
+            ;;
+        3)
+            FILENO="0${no}"
+            ;;
+        esac
+    else
+        if [ "X${count}" == "X2" ]; then
+            FILENO="0${no}"
+        fi
+    fi
+
+    FILE=`ls | grep "^${FILENO}"`
+    if [ "X${FILE}" != "X" ]; then
+        updateHEADER ${no} "${ALBUM}" "${FILE}" "$1" "${COVER}"
+    fi
+done

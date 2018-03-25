@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ "X$1" == "Xslow" ]; then
+   sudo wondershaper ens2 1024 256
+else
+    sudo wondershaper clear ens2
+fi

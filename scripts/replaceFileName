@@ -1,0 +1,31 @@
+#!/bin/bash
+
+get_tmpfile()
+{
+    for i in `seq 1 100`; do
+	if [ ! -e /tmp/files$i ]; then
+	    echo /tmp/files$i;
+	    break;
+	fi
+    done
+}
+
+TMPFILE=`get_tmpfile`
+OLD="${1}"
+NEW="${2}"
+
+ls > ${TMPFILE}
+while read OLD_FILENAME ; do
+
+    # NEW_FILENAME=`echo "${OLD_FILENAME}" | awk -F'-' '{print $1}'`
+    NEW_FILENAME=`echo "${OLD_FILENAME}" | sed "s/${OLD}/${NEW}/g"`
+
+    if [ "${OLD_FILENAME}" != "${NEW_FILENAME}" ]; then
+	echo "${NEW_FILENAME}"
+
+	mv "${OLD_FILENAME}" "${NEW_FILENAME}"
+    fi
+    
+done < ${TMPFILE}
+
+rm -rf ${TMPFILE}

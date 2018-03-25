@@ -1,6 +1,6 @@
 _myscript()
 {
-  _script_commands=$(ls /home/${USER}/env/scripts)
+  _script_commands=$(ls ~/env/scripts)
 
   local cur prev
   COMPREPLY=()

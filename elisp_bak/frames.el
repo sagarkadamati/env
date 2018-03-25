@@ -49,7 +49,7 @@
 (defun set-pad()                                                        ; set pad frame
   (interactive)
   (set-frame-name "Pad")
-  (find-file-at-point "~/org/Pad")
+  (find-file-at-point "~/org/pad.org")
   (set-frame-size (selected-frame) 80 43))
 
 ;; custom frames

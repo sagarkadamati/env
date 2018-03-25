@@ -1,0 +1,114 @@
+#!/bin/bash
+
+WGET="wget -q"
+
+update_movie_list()
+{
+    CATEGORY="$1"
+
+    rm -rf /tmp/page.txt /tmp/titles.txt
+
+    HOST="http://www.hqzone.telugump3.co"
+    URL="${HOST}/index.php?d=/A_to_Z/${CATEGORY}"
+
+    ${WGET} ${URL} -O /tmp/page.txt
+    PAGES=`awk -F">" '{ for (i=4; i<=NF; i++) print $i }' /tmp/page.txt | grep 'Page 1/' | awk -F'<' '{print $1}' | awk -F'/' '{print $2}'`
+
+    if [ "X${PAGES}" == "X0" ]; then
+	echo "No movies under ${CATEGORY} category"
+	return
+    fi
+    
+    echo "Updating Page 1"
+    grep "${CATEGORY} Songs Download" /tmp/page.txt >> /tmp/titles.txt
+    
+    for page_no in `seq 2 ${PAGES}`
+    do
+	rm -rf /tmp/page.txt
+	PAGE="http://www.hqzone.telugump3.co/index.php?p=${page_no}&d=/A_to_Z/${CATEGORY}"
+	${WGET} ${PAGE} -O /tmp/page.txt
+
+	echo "Updating Page ${page_no}"
+	grep "${CATEGORY} Songs Download" /tmp/page.txt >> /tmp/titles.txt
+    done
+
+    IFS_SAVE="${IFS}"
+    IFS=$'\n'
+    MOVIES=`awk -F">" '{ for (i=4; i<=NF; i++) print $i }' /tmp/titles.txt | grep 'alt="' | awk -F'"' '{print $4}'`
+
+    for mov in ${MOVIES}
+    do
+	MOVIE="${mov:1:${#mov}-1}"
+	echo ${MOVIE} >> /home/sagar/mp3/movies.txt
+    done
+    IFS="${IFS_SAVE}"
+}
+
+get_movie_songs()
+{
+    MOVIE="${1}"
+    CATEGORY="0-9"
+
+    HOST="http://www.hqzone.telugump3.co"
+    URL="${HOST}/index.php?d=/A_to_Z/${CATEGORY}"
+
+    echo "Movie: ${MOVIE}"
+    
+    mkdir "${MOVIE}"
+    cd "${MOVIE}"
+
+    rm -rf /tmp/songs.list
+    echo "${URL}/${MOVIE}"
+    ${WGET} "${URL}/${MOVIE}" -O /tmp/songs.list
+
+    IFS_SAVE="${IFS}"
+    IFS=$'\n'
+    FURLS=($(awk -F">" '{ for (i=4; i<=NF; i++) print $i }' /tmp/songs.list | grep filename | awk -F'"' '{print $2}'))
+    FILES=($(awk -F">" '{ for (i=4; i<=NF; i++) print $i }' /tmp/songs.list | grep mp3      | awk -F"<" '{print $1}'))
+    IFS="${IFS_SAVE}"
+    
+    FILE_COUNT=${#FILES[@]}
+    for i in `seq 0 $(($FILE_COUNT - 1))`
+    do
+	echo "${FILES[$i]}"
+	${WGET} "${HOST}/${FURLS[$i]}" -O /tmp/song.url
+
+	FURL=`awk -F">" '{ for (i=4; i<=NF; i++) print $i }' /tmp/song.url | grep '/load.php?id=' | awk -F"'" '{print $2}' | head -1`
+	${WGET} -U "Mozilla" "${HOST}/${FURL:2:${#FURL}-1}" -O "${FILES[$i]}"
+    done
+}
+
+download_mp3()
+{
+    rm -rf /tmp/error.txt
+    while read MOVIE
+    do
+	cd /home/sagar/mp3
+
+	# find . -type d -empty | xargs rm -rf
+	# ls | grep -v txt > /home/sagar/mp3/blacklist.txt
+
+	# grep -q "$MOVIE" /home/sagar/mp3/blacklist.txt
+	# if [ $? -eq 0 ]; then
+	#     continue
+	# fi
+
+	get_movie_songs "${MOVIE}"
+
+    done < /home/sagar/mp3/movies.txt
+}
+
+if [ "X$1" == "Xupdate" ]; then
+    rm -rf /home/sagar/mp3/movies.txt
+
+    echo "Updating 0-9 list..."
+    update_movie_list "0-9"
+    for c in A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+    do
+	echo
+	echo "Updating ${c} list..."
+	update_movie_list "${c}"
+    done
+else
+    download_mp3
+fi

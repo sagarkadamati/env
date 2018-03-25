@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 res=`wmctrl -d | awk '{print $9}'`
 
@@ -10,4 +10,4 @@ height=`echo $res | awk -F'x' '{print $2}'`
 wmctrl -r Coder -e 1,25,49,$((${width} - 40)),$((${height} - 15))
 
 emacsid=`wmctrl -l | grep 'Coder' | awk '{print $1}'`
-windowtool.py -d 0 "$emacsid"
+/home/sagar/env/scripts/windowtool.py -d 0 "$emacsid"

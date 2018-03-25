@@ -3,6 +3,8 @@
 opened=`wmctrl -l | grep 'Coder'`
 running=`ps aux | grep 'emacs --daemon' | grep -v grep`
 
+# wmctrl -k on
+
 if [ "X$opened" == "X" ]; then
     if [ "X$running" == "X" ]; then
 	emacs --daemon

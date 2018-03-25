@@ -1,0 +1,9 @@
+#!/bin/bash
+
+FILE_NAME="$1"
+
+mkdir -p out
+rm -rf "\'out/${FILE_NAME}\'"
+
+pdfjam "${FILE_NAME}" --nup 2x1 --landscape --outfile "out/${FILE_NAME}"
+

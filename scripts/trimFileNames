@@ -1,0 +1,27 @@
+#!/bin/bash
+
+rm -rf "${1}"
+
+count=0
+files=`ls`
+
+mkdir -p "${1}"
+
+IFS=$'\n'
+for file in $files
+do
+    size=`echo ${count} | wc -c`
+
+    echo ${file}
+    new_file=`echo ${file} | awk -F"$1" '{print $2}'`
+    if [ "X" == "X${new_file}" ]; then
+	new_file="${file}"
+    fi
+    
+    if [ "X${size}" == "X2" ]; then
+	cp "${file}" "${1}/0${count} ${new_file}"
+    else
+	cp "${file}" "${1}/${count} ${new_file}"
+    fi
+    count=$((count + 1))
+done

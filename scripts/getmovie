@@ -1,0 +1,5 @@
+#!/bin/bash
+
+URL="http://mersalaayitten.us/embed/682"
+
+wget -U "Mozilla" "$URL"

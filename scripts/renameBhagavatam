@@ -1,0 +1,28 @@
+#!/bin/bash
+
+ls > /tmp/files
+# mkdir out
+
+# while read file
+# do
+#     name=`echo "$file" | awk -F'Episode' '{print $2}'`
+#     mv "$file" "Episode${name}.mp4"
+# done < /tmp/files
+
+while read file
+do
+    no=`echo "$file" | awk -F'-' '{print $1}' | awk '{print $3}'`
+    # count=`echo $no | wc -c`
+    # if [ "X2" == "X$count" ]; then
+    # 	mv "$file" "Episode 00${no}.mp4"
+    # fi
+    # if [ "X3" == "X$count" ]; then
+    # 	mv "$file" "Episode 0${no}.mp4"
+    # fi
+    # if [ "X4" == "X$count" ]; then
+	# mv "$file" "Episode ${no}.mp4"
+    # fi
+    mv "$file" "Episode ${no}.mp4"
+done < /tmp/files
+
+rm -rf /tmp/files

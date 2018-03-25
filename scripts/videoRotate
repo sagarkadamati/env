@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# 0 = 90CounterCLockwise and Vertical Flip (default) 
+# 1 = 90Clockwise 
+# 2 = 90CounterClockwise 
+# 3 = 90Clockwise and Vertical Flip
+
+FILENAME="$2"
+FILE="${FILENAME%.*}"
+EXT="${FILENAME##*.}"
+
+case "X$1" in
+    "Xleft")
+	ROTATION="transpose=2"
+	OUTFILE="${FILE}-left.${EXT}"
+    ;;
+    "Xright")
+	ROTATION="transpose=1"
+	OUTFILE="${FILE}-right.${EXT}"
+    ;;
+esac
+
+ffmpeg -i "${FILENAME}" -vf "${ROTATION}" -strict -2 "${OUTFILE}" 

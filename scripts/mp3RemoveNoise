@@ -1,0 +1,36 @@
+#!/bin/bash
+
+correctAudio()
+{
+    mkdir -p out
+
+    FILE="$1"
+
+    rm -rf "out/${FILE}"
+    rm -rf /tmp/input.wav
+    rm -rf /tmp/profile
+    rm -rf /tmp/out.wav
+    rm -rf /tmp/output.wav
+
+    # ffmpeg -i "${FILE}" -vn -ss 00:00:00 -t 00:3:00 /tmp/input.wav
+
+    ffmpeg -i "${FILE}" /tmp/input.wav
+    normalize-audio /tmp/input.wav
+
+    sox --show-progress /tmp/input.wav -n noiseprof /tmp/profile trim 0 1
+    sox --show-progress /tmp/input.wav /tmp/out.wav noisered /tmp/profile 0.21
+
+    sox --show-progress -b 16 -s -c 1 -r 48k -t raw /tmp/out.wav /tmp/outfile.wav
+    sox --show-progress -v -1.0 /tmp/outfile.wav /tmp/output.wav
+    normalize-audio /tmp/output.wav
+
+    ffmpeg -i -b:a 128k /tmp/output.wav "out/${FILE}"
+}
+
+files=`ls`
+IFS=$'\n'
+for file in ${files}
+do
+    echo "${file}"
+    correctAudio "${file}"
+done

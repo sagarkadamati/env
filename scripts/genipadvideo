@@ -1,0 +1,49 @@
+#!/bin/bash
+
+rm -rf out 
+mkdir -p out
+
+get_tmpfile()
+{
+    for i in `seq 1 100`; do
+	if [ ! -e /tmp/files$i ]; then
+	    echo /tmp/files$i;
+	    break;
+	fi
+    done
+}
+
+TMPFILE=`get_tmpfile`
+
+ls *.mkv *.mp4 *.avi > ${TMPFILE}
+while read FILENAME ; do
+
+    FILE="${FILENAME%.*}"
+    EXT="${FILENAME##*.}"
+    OUTPUT="out/${FILE}.mp4"
+
+    # ffmpeg -i input.mp4 -vcodec libx264 -profile:v main -level 3.1 -preset medium -crf 23 -x264-params ref=4 -acodec copy -movflags +faststart output.mp4
+
+    # ffmpeg -i "$FILENAME" \
+    # 	   -vcodec libx264 \
+    # 	   -profile:v main \
+    # 	   -level 3.1 \
+    # 	   -preset medium \
+    # 	   -crf 23 \
+    # 	   -x264-params ref=4 \
+    # 	   -acodec copy \
+    # 	   -movflags +faststart \
+    # 	   "${OUTPUT}" < /dev/null
+
+    ffmpeg -i "$FILENAME" \
+	   -c:v libx264 \
+	   -profile:v high -level 4.2 \
+	   -preset slow \
+	   -crf 23 \
+	   -x264-params ref=4 \
+	   -c:a copy \
+	   "${OUTPUT}" < /dev/null
+
+done < ${TMPFILE}
+
+rm -rf ${TMPFILE}

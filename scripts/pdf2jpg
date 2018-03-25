@@ -1,0 +1,27 @@
+#!/bin/bash
+
+FILE_NAME="$1"
+
+pages=`mutool info "${FILE_NAME}"  | grep Pages | awk '{print $2}'`
+echo "Total Pages: $((${pages} + 1))"
+echo "Converting page ..."
+
+for page in `seq 0 $((${pages} - 1))`; do
+    PAGENO=$((${page} + 1))
+    count=`echo ${PAGENO} | wc -c`
+
+    if [ "X2" == "X$count" ];then
+	OUT=page-00${PAGENO}.jpg
+    fi
+    if [ "X3" == "X$count" ];then
+	OUT=page-0${PAGENO}.jpg
+    fi
+    if [ "X4" == "X$count" ];then
+	OUT=page-${PAGENO}.jpg
+    fi
+
+    echo -n "${PAGENO} "
+    convert -density 300 "${FILE_NAME}[${page}]" -quality 100 -flatten -sharpen 0x1.0 ${OUT}
+done
+
+echo

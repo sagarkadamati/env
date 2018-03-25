@@ -12,6 +12,6 @@ height=`echo $res | awk -F'x' '{print $2}'`
 # windowtool.py -d 0 "$terminalid"
 # wmctrl -r "Terminal" -e 1,24,49,${width},$((${height} + 5))
 
-wmctrl -r Terminal -e 1,25,49,$((${width} - 40)),$((${height} - 15))
-terminalid=`wmctrl -l | grep 'Terminal' | awk '{print $1}'`
-/home/sagar/env/scripts/windowtool.py -d 0 "$terminalid"
+wmctrl -r Chrome -e 1,25,49,$((${width} - 40)),$((${height} - 15))
+chromeid=`wmctrl -l | grep 'Chrome' | awk '{print $1}'`
+/home/sagar/env/scripts/windowtool.py -d 0 "$chromeid"

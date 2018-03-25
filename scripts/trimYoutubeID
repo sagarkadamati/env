@@ -1,0 +1,32 @@
+#!/bin/bash
+
+filecount=`ls *.mp3 | wc -l`
+zeros=`echo ${filecount} | bc | wc -c`
+zeros=$(($zeros - 1))
+
+for no in `seq 1 ${filecount}`
+do
+    FILENO="${no}"
+
+    count=`echo $no | wc -c`
+    if [ "X${zeros}" == "X3" ]; then
+        case ${count} in
+        2)
+            FILENO="00${no}"
+            ;;
+        3)
+            FILENO="0${no}"
+            ;;
+        esac
+    else
+        if [ "X${count}" == "X2" ]; then
+            FILENO="0${no}"
+        fi
+    fi
+
+    FILE=`ls | grep "^${FILENO}"`
+    if [ "X${FILE}" != "X" ]; then
+        TRIMED=`echo ${FILE} | awk 'NF-=1'`
+        mv "$FILE" "$TRIMED.mp3"
+    fi
+done

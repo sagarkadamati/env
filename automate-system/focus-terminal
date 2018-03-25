@@ -3,9 +3,12 @@
 opened=`wmctrl -l | grep Terminal`
 echo $opened
 
+# wmctrl -k on
+
 if [ "X$opened" == "X" ]; then
     gnome-terminal
-else 
+    /home/sagar/env/scripts/setterminal
+else
     wmctrl -a "Terminal"
 fi
 

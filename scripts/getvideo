@@ -1,0 +1,11 @@
+#!/bin/bash
+
+URL=`/usr/bin/xclip -selection clipboard -o`
+echo ${URL}
+
+FORMATE=`youtube-dl "${URL}" -F | grep '(best)' | awk '{print $1}'`
+echo ${FORMATE}
+
+gnome-terminal -e "youtube-dl \"${URL}\" -f ${FORMATE} -o \"~/Videos/youtube-dl/%(title)s.%(ext)s\""
+
+# gnome-terminal -e "/bin/bash -c "youtube-dl \"${URL}\" -f ${FORMATE} -o \"~/Videos/youtube-dl/%(title)s.%(ext)s\ ; exec /bin/bash -i"

@@ -1,8 +1,6 @@
-#!/bin/sh
+c#!/bin/sh
 
 # PKGS=""
-
-
 
 ## Install sshd
 # sudo apt-get update
@@ -12,6 +10,8 @@
 ## Install guest addons virtualbox
 # sudo apt-get install -y virtualbox-guest-dkms
 # sudo apt-get remove -y virtualbox-guest-dkms
+
+# sudo apt-get install build-essential
 
 ## Install Packages
 sudo apt-get install -y wmctrl
@@ -49,10 +49,13 @@ gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ vsize 2
 
 ## Git save credentials
 if ! type git > /dev/null; then
-	sudo apt-get install -y git-core
+    sudo apt-get install -y git-core
 fi
 
 git config credential.helper store
+
+git config --global user.email "sagarkadamati@gmail.com"
+git config --global user.name "Sagar Kadamati"
 
 ## Disable lockscreen
 gsettings set org.gnome.desktop.screensaver lock-enabled false
@@ -87,7 +90,12 @@ sudo cp fonts/source-code-pro/TTF/* /usr/share/fonts/truetype/source-code-pro
 
 
 ## Setting keyboard shortcuts
-gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings  \
+"['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', \
+  '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', \
+  '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', \
+  '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/']"
+
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'chrome'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command '/home/sagar/env/automate-system/focus-chrome'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<Primary><Alt>i'
@@ -243,7 +251,7 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 
 # locate panel-shadow.png
 
-sudo dpkg --add-architecture i386
+# sudo dpkg --add-architecture i386
 
 # sudo apt-get install libnotify-bin
 

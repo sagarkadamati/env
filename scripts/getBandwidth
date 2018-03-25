@@ -1,0 +1,16 @@
+#!/bin/bash
+
+OLD=`cat ~/bandwidth | grep New | awk -F'New: ' '{print $2}'`
+
+DATA=`ifconfig | grep -A 8 ens2 | grep 'RX bytes'`
+
+DOWNLOAD=`echo "$DATA" | awk -F')' '{print $1}' | awk -F'(' '{print $2}'`
+UPLOAD=`echo "$DATA" | awk -F')' '{print $2}' | awk -F'(' '{print $2}'`
+
+echo
+echo "OLD: ${OLD}"
+echo "New: Download: ${DOWNLOAD}         Upload: ${UPLOAD}"
+echo
+
+echo "${OLD}" > ~/bandwidth
+echo "New: Download: ${DOWNLOAD}         Upload: ${UPLOAD}" >> ~/bandwidth
