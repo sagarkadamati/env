@@ -6,7 +6,7 @@ if [ "${CODE_DIR}X" == "X" ]; then
 fi
 
 grep -B 1000 'src="index.js"' "${CODE_DIR}/resources/app/out/vs/workbench/electron-browser/bootstrap/index.html" > /tmp/index.html
-echo '        <link rel="stylesheet" href="/home/sagar/.vscode/extensions/my-editor/css/notabstitle.css"/>' >> /tmp/index.html
+echo "        <link rel=\"stylesheet\" href=\"/home/$USER/.vscode/extensions/my-editor/css/notabstitle.css\"/>" >> /tmp/index.html
 echo '</html>'  >> /tmp/index.html
 
 sudo mv /tmp/index.html "${CODE_DIR}/resources/app/out/vs/workbench/electron-browser/bootstrap/index.html"
